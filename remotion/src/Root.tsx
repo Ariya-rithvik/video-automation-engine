@@ -6,8 +6,9 @@ import React from 'react';
 import { Composition } from 'remotion';
 import { MarketingVideo } from './MarketingVideo';
 import { FALLBACK_PLAN, type ScenePlan } from './types';
+import { CogneeMographDemoFinal } from './scenes/CogneeMographDemoFinal';
 
-// Shared duration calc — both compositions sum scene durations (single source of truth).
+// Shared duration calc — compositions sum scene durations (single source of truth).
 function calcDuration({ props }: { props: Record<string, unknown> }) {
   const plan = (props as { scenePlan?: ScenePlan }).scenePlan || FALLBACK_PLAN;
   const totalFromScenes = (plan.scenes || []).reduce(
@@ -21,6 +22,16 @@ function calcDuration({ props }: { props: Record<string, unknown> }) {
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      {/* Target After Effects Motion Graphics Demo Composition */}
+      <Composition
+        id="mograph_cognee__demo_FINAL"
+        component={CogneeMographDemoFinal}
+        durationInFrames={180}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
       {/* Landscape 16:9 — the primary marketing ad */}
       <Composition
         id="MarketingVideo"

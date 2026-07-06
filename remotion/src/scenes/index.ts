@@ -19,6 +19,7 @@ import { DeviceFrame } from './DeviceFrame';
 import { TemplateCollage } from './TemplateCollage';
 import { ProductSelectAndCart } from './ProductSelectAndCart';
 import { OneScenePan } from './OneScenePan';
+import { CogneeMographDemoFinal } from './CogneeMographDemoFinal';
 
 export interface SceneComponentProps {
   plan: ScenePlan;
@@ -43,11 +44,12 @@ export const SCENE_REGISTRY: Record<string, SceneComponent> = {
   DeviceFrame,
   TemplateCollage,
   ProductSelectAndCart,
+  CogneeMographDemoFinal,
 };
 
 // Re-exports for direct import where needed
 export {
   TitleCard, PhoneMockup, FeatureCallout, StatsRow, EndingCTA, ScreenshotShowcase,
   ProcessSteps, AnimatedFootage, CursorClickReveal, PromptThenGrid, BeforeAfterSlider,
-  DeviceFrame, TemplateCollage, ProductSelectAndCart, OneScenePan,
+  DeviceFrame, TemplateCollage, ProductSelectAndCart, OneScenePan, CogneeMographDemoFinal,
 };
