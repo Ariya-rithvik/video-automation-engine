@@ -1,0 +1,108 @@
+{
+  "status": "SUCCESS",
+  "projectId": "SupervisorCrawl",
+  "taskId": "crawl-1781771455008",
+  "steps": [
+    {
+      "step": "Agentic_Infrastructure_1",
+      "timestamp": 0,
+      "description": "Supervisor crawled and captured \"Agentic Infrastructure\" at https://vercel.com"
+    },
+    {
+      "step": "Agentic_Infrastructure_2",
+      "timestamp": 3,
+      "description": "Supervisor crawled and captured \"Agentic Infrastructure\" at https://vercel.com"
+    },
+    {
+      "step": "Agentic_Infrastructure_3",
+      "timestamp": 6,
+      "description": "Supervisor crawled and captured \"Agentic Infrastructure\" at https://vercel.com"
+    },
+    {
+      "step": "Agentic_Infrastructure_4",
+      "timestamp": 9,
+      "description": "Supervisor crawled and captured \"Agentic Infrastructure\" at https://vercel.com"
+    },
+    {
+      "step": "Agentic_Infrastructure_1",
+      "timestamp": 12,
+      "description": "Supervisor crawled and captured \"Agentic Infrastructure\" at https://vercel.com/home"
+    },
+    {
+      "step": "Agentic_Infrastructure_2",
+      "timestamp": 15,
+      "description": "Supervisor crawled and captured \"Agentic Infrastructure\" at https://vercel.com/home"
+    },
+    {
+      "step": "Agentic_Infrastructure_3",
+      "timestamp": 18,
+      "description": "Supervisor crawled and captured \"Agentic Infrastructure\" at https://vercel.com/home"
+    },
+    {
+      "step": "Agentic_Infrastructure_4",
+      "timestamp": 21,
+      "description": "Supervisor crawled and captured \"Agentic Infrastructure\" at https://vercel.com/home"
+    },
+    {
+      "step": "AI_SDK_-_Vercel_1",
+      "timestamp": 24,
+      "description": "Supervisor crawled and captured \"AI SDK - Vercel\" at https://vercel.com/ai-sdk"
+    },
+    {
+      "step": "AI_SDK_-_Vercel_2",
+      "timestamp": 27,
+      "description": "Supervisor crawled and captured \"AI SDK - Vercel\" at https://vercel.com/ai-sdk"
+    },
+    {
+      "step": "AI_SDK_-_Vercel_3",
+      "timestamp": 30,
+      "description": "Supervisor crawled and captured \"AI SDK - Vercel\" at https://vercel.com/ai-sdk"
+    },
+    {
+      "step": "AI_Gateway_1",
+      "timestamp": 33,
+      "description": "Supervisor crawled and captured \"AI Gateway\" at https://vercel.com/ai-gateway"
+    },
+    {
+      "step": "AI_Gateway_2",
+      "timestamp": 36,
+      "description": "Supervisor crawled and captured \"AI Gateway\" at https://vercel.com/ai-gateway"
+    },
+    {
+      "step": "AI_Gateway_3",
+      "timestamp": 39,
+      "description": "Supervisor crawled and captured \"AI Gateway\" at https://vercel.com/ai-gateway"
+    },
+    {
+      "step": "AI_Gateway_4",
+      "timestamp": 42,
+      "description": "Supervisor crawled and captured \"AI Gateway\" at https://vercel.com/ai-gateway"
+    },
+    {
+      "step": "Sandbox_1",
+      "timestamp": 45,
+      "description": "Supervisor crawled and captured \"Sandbox\" at https://vercel.com/sandbox"
+    },
+    {
+      "step": "Sandbox_2",
+      "timestamp": 48,
+      "description": "Supervisor crawled and captured \"Sandbox\" at https://vercel.com/sandbox"
+    },
+    {
+      "step": "Sandbox_3",
+      "timestamp": 51,
+      "description": "Supervisor crawled and captured \"Sandbox\" at https://vercel.com/sandbox"
+    },
+    {
+      "step": "Sandbox_4",
+      "timestamp": 54,
+      "description": "Supervisor crawled and captured \"Sandbox\" at https://vercel.com/sandbox"
+    },
+    {
+      "step": "Sandbox_5",
+      "timestamp": 57,
+      "description": "Supervisor crawled and captured \"Sandbox\" at https://vercel.com/sandbox"
+    }
+  ],
+  "error": null
+}

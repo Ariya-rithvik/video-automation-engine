@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iOS × FIFA World Cup — Cinematic Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="football-style.css">
+</head>
+<body>
+
+  <div class="ambient-glow"></div>
+  <div class="ambient-glow-2"></div>
+
+  <!-- 16:9 cinematic stage -->
+  <div class="stage" id="stage">
+
+    <div class="phone" id="phone">
+      <div class="phone-btn btn-power"></div>
+      <div class="phone-btn btn-vol-up"></div>
+      <div class="phone-btn btn-vol-down"></div>
+
+      <div class="bezel">
+        <div class="screen" id="screen">
+
+          <!-- Shared wallpaper (stadium night) -->
+          <div class="wallpaper" id="wallpaper">
+            <div class="wp-grass"></div>
+            <div class="wp-glow"></div>
+            <div class="wp-spot wp-spot-1"></div>
+            <div class="wp-spot wp-spot-2"></div>
+          </div>
+
+          <!-- Dynamic Island -->
+          <div class="dynamic-island" id="dynamic-island">
+            <div class="di-content" id="di-content"></div>
+          </div>
+
+          <!-- Status bar (always on home/apps) -->
+          <div class="statusbar" id="statusbar">
+            <span class="sb-time">10:00</span>
+            <span class="sb-right"><span class="sb-sig"></span><span class="sb-wifi"></span><span class="sb-batt"></span></span>
+          </div>
+
+          <!-- ════ SCENE 1 — LOCK SCREEN ════ -->
+          <div class="scene lock active" id="lock">
+            <!-- Dual Spheres Lockscreen Wallpaper layout -->
+            <div class="lock-spheres-container">
+              <div class="lock-sphere-bottom"></div>
+              <div class="lock-sphere-shadow" id="lock-sphere-shadow"></div>
+              <div class="lock-sphere-top" id="lock-sphere-top"></div>
+            </div>
+
+            <div class="lock-clockwrap" id="lock-clockwrap">
+              <div class="lock-date">Sunday, December 18</div>
+              <div class="lock-clock">10:00</div>
+            </div>
+
+            <div class="lock-bottom">
+              <div class="lock-quickbtn">🔦</div>
+              <div class="lock-hint" id="lock-hint">
+                <div class="lock-bar"></div>
+                <span>swipe up to open</span>
+              </div>
+              <div class="lock-quickbtn">📷</div>
+            </div>
+          </div>
+
+          <!-- ════ SCENE 2 — HOME SCREEN ════ -->
+          <div class="scene home" id="home">
+            <div class="home-inner" id="home-inner">
+
+              <!-- Widgets -->
+              <div class="widgets">
+                <div class="widget widget-match">
+                  <div class="wm-top"><span>FIFA WORLD CUP FINAL</span><span class="wm-live">LIVE</span></div>
+                  <div class="wm-score-row">
+                    <span class="wm-team"><span class="wm-flag arg-flag"></span> ARG</span>
+                    <b id="wm-score">3 – 3</b>
+                    <span class="wm-team">FRA <span class="wm-flag fra-flag"></span></span>
+                  </div>
+                  <div class="wm-scorers">
+                    <span class="wm-scorer-arg">Messi 23', 108'</span>
+                    <span class="wm-scorer-fra">Mbappé 80', 81', 118'</span>
+                  </div>
+                  <div class="wm-bot">AET (Penalties: 4–2)</div>
+                </div>
+                <div class="widget widget-cal">
+                  <div class="wc-header">
+                    <span class="wc-month">SUN • DEC 18</span>
+                  </div>
+                  <div class="wc-event">
+                    <div class="wc-event-time">22:30</div>
+                    <div class="wc-event-title">Trophy lift</div>
+                    <div class="wc-event-loc">Lusail Stadium</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- App grid (matches the iOS reference layout) -->
+              <div class="apps" id="apps">
+                <div class="app"><div class="icon ic-facetime">📹</div><span>FaceTime</span></div>
+                <div class="app"><div class="icon ic-vision">🥽</div><span>Vision</span></div>
+                <div class="app" id="app-photos">
+                  <div class="icon ic-photos">
+                    <svg viewBox="0 0 30 30"><circle cx="15" cy="9" r="4.2" fill="#ff453a"/><circle cx="21" cy="15" r="4.2" fill="#ff9f0a"/><circle cx="15" cy="21" r="4.2" fill="#30d158"/><circle cx="9" cy="15" r="4.2" fill="#0a84ff"/><circle cx="11" cy="11" r="3.6" fill="#bf5af2"/><circle cx="19" cy="11" r="3.6" fill="#ff375f"/><circle cx="19" cy="19" r="3.6" fill="#ffd60a"/><circle cx="11" cy="19" r="3.6" fill="#64d2ff"/></svg>
+                  </div><span>Photos</span>
+                </div>
+                <div class="app"><div class="icon ic-camera">📷</div><span>Camera</span></div>
+
+                <div class="app"><div class="icon ic-mail">✉️</div><span>Mail</span></div>
+                <div class="app"><div class="icon ic-notes">📒</div><span>Notes</span></div>
+                <div class="app"><div class="icon ic-clock">🕘</div><span>Clock</span></div>
+                <div class="app"><div class="icon ic-maps">🗺️</div><span>Maps</span></div>
+
+                <div class="app"><div class="icon ic-tv">📺</div><span>TV</span></div>
+                <div class="app"><div class="icon ic-news">📰</div><span>News</span></div>
+                <div class="app"><div class="icon ic-appstore">Ⓐ</div><span>App Store</span></div>
+                <div class="app"><div class="icon ic-rocket">🚀</div><span>Antigravity</span></div>
+
+                <div class="app"><div class="icon ic-health">❤️</div><span>Health</span></div>
+                <div class="app"><div class="icon ic-wallet">💳</div><span>Wallet</span></div>
+                <div class="app"><div class="icon ic-siri"><span class="siri-orb"></span></div><span>Siri</span></div>
+                <div class="app"><div class="icon ic-settings">⚙️</div><span>Settings</span></div>
+              </div>
+
+              <div class="searchpill">⌕ Search</div>
+
+              <div class="dock" id="dock">
+                <div class="app"><div class="icon ic-phone">📞</div></div>
+                <div class="app"><div class="icon ic-safari">🧭</div></div>
+                <div class="app"><div class="icon ic-messages">💬</div></div>
+                <div class="app"><div class="icon ic-music">🎵</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ════ SCENE 3 — PHOTOS GALLERY ════ -->
+          <div class="scene photos" id="photos">
+            <div class="ph-nav">
+              <span class="ph-back">‹ Albums</span>
+              <span class="ph-title">World Cup</span>
+              <span class="ph-sel">Select</span>
+            </div>
+            <div class="ph-content" id="ph-content">
+              <div class="ph-head">
+                <h2>FIFA World Cup</h2>
+                <p>Greatest moments · 8 photos</p>
+              </div>
+              <div class="ph-grid" id="ph-grid">
+                <div class="thumb" data-i="0"><img src="messi_trophy.jpg" alt="Messi WC Trophy"></div>
+                <div class="thumb" data-i="1"><img src="messi_licensed.jpg" alt="Messi Golden Ball"></div>
+                <div class="thumb" data-i="2"><img src="pele_1958_moment.png" alt="Pele 1958 moment"></div>
+                <div class="thumb" data-i="3"><img src="fifa-4.jpg" alt=""></div>
+                <div class="thumb" data-i="4"><img src="fifa-5.jpg" alt=""></div>
+                <div class="thumb" data-i="5"><img src="fifa-6.jpg" alt=""></div>
+                <div class="thumb" data-i="6"><img src="fifa-7.jpg" alt=""></div>
+                <div class="thumb" data-i="7"><img src="fifa-8.jpg" alt=""></div>
+              </div>
+
+              <!-- World Cup Decades of Drama stories section -->
+              <div class="ph-stories-wrap">
+                <p class="ph-stories-intro">The greatest moments in FIFA World Cup history span decades of unmatched drama, featuring Pele’s majestic 1970 header, Maradona’s polarizing "Hand of God," and Messi’s triumphant 2022 finale. These legendary milestones continue to define the pinnacle of international football.</p>
+                
+                <div class="ph-story-header">Decades of Drama</div>
+                
+                <div class="ph-story-item">
+                  <div class="ph-story-year">1970</div>
+                  <div class="ph-story-title">Pele’s Header and the "Game of the Century"</div>
+                  <div class="ph-story-body">Brazil’s spectacular 4-1 victory over Italy in the 1970 final featured Pele’s 100th World Cup goal. He soared in the air, hanging long enough to head it past the keeper. This tournament is also home to the legendary 1970 semi-final between Italy and West Germany, a 4-3 thriller often called the "Game of the Century". YouTube·FIFA +1</div>
+                </div>
+
+                <div class="ph-story-item">
+                  <div class="ph-story-year">1986</div>
+                  <div class="ph-story-title">Maradona’s Brilliance and Controversy</div>
+                  <div class="ph-story-body">Diego Maradona cemented his legacy in Mexico in two unforgettable ways during a single match against England. First came the notorious "Hand of God" goal, followed shortly by the "Goal of the Century," where he dribbled past five English players from his own half to score.</div>
+                </div>
+
+                <div class="ph-story-item">
+                  <div class="ph-story-year">1998</div>
+                  <div class="ph-story-title">Ronaldo’s Mystery and Zidane’s Triumph</div>
+                  <div class="ph-story-body">The 1998 final in Paris saw French icon Zinedine Zidane score two headers to lead France to a 3-0 victory over Brazil, capturing their first-ever World Cup on home soil. This tournament is also famously remembered for the mysterious medical episode suffered by Brazilian star Ronaldo just hours before kickoff.</div>
+                </div>
+
+                <div class="ph-story-item">
+                  <div class="ph-story-year">2010</div>
+                  <div class="ph-story-title">Iniesta and the African Stage</div>
+                  <div class="ph-story-body">The 2010 World Cup in South Africa marked the first time the tournament was hosted on the continent. The iconic opening goal by Siphiwe Tshabalala against Mexico remains a massive fan favorite. The tournament culminated in Andres Iniesta's dramatic extra-time winner, giving Spain its first World Cup title against the Netherlands.</div>
+                </div>
+
+                <div class="ph-story-item">
+                  <div class="ph-story-year">2022</div>
+                  <div class="ph-story-title">Messi and the Ultimate Final</div>
+                  <div class="ph-story-body">The 2022 tournament in Qatar delivered what many consider the greatest World Cup final in history. Lionel Messi led Argentina to glory, but not before an epic back-and-forth battle with Kylian Mbappé, who scored a hat-trick for France. The match ultimately went to a penalty shootout, resulting in Argentina’s first trophy since 1986. FIFA</div>
+                </div>
+                
+                <p class="ph-stories-outro">For a quick dive into some of the most unbelievable goals and plays from across the tournament's history:</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ════ SCENE 4 — PHOTO FULLSCREEN ════ -->
+          <div class="scene full" id="full">
+            <canvas class="confetti" id="confetti"></canvas>
+            <img src="messi_trophy.jpg" class="full-img" id="full-img" alt="">
+            <div class="full-top">
+              <span class="full-back">‹</span>
+              <span class="full-when">World Cup Final • Dec 18, 2022</span>
+              <span class="full-share">⤴</span>
+            </div>
+            <div class="full-cap" id="full-cap">
+              <h3>Lionel Messi lifts the World Cup</h3>
+              <p>Argentina wins their 3rd FIFA World Cup in a thrilling final. Messi seals his legacy, winning the Golden Ball and the ultimate prize.</p>
+              <div class="full-play" id="full-play">▶ Play highlights</div>
+            </div>
+          </div>
+
+          <!-- ════ SCENE 5 — VIDEO FINALE (real video) ════ -->
+          <div class="scene video" id="videoScene">
+            <video id="finale-video" src="football-clip.mp4" muted loop playsinline preload="auto"></video>
+            <div class="vid-grad"></div>
+            <div class="vid-top"><span class="vid-badge">FIFA+ ▶</span><span class="vid-live">HIGHLIGHTS</span></div>
+            <div class="vid-cap">
+              <h3>World Cup — Best Moments</h3>
+              <div class="vid-progress"><div class="vid-bar" id="vid-bar"></div></div>
+            </div>
+          </div>
+
+          <!-- ════ SCENE 6 — 2026 TEASER (3D Carousel) ════ -->
+          <div class="scene teaser" id="teaserScene">
+            <div class="teaser-bg">
+              <div class="teaser-light teaser-light-1"></div>
+              <div class="teaser-light teaser-light-2"></div>
+            </div>
+            
+            <div class="teaser-text-top" id="teaser-text-top">The World Awaits...</div>
+            
+            <!-- 3D revolving carousel -->
+            <div class="teaser-carousel-container" id="teaser-carousel-container">
+              <div class="teaser-carousel" id="teaser-carousel">
+                <div class="t-card" style="transform: rotateY(0deg) translateZ(80px);"><img src="ronaldo_wc_trophy.png" alt="Ronaldo"><span>CR7</span></div>
+                <div class="t-card" style="transform: rotateY(90deg) translateZ(80px);"><img src="neymar_wc_moment.png" alt="Neymar"><span>Neymar</span></div>
+                <div class="t-card" style="transform: rotateY(180deg) translateZ(80px);"><img src="messi_trophy.jpg" alt="Messi"><span>Messi</span></div>
+                <div class="t-card" style="transform: rotateY(270deg) translateZ(80px);"><img src="pele_1958_moment.png" alt="Pele"><span>Pelé</span></div>
+              </div>
+            </div>
+
+            <!-- Trophy Reveal Teaser -->
+            <div class="teaser-reveal" id="teaser-reveal">
+              <div class="trophy-glow"></div>
+              <img src="fifa_2026_trophy.png" class="teaser-trophy" id="teaser-trophy" alt="FIFA Trophy">
+              <div class="teaser-tagline">
+                <span>See you at</span>
+                <h2>FIFA World Cup 2026</h2>
+              </div>
+            </div>
+          </div>
+
+          <!-- Virtual finger cursor -->
+          <div class="cursor" id="cursor"></div>
+          <!-- Unlock flash -->
+          <div class="flash" id="flash"></div>
+          <div class="glare"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Playback console -->
+  <div class="console">
+    <div class="con-row">
+      <button class="cbtn primary" id="btn-play">Pause</button>
+      <button class="cbtn" id="btn-restart">Restart</button>
+      <div class="speeds">
+        <button class="sp active" data-speed="1">1x</button>
+        <button class="sp" data-speed="2">2x</button>
+        <button class="sp" data-speed="0.5">0.5x</button>
+      </div>
+    </div>
+    <div class="scrub-row">
+      <span class="t" id="t-cur">0.00s</span>
+      <input type="range" class="scrub" id="scrub" min="0" max="1950" value="0">
+      <span class="t">65.00s</span>
+    </div>
+    <div class="steps">
+      <div class="step active" data-frame="0"><b>1</b><span>Lock</span></div>
+      <div class="step" data-frame="280"><b>2</b><span>Home</span></div>
+      <div class="step" data-frame="600"><b>3</b><span>Gallery</span></div>
+      <div class="step" data-frame="900"><b>4</b><span>Photo</span></div>
+      <div class="step" data-frame="1140"><b>5</b><span>Video</span></div>
+      <div class="step" data-frame="1440"><b>6</b><span>Teaser</span></div>
+    </div>
+  </div>
+
+  <script src="football-script.js"></script>
+</body>
+</html>

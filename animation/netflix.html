@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Netflix — TUDUM Cinematic Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="netflix-style.css">
+</head>
+<body>
+
+  <!-- Ambient Background Glows -->
+  <div class="ambient-glow"></div>
+  <div class="ambient-glow-secondary"></div>
+
+  <!-- Main Showcase Viewport (16:9) -->
+  <div class="showcase-viewport" id="showcase-viewport">
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCENE 1: Profile Selection & Browse            -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="scene scene-profiles" id="scene-profiles">
+      <h2 class="nf-who-watching" id="nf-who-watching">Who's watching?</h2>
+      <div class="nf-profile-grid" id="nf-profile-grid">
+        <!-- Profile 1 -->
+        <div class="nf-profile" id="profile-1">
+          <div class="nf-profile-avatar">
+            <svg viewBox="0 0 120 120">
+              <defs>
+                <linearGradient id="av1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#E50914"/>
+                  <stop offset="100%" stop-color="#831010"/>
+                </linearGradient>
+              </defs>
+              <rect width="120" height="120" fill="url(#av1)"/>
+              <text x="60" y="72" font-size="52" fill="#fff" text-anchor="middle" font-family="'Outfit',sans-serif" font-weight="800">A</text>
+            </svg>
+          </div>
+          <span class="nf-profile-name">Ariya</span>
+        </div>
+        <!-- Profile 2 -->
+        <div class="nf-profile" id="profile-2">
+          <div class="nf-profile-avatar">
+            <svg viewBox="0 0 120 120">
+              <defs>
+                <linearGradient id="av2" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0071EB"/>
+                  <stop offset="100%" stop-color="#003B7A"/>
+                </linearGradient>
+              </defs>
+              <rect width="120" height="120" fill="url(#av2)"/>
+              <text x="60" y="72" font-size="52" fill="#fff" text-anchor="middle" font-family="'Outfit',sans-serif" font-weight="800">K</text>
+            </svg>
+          </div>
+          <span class="nf-profile-name">Kids</span>
+        </div>
+        <!-- Profile 3 -->
+        <div class="nf-profile" id="profile-3">
+          <div class="nf-profile-avatar">
+            <svg viewBox="0 0 120 120">
+              <defs>
+                <linearGradient id="av3" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#2ECC71"/>
+                  <stop offset="100%" stop-color="#145A32"/>
+                </linearGradient>
+              </defs>
+              <rect width="120" height="120" fill="url(#av3)"/>
+              <text x="60" y="72" font-size="52" fill="#fff" text-anchor="middle" font-family="'Outfit',sans-serif" font-weight="800">M</text>
+            </svg>
+          </div>
+          <span class="nf-profile-name">Mom</span>
+        </div>
+        <!-- Add Profile -->
+        <div class="nf-profile" id="profile-add">
+          <div class="nf-profile-avatar">
+            <svg viewBox="0 0 120 120">
+              <rect width="120" height="120" fill="#2a2a2a"/>
+              <circle cx="60" cy="60" r="30" fill="none" stroke="#808080" stroke-width="3"/>
+              <line x1="60" y1="42" x2="60" y2="78" stroke="#808080" stroke-width="3"/>
+              <line x1="42" y1="60" x2="78" y2="60" stroke="#808080" stroke-width="3"/>
+            </svg>
+          </div>
+          <span class="nf-profile-name">Add Profile</span>
+        </div>
+      </div>
+
+      <!-- Netflix Browse Overlay (shows after profile click) -->
+      <div class="nf-browse-overlay" id="nf-browse-overlay">
+        <div class="nf-navbar">
+          <span class="nf-nav-logo">NETFLIX</span>
+          <div class="nf-nav-links" id="nf-nav-links">
+            <span class="nf-nav-link active-link">Home</span>
+            <span class="nf-nav-link">TV Shows</span>
+            <span class="nf-nav-link">Movies</span>
+            <span class="nf-nav-link">New & Popular</span>
+            <span class="nf-nav-link">My List</span>
+          </div>
+        </div>
+        <div class="nf-hero-banner">
+          <div class="nf-hero-bg">
+            <svg viewBox="0 0 1024 500" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <linearGradient id="hero-sky" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#1a0a0a"/>
+                  <stop offset="30%" stop-color="#2d0a0a"/>
+                  <stop offset="70%" stop-color="#0a0a1a"/>
+                  <stop offset="100%" stop-color="#0a0a0a"/>
+                </linearGradient>
+                <filter id="hero-glow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="20" result="blur"/>
+                  <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                </filter>
+              </defs>
+              <rect width="1024" height="500" fill="url(#hero-sky)"/>
+              <!-- Atmospheric city silhouette -->
+              <rect x="50" y="280" width="60" height="220" fill="#1a1a1a"/>
+              <rect x="120" y="320" width="40" height="180" fill="#151515"/>
+              <rect x="180" y="250" width="70" height="250" fill="#1d1d1d"/>
+              <rect x="270" y="300" width="50" height="200" fill="#161616"/>
+              <rect x="340" y="340" width="80" height="160" fill="#1a1a1a"/>
+              <rect x="440" y="260" width="60" height="240" fill="#181818"/>
+              <rect x="520" y="310" width="70" height="190" fill="#151515"/>
+              <rect x="610" y="280" width="50" height="220" fill="#1c1c1c"/>
+              <rect x="680" y="350" width="90" height="150" fill="#171717"/>
+              <rect x="790" y="290" width="60" height="210" fill="#191919"/>
+              <rect x="870" y="330" width="80" height="170" fill="#161616"/>
+              <!-- Red mood lighting -->
+              <circle cx="300" cy="200" r="120" fill="rgba(229,9,20,0.08)" filter="url(#hero-glow)"/>
+              <circle cx="700" cy="180" r="100" fill="rgba(180,0,0,0.06)" filter="url(#hero-glow)"/>
+              <!-- Stars -->
+              <circle cx="120" cy="60" r="1" fill="#fff" opacity="0.3"/>
+              <circle cx="300" cy="40" r="1.2" fill="#fff" opacity="0.4"/>
+              <circle cx="500" cy="80" r="0.8" fill="#fff" opacity="0.3"/>
+              <circle cx="700" cy="30" r="1" fill="#fff" opacity="0.35"/>
+              <circle cx="850" cy="70" r="1.3" fill="#fff" opacity="0.25"/>
+              <circle cx="950" cy="45" r="0.9" fill="#fff" opacity="0.3"/>
+            </svg>
+          </div>
+          <div class="nf-hero-gradient"></div>
+          <div class="nf-hero-info" id="nf-hero-info">
+            <div class="nf-hero-title">Stranger<br>Things</div>
+            <div class="nf-hero-desc">When a young boy vanishes, a small town uncovers a mystery involving secret experiments and terrifying supernatural forces.</div>
+            <div class="nf-hero-buttons">
+              <button class="nf-btn-play" id="nf-btn-play">▶ Play</button>
+              <button class="nf-btn-info">ⓘ More Info</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Top 10 Row -->
+        <div class="nf-top10-row" id="nf-top10-row">
+          <div class="nf-row-title"><span class="nf-top10-badge">TOP 10</span> in India Today</div>
+          <div class="nf-card-row" id="nf-card-row">
+            <!-- Cards generated by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCENE 2: TUDUM N-Ribbon Animation              -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="scene scene-tudum" id="scene-tudum">
+      <div class="tudum-flash" id="tudum-flash"></div>
+      <canvas class="tudum-particles-canvas" id="tudum-particles" width="1024" height="576"></canvas>
+      <div class="tudum-container" id="tudum-container">
+        <svg class="tudum-n-svg" id="tudum-n" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="n-red-left" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#E50914"/>
+              <stop offset="100%" stop-color="#B20710"/>
+            </linearGradient>
+            <linearGradient id="n-red-diag" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#E50914"/>
+              <stop offset="50%" stop-color="#ff1a25"/>
+              <stop offset="100%" stop-color="#B20710"/>
+            </linearGradient>
+            <linearGradient id="n-red-right" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#E50914"/>
+              <stop offset="100%" stop-color="#831010"/>
+            </linearGradient>
+            <filter id="n-glow" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="8" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <!-- Left leg of N -->
+          <path id="n-left" d="M 30 0 L 90 0 L 90 400 L 30 400 Z" fill="url(#n-red-left)" filter="url(#n-glow)" opacity="0"/>
+          <!-- Diagonal of N -->
+          <path id="n-diag" d="M 30 0 L 90 0 L 270 400 L 210 400 Z" fill="url(#n-red-diag)" filter="url(#n-glow)" opacity="0"/>
+          <!-- Right leg of N -->
+          <path id="n-right" d="M 210 0 L 270 0 L 270 400 L 210 400 Z" fill="url(#n-red-right)" filter="url(#n-glow)" opacity="0"/>
+        </svg>
+      </div>
+      <!-- Pulse rings -->
+      <div class="tudum-ring" id="tudum-ring-1"></div>
+      <div class="tudum-ring" id="tudum-ring-2"></div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCENE 3: Content Reel / Still Watching         -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="scene scene-reel" id="scene-reel">
+      <div class="reel-sprockets top" id="sprockets-top"></div>
+      <div class="reel-filmstrip" id="reel-filmstrip">
+        <!-- Reel frames generated by JS -->
+      </div>
+      <div class="reel-spotlight"></div>
+      <div class="reel-sprockets bottom" id="sprockets-bottom"></div>
+
+      <!-- "Are you still watching?" overlay -->
+      <div class="still-watching-prompt" id="still-watching">
+        <div class="still-watching-title">Are you still watching?</div>
+        <div class="still-watching-show">Stranger Things</div>
+        <button class="still-watching-btn" id="still-watching-btn">Continue Watching</button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCENE 4: Brand Celebration                     -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="scene scene-brand" id="scene-brand">
+      <div class="brand-container" id="brand-container">
+        <div class="brand-n-logo" id="brand-n-logo">
+          <svg viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 12 0 L 36 0 L 36 160 L 12 160 Z" fill="#E50914"/>
+            <path d="M 12 0 L 36 0 L 108 160 L 84 160 Z" fill="#E50914"/>
+            <path d="M 84 0 L 108 0 L 108 160 L 84 160 Z" fill="#E50914"/>
+          </svg>
+        </div>
+        <h1 class="brand-tagline" id="brand-tagline">See What's Next.</h1>
+        <p class="brand-subtitle" id="brand-subtitle">The world's leading streaming entertainment service</p>
+        <div class="nf-stats-row" id="nf-stats-row">
+          <div class="nf-stat-item" id="stat-1">
+            <div class="nf-stat-number">283M+</div>
+            <div class="nf-stat-label">subscribers worldwide</div>
+          </div>
+          <div class="nf-stat-item" id="stat-2">
+            <div class="nf-stat-number">190+</div>
+            <div class="nf-stat-label">countries available</div>
+          </div>
+          <div class="nf-stat-item" id="stat-3">
+            <div class="nf-stat-number">17K+</div>
+            <div class="nf-stat-label">titles in library</div>
+          </div>
+          <div class="nf-stat-item" id="stat-4">
+            <div class="nf-stat-number">TUDUM</div>
+            <div class="nf-stat-label">iconic sound mark</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ OVERLAYS ═══ -->
+    <div class="virtual-cursor" id="virtual-cursor">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="white" stroke="#E50914" stroke-width="1.5">
+        <polygon points="5 3 21 11 13 13 11 21 5 3"/>
+      </svg>
+      <div class="cursor-ripple" id="cursor-ripple"></div>
+    </div>
+    <canvas class="confetti-overlay" id="confetti-canvas"></canvas>
+  </div>
+
+  <!-- Media Playback Control Bar -->
+  <div class="control-panel">
+    <div class="control-buttons">
+      <button class="btn btn-primary" id="btn-play">Pause</button>
+      <button class="btn btn-secondary" id="btn-restart">Restart</button>
+      <div class="speed-toggle-group">
+        <button class="speed-btn active" data-speed="1">1x</button>
+        <button class="speed-btn" data-speed="2">2x</button>
+        <button class="speed-btn" data-speed="0.5">0.5x</button>
+      </div>
+    </div>
+    <div class="timeline-slider-wrapper">
+      <span class="time-label" id="current-time">0.00s</span>
+      <input type="range" class="timeline-slider" id="timeline-slider" min="0" max="1350" value="0">
+      <span class="time-label">45.00s</span>
+    </div>
+    <div class="steps-progress">
+      <div class="step-indicator active" data-frame="0">
+        <span class="step-num">1</span>
+        <span class="step-txt">Profile & Browse</span>
+      </div>
+      <div class="step-indicator" data-frame="360">
+        <span class="step-num">2</span>
+        <span class="step-txt">TUDUM</span>
+      </div>
+      <div class="step-indicator" data-frame="630">
+        <span class="step-num">3</span>
+        <span class="step-txt">Content Reel</span>
+      </div>
+      <div class="step-indicator" data-frame="1020">
+        <span class="step-num">4</span>
+        <span class="step-txt">Celebration</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="netflix-script.js"></script>
+</body>
+</html>

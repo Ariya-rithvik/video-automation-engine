@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amazon Prime — Cyber-Grid Cinematic Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="amazon-cyber-style.css">
+</head>
+<body>
+
+  <!-- Ambient Hologram Glows -->
+  <div class="hologram-glow-orange"></div>
+  <div class="hologram-glow-cyan"></div>
+
+  <!-- Main Showcase Viewport (16:9) -->
+  <div class="showcase-viewport" id="showcase-viewport">
+    
+    <!-- Cyber Grid Canvas (runs grid scanlines & thruster particles) -->
+    <canvas class="cyber-canvas" id="cyber-canvas"></canvas>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCENE 1: Cyber Street Grid                      -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="scene scene-street active" id="scene-street">
+      <!-- Background Cyberpunk Buildings with Parallax -->
+      <div class="parallax-layer bg-skyline" id="skyline-far"></div>
+      <div class="parallax-layer bg-buildings" id="skyline-mid"></div>
+      
+      <!-- Interactive Neon Signs -->
+      <div class="cyber-sign sign-video" id="sign-video">
+        <div class="neon-border"></div>
+        <span class="sign-txt">PRIME VIDEO</span>
+        <div class="flicker-overlay"></div>
+      </div>
+      
+      <div class="cyber-sign sign-aws" id="sign-aws">
+        <div class="neon-border"></div>
+        <span class="sign-txt">AWS CLOUD</span>
+        <div class="flicker-overlay"></div>
+      </div>
+
+      <div class="cyber-sign sign-kindle" id="sign-kindle">
+        <div class="neon-border"></div>
+        <span class="sign-txt">KINDLE READER</span>
+        <div class="flicker-overlay"></div>
+      </div>
+
+      <div class="grid-overlay-floor"></div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCENE 2: Cargo Drone Descent                    -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="scene scene-drone" id="scene-drone">
+      <!-- Futuristic Prime Cargo Drone (Detailed SVG) -->
+      <div class="cyber-drone" id="cyber-drone">
+        <svg viewBox="0 0 200 120" width="160" height="96" class="drone-svg">
+          <defs>
+            <linearGradient id="drone-metal" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1e293b"/>
+              <stop offset="50%" stop-color="#0f172a"/>
+              <stop offset="100%" stop-color="#334155"/>
+            </linearGradient>
+            <filter id="neon-cyan-glow">
+              <feGaussianBlur stdDeviation="3" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          
+          <!-- Thruster Arms -->
+          <line x1="40" y1="40" x2="160" y2="40" stroke="url(#drone-metal)" stroke-width="8" stroke-linecap="round"/>
+          <line x1="40" y1="80" x2="160" y2="80" stroke="url(#drone-metal)" stroke-width="8" stroke-linecap="round"/>
+          <path d="M70,30 L100,60 L130,30" fill="none" stroke="url(#drone-metal)" stroke-width="6"/>
+
+          <!-- Main Core Pod -->
+          <rect x="70" y="40" width="60" height="40" rx="10" fill="url(#drone-metal)" stroke="#ff9900" stroke-width="2"/>
+          <circle cx="100" cy="60" r="12" fill="#0f172a" stroke="#00d4ff" stroke-width="2" filter="url(#neon-cyan-glow)"/>
+          <!-- Scanner Eye -->
+          <line x1="90" y1="60" x2="110" y2="60" stroke="#00d4ff" stroke-width="3" filter="url(#neon-cyan-glow)"/>
+
+          <!-- Rotors (Spinning animated in CSS) -->
+          <g class="rotor rotor-tl"><ellipse cx="40" cy="30" rx="25" ry="5" fill="none" stroke="#00d4ff" stroke-width="2" filter="url(#neon-cyan-glow)"/></g>
+          <g class="rotor rotor-tr"><ellipse cx="160" cy="30" rx="25" ry="5" fill="none" stroke="#00d4ff" stroke-width="2" filter="url(#neon-cyan-glow)"/></g>
+          <g class="rotor rotor-bl"><ellipse cx="40" cy="90" rx="25" ry="5" fill="none" stroke="#00d4ff" stroke-width="2" filter="url(#neon-cyan-glow)"/></g>
+          <g class="rotor rotor-br"><ellipse cx="160" cy="90" rx="25" ry="5" fill="none" stroke="#00d4ff" stroke-width="2" filter="url(#neon-cyan-glow)"/></g>
+
+          <!-- Cargo Clamps -->
+          <path d="M85,80 L85,95 L95,95" fill="none" stroke="#ff9900" stroke-width="3" stroke-linecap="round"/>
+          <path d="M115,80 L115,95 L105,95" fill="none" stroke="#ff9900" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+
+        <!-- Under-slung Cargo Package -->
+        <div class="drone-package" id="drone-package">
+          <div class="box-face box-front"></div>
+          <div class="box-face box-top"></div>
+          <div class="box-face box-side"></div>
+          <div class="box-smile-logo"></div>
+        </div>
+      </div>
+
+      <!-- Landing Target / Portal Locker -->
+      <div class="cyber-pod-platform" id="pod-platform">
+        <div class="platform-ring ring-outer"></div>
+        <div class="platform-ring ring-inner"></div>
+        <div class="platform-scanner-beam"></div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCENE 3: The Hologram Locker                    -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="scene scene-locker" id="scene-locker">
+      <!-- 3D Locker Pod Container -->
+      <div class="locker-3d-wrapper" id="locker-wrapper">
+        <div class="locker-door door-left" id="door-l"></div>
+        <div class="locker-door door-right" id="door-r"></div>
+        <div class="locker-core-glow"></div>
+        
+        <!-- Levitating Holographic Package -->
+        <div class="holo-package" id="holo-package">
+          <div class="holo-box-face face-front"></div>
+          <div class="holo-box-face face-back"></div>
+          <div class="holo-box-face face-left"></div>
+          <div class="holo-box-face face-right"></div>
+          <div class="holo-box-face face-top"></div>
+          <div class="holo-box-face face-bottom"></div>
+        </div>
+      </div>
+
+      <!-- Holographic Hexagonal Projection Grid -->
+      <div class="holo-projection-cone" id="holo-cone"></div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCENE 4: Cyber Skyline Reveal                   -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="scene scene-skyline" id="scene-skyline">
+      <!-- Mega Neon Logo Constellation -->
+      <div class="neon-skyline-brand" id="skyline-brand">
+        <div class="neon-sky-logo">amazon</div>
+        <div class="neon-sky-arrow">
+          <svg viewBox="0 0 300 80" width="260">
+            <path d="M30,25 Q150,75 270,25" fill="none" stroke="#ff9900" stroke-width="7" stroke-linecap="round" class="sky-arrow-path"/>
+            <polygon points="255,15 278,28 252,38" fill="#ff9900"/>
+          </svg>
+        </div>
+        <h2 class="neon-sky-tagline">FUTURE DELIVERED</h2>
+        <div class="hologram-stats-grid">
+          <div class="holo-stat-card">
+            <span class="stat-unit">PING</span>
+            <span class="stat-val">0.03 MS</span>
+          </div>
+          <div class="holo-stat-card">
+            <span class="stat-unit">NODE</span>
+            <span class="stat-val">AMZ-CYBER</span>
+          </div>
+          <div class="holo-stat-card">
+            <span class="stat-unit">STATUS</span>
+            <span class="stat-val SECURE">SECURE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive System HUD / Overlay Toast -->
+    <div class="cyber-toast" id="cyber-toast">
+      <div class="toast-indicator"></div>
+      <div class="toast-content">
+        <div class="toast-title">GRID COMM LINK ESTABLISHED</div>
+        <div class="toast-body">Fulfillment drone matching telemetry signature: AMZN-DRN-9092.</div>
+      </div>
+    </div>
+
+    <!-- Scanning Reticle Overlay -->
+    <div class="hud-reticle" id="hud-reticle">
+      <div class="reticle-bracket tl"></div>
+      <div class="reticle-bracket tr"></div>
+      <div class="reticle-bracket bl"></div>
+      <div class="reticle-bracket br"></div>
+      <div class="reticle-label">SYS_STATUS: ACTIVE</div>
+    </div>
+
+  </div>
+
+  <!-- Cybernetic Control Console -->
+  <div class="control-console">
+    <div class="console-row">
+      <div class="playback-controls">
+        <button class="console-btn btn-action" id="btn-play">PAUSE_SYSTEM</button>
+        <button class="console-btn btn-secondary" id="btn-restart">REBOOT_LOOP</button>
+        <div class="frequency-multiplier">
+          <button class="freq-btn active" data-speed="1">1.0x</button>
+          <button class="freq-btn" data-speed="2">2.0x</button>
+          <button class="freq-btn" data-speed="0.5">0.5x</button>
+        </div>
+      </div>
+      <div class="node-indicator">PORT_ID: //AMZN_CYBER_NODE_D9</div>
+    </div>
+    
+    <div class="slider-container">
+      <span class="timestamp-label" id="time-current">00.00s</span>
+      <input type="range" class="console-slider" id="timeline-slider" min="0" max="1350" value="0">
+      <span class="timestamp-label">45.00s</span>
+    </div>
+
+    <div class="phase-nodes">
+      <div class="console-node active" data-frame="0">
+        <div class="node-dot"></div>
+        <span class="node-name">STREET_GRID</span>
+      </div>
+      <div class="console-node" data-frame="360">
+        <div class="node-dot"></div>
+        <span class="node-name">DRONE_DESCENT</span>
+      </div>
+      <div class="console-node" data-frame="750">
+        <div class="node-dot"></div>
+        <span class="node-name">HOLOGRAM_LOCKER</span>
+      </div>
+      <div class="console-node" data-frame="1110">
+        <div class="node-dot"></div>
+        <span class="node-name">SKYLINE_REVEAL</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="amazon-cyber-script.js"></script>
+</body>
+</html>

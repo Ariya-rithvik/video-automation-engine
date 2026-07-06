@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amazon — A to Z Universe Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="amazon-az-style.css">
+</head>
+<body>
+
+  <!-- Ambient Backdrop -->
+  <div class="ambient-glow"></div>
+  <div class="ambient-glow-secondary"></div>
+
+  <!-- Main Showcase Viewport (16:9) -->
+  <div class="showcase-viewport" id="showcase-viewport">
+
+    <!-- Particle Canvas (used across all phases) -->
+    <canvas class="particle-canvas" id="particle-canvas"></canvas>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCENE 1: The Spark — Smile Arrow Ignites        -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="scene scene-spark active" id="scene-spark">
+      <!-- Central SVG: The Amazon Smile Arrow being traced -->
+      <div class="spark-center" id="spark-center">
+        <svg class="smile-arrow-svg" viewBox="0 0 400 200" id="smile-svg">
+          <defs>
+            <linearGradient id="arrow-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#ff6600"/>
+              <stop offset="50%" stop-color="#ff9900"/>
+              <stop offset="100%" stop-color="#ffcc00"/>
+            </linearGradient>
+            <filter id="arrow-glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="8" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <filter id="arrow-glow-intense" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="14" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <!-- The smile curve path -->
+          <path id="smile-path" 
+                d="M 60 100 Q 200 180 340 100"
+                fill="none" stroke="url(#arrow-grad)" stroke-width="8"
+                stroke-linecap="round" filter="url(#arrow-glow)"
+                stroke-dasharray="0 9999"/>
+          <!-- The arrowhead at the end -->
+          <polygon id="smile-arrowhead"
+                   points="330,85 350,100 330,110"
+                   fill="#ff9900" filter="url(#arrow-glow)" opacity="0"/>
+        </svg>
+
+        <!-- The "A" and "Z" letters flanking the smile -->
+        <div class="az-letter letter-a" id="letter-a">a</div>
+        <div class="az-letter letter-z" id="letter-z">z</div>
+      </div>
+
+      <!-- Portal Wormhole Ring (expands after arrow is drawn) -->
+      <div class="portal-ring-wrapper" id="portal-wrapper">
+        <div class="portal-ring" id="portal-ring"></div>
+        <div class="portal-ring ring-inner" id="portal-inner"></div>
+        <div class="portal-ring ring-core" id="portal-core"></div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCENE 2: The Ecosystem Carousel                 -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="scene scene-ecosystem" id="scene-ecosystem">
+      <!-- Tunnel perspective wrapper -->
+      <div class="tunnel-perspective" id="tunnel-perspective">
+        <div class="tunnel-ring-layer" id="tunnel-rings"></div>
+      </div>
+
+      <!-- Floating Holographic Orbs -->
+      <div class="ecosystem-orbs-container" id="orbs-container">
+        <!-- Alexa Orb -->
+        <div class="eco-orb" id="orb-alexa" data-label="Alexa">
+          <div class="orb-glass">
+            <div class="orb-icon">
+              <svg viewBox="0 0 60 60" width="50" height="50">
+                <!-- Echo device body -->
+                <rect x="18" y="12" width="24" height="36" rx="12" fill="none" stroke="#00d4ff" stroke-width="2.5"/>
+                <!-- Voice wave rings -->
+                <circle cx="30" cy="30" r="16" fill="none" stroke="rgba(0,212,255,0.4)" stroke-width="1.5" class="voice-ring r1"/>
+                <circle cx="30" cy="30" r="22" fill="none" stroke="rgba(0,212,255,0.25)" stroke-width="1" class="voice-ring r2"/>
+                <circle cx="30" cy="30" r="28" fill="none" stroke="rgba(0,212,255,0.12)" stroke-width="0.8" class="voice-ring r3"/>
+                <!-- LED ring top -->
+                <ellipse cx="30" cy="14" rx="10" ry="3" fill="none" stroke="#00d4ff" stroke-width="2"/>
+              </svg>
+            </div>
+          </div>
+          <div class="orb-label">Alexa</div>
+        </div>
+
+        <!-- Prime Video Orb -->
+        <div class="eco-orb" id="orb-video" data-label="Prime Video">
+          <div class="orb-glass">
+            <div class="orb-icon">
+              <svg viewBox="0 0 60 60" width="50" height="50">
+                <!-- Play triangle -->
+                <polygon points="22,15 45,30 22,45" fill="none" stroke="#00d4ff" stroke-width="2.5" stroke-linejoin="round"/>
+                <!-- Film reel circle -->
+                <circle cx="30" cy="30" r="24" fill="none" stroke="rgba(255,153,0,0.5)" stroke-width="1.5" stroke-dasharray="6 4"/>
+                <!-- Small reel holes -->
+                <circle cx="30" cy="8" r="2" fill="#ff9900"/>
+                <circle cx="30" cy="52" r="2" fill="#ff9900"/>
+                <circle cx="8" cy="30" r="2" fill="#ff9900"/>
+                <circle cx="52" cy="30" r="2" fill="#ff9900"/>
+              </svg>
+            </div>
+          </div>
+          <div class="orb-label">Prime Video</div>
+        </div>
+
+        <!-- AWS Cloud Orb -->
+        <div class="eco-orb" id="orb-aws" data-label="AWS">
+          <div class="orb-glass">
+            <div class="orb-icon">
+              <svg viewBox="0 0 60 60" width="50" height="50">
+                <!-- Cloud shape -->
+                <path d="M15,38 Q8,38 8,30 Q8,22 16,22 Q18,14 28,14 Q38,14 40,22 Q48,20 52,28 Q54,36 46,38 Z"
+                      fill="none" stroke="#ff9900" stroke-width="2"/>
+                <!-- Data nodes -->
+                <circle cx="20" cy="44" r="3" fill="#00d4ff"/>
+                <circle cx="30" cy="48" r="3" fill="#00d4ff"/>
+                <circle cx="40" cy="44" r="3" fill="#00d4ff"/>
+                <!-- Connection lines -->
+                <line x1="20" y1="38" x2="20" y2="44" stroke="rgba(0,212,255,0.4)" stroke-width="1"/>
+                <line x1="30" y1="38" x2="30" y2="48" stroke="rgba(0,212,255,0.4)" stroke-width="1"/>
+                <line x1="40" y1="38" x2="40" y2="44" stroke="rgba(0,212,255,0.4)" stroke-width="1"/>
+              </svg>
+            </div>
+          </div>
+          <div class="orb-label">AWS</div>
+        </div>
+
+        <!-- Kindle Orb -->
+        <div class="eco-orb" id="orb-kindle" data-label="Kindle">
+          <div class="orb-glass">
+            <div class="orb-icon">
+              <svg viewBox="0 0 60 60" width="50" height="50">
+                <!-- Book shape (open) -->
+                <path d="M10,45 L10,10 Q30,5 30,15 L30,50 Q30,42 10,45 Z" fill="none" stroke="#ff9900" stroke-width="2"/>
+                <path d="M50,45 L50,10 Q30,5 30,15 L30,50 Q30,42 50,45 Z" fill="none" stroke="#ff9900" stroke-width="2"/>
+                <!-- Text lines on left page -->
+                <line x1="14" y1="18" x2="26" y2="20" stroke="rgba(255,153,0,0.3)" stroke-width="1.5"/>
+                <line x1="14" y1="24" x2="26" y2="26" stroke="rgba(255,153,0,0.3)" stroke-width="1.5"/>
+                <line x1="14" y1="30" x2="26" y2="32" stroke="rgba(255,153,0,0.3)" stroke-width="1.5"/>
+                <line x1="14" y1="36" x2="22" y2="37" stroke="rgba(255,153,0,0.3)" stroke-width="1.5"/>
+              </svg>
+            </div>
+          </div>
+          <div class="orb-label">Kindle</div>
+        </div>
+
+        <!-- Shopping Orb -->
+        <div class="eco-orb" id="orb-shop" data-label="Shopping">
+          <div class="orb-glass">
+            <div class="orb-icon">
+              <svg viewBox="0 0 60 60" width="50" height="50">
+                <!-- Cart body -->
+                <path d="M12,18 L18,18 L24,40 L46,40 L50,22 L20,22" fill="none" stroke="#00d4ff" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+                <!-- Wheels -->
+                <circle cx="28" cy="46" r="3.5" fill="none" stroke="#00d4ff" stroke-width="2"/>
+                <circle cx="42" cy="46" r="3.5" fill="none" stroke="#00d4ff" stroke-width="2"/>
+                <!-- Items in cart -->
+                <rect x="26" y="26" width="6" height="10" rx="1" fill="rgba(255,153,0,0.5)"/>
+                <rect x="34" y="28" width="6" height="8" rx="1" fill="rgba(0,212,255,0.4)"/>
+                <rect x="42" y="30" width="4" height="6" rx="1" fill="rgba(255,153,0,0.3)"/>
+              </svg>
+            </div>
+          </div>
+          <div class="orb-label">Shopping</div>
+        </div>
+      </div>
+
+      <!-- Data stream lines connecting orbs -->
+      <svg class="data-streams-svg" id="data-streams" viewBox="0 0 1024 576">
+        <defs>
+          <linearGradient id="stream-grad-1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="rgba(255,153,0,0.6)"/>
+            <stop offset="100%" stop-color="rgba(0,212,255,0.1)"/>
+          </linearGradient>
+          <linearGradient id="stream-grad-2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="rgba(0,212,255,0.5)"/>
+            <stop offset="100%" stop-color="rgba(255,153,0,0.1)"/>
+          </linearGradient>
+          <filter id="stream-glow">
+            <feGaussianBlur stdDeviation="4"/>
+          </filter>
+        </defs>
+      </svg>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCENE 3: The Convergence River                  -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="scene scene-river" id="scene-river">
+      <!-- Counter Overlays -->
+      <div class="river-counter-block" id="counter-block">
+        <div class="river-counter" id="counter-products">
+          <div class="counter-num" id="counter-products-num">0</div>
+          <div class="counter-label">Products Available</div>
+        </div>
+        <div class="river-counter" id="counter-members">
+          <div class="counter-num" id="counter-members-num">0</div>
+          <div class="counter-label">Prime Members Worldwide</div>
+        </div>
+      </div>
+
+      <!-- Convergence Point (bright singularity) -->
+      <div class="convergence-point" id="convergence-point">
+        <div class="singularity-core"></div>
+        <div class="singularity-ring ring-1"></div>
+        <div class="singularity-ring ring-2"></div>
+        <div class="singularity-ring ring-3"></div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCENE 4: The Brand Supernova                    -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="scene scene-supernova" id="scene-supernova">
+      <!-- Shockwave ring -->
+      <div class="supernova-shockwave" id="shockwave"></div>
+
+      <!-- Amazon Corporate Logo -->
+      <div class="supernova-brand-block" id="brand-block">
+        <div class="sn-logo" id="sn-logo">amazon</div>
+        <div class="sn-smile-arrow" id="sn-smile">
+          <svg viewBox="0 0 200 50" width="180">
+            <path d="M20,15 Q100,45 180,15" fill="none" stroke="#ff9900" stroke-width="6" stroke-linecap="round"/>
+            <polygon points="170,8 185,18 168,24" fill="#ff9900"/>
+          </svg>
+        </div>
+        <h1 class="sn-tagline" id="sn-tagline">Everything store. For everyone.</h1>
+        <p class="sn-subtitle" id="sn-subtitle">From A to Z — delivering possibility</p>
+
+        <div class="sn-stats-row" id="sn-stats">
+          <div class="sn-stat-card" id="sn-stat-1">
+            <div class="sn-stat-num">350M+</div>
+            <div class="sn-stat-label">Products</div>
+          </div>
+          <div class="sn-stat-card" id="sn-stat-2">
+            <div class="sn-stat-num">200M+</div>
+            <div class="sn-stat-label">Prime Members</div>
+          </div>
+          <div class="sn-stat-card" id="sn-stat-3">
+            <div class="sn-stat-num">A → Z</div>
+            <div class="sn-stat-label">Everything Delivered</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- OVERLAYS                                        -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- Celebration Toast -->
+    <div class="celebration-toast" id="celebration-toast">
+      <div class="toast-icon-badge">🌟</div>
+      <div class="toast-body">
+        <h5>Welcome to Everything</h5>
+        <p>350 million products. One destination.</p>
+      </div>
+    </div>
+
+    <!-- Confetti Canvas -->
+    <canvas class="confetti-overlay" id="confetti-canvas"></canvas>
+
+  </div>
+
+  <!-- Control Panel -->
+  <div class="control-panel">
+    <div class="control-buttons">
+      <button class="btn btn-primary" id="btn-play">Pause</button>
+      <button class="btn btn-secondary" id="btn-restart">Restart</button>
+      <div class="speed-toggle-group">
+        <button class="speed-btn active" data-speed="1">1x</button>
+        <button class="speed-btn" data-speed="2">2x</button>
+        <button class="speed-btn" data-speed="0.5">0.5x</button>
+      </div>
+    </div>
+    <div class="timeline-slider-wrapper">
+      <span class="time-label" id="current-time">0.00s</span>
+      <input type="range" class="timeline-slider" id="timeline-slider" min="0" max="1350" value="0">
+      <span class="time-label">45.00s</span>
+    </div>
+    <div class="steps-progress">
+      <div class="step-indicator active" data-frame="0">
+        <span class="step-num">1</span>
+        <span class="step-txt">The Spark</span>
+      </div>
+      <div class="step-indicator" data-frame="270">
+        <span class="step-num">2</span>
+        <span class="step-txt">Ecosystem</span>
+      </div>
+      <div class="step-indicator" data-frame="660">
+        <span class="step-num">3</span>
+        <span class="step-txt">Convergence</span>
+      </div>
+      <div class="step-indicator" data-frame="1020">
+        <span class="step-num">4</span>
+        <span class="step-txt">Supernova</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="amazon-az-script.js"></script>
+</body>
+</html>

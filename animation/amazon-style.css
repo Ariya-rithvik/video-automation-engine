@@ -1,0 +1,681 @@
+/* ═══════════════════════════════════════════════════════════ */
+/* AMAZON CLICKS TO DELIVERY — CINEMATIC SHOWCASE STYLES      */
+/* ═══════════════════════════════════════════════════════════ */
+
+/* ── Reset & Core Styles ── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cyber-black: #05070a;
+  --panel-dark: #0a0e17;
+  --prime-blue: #0066c0;
+  --prime-blue-glow: rgba(0, 102, 192, 0.4);
+  --amazon-orange: #ff9900;
+  --amazon-orange-glow: rgba(255, 153, 0, 0.4);
+  --glass-white: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --text-primary: #f8fafc;
+  --text-muted: #64748b;
+  --text-success: #10b981;
+}
+
+body {
+  background-color: #030406;
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 20px;
+}
+
+/* ── Ambient Background Glows ── */
+.ambient-glow {
+  position: fixed; top: 10%; left: 15%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(0, 102, 192, 0.12) 0%, transparent 70%);
+  filter: blur(100px); pointer-events: none; z-index: -1; border-radius: 50%;
+}
+.ambient-glow-secondary {
+  position: fixed; bottom: 10%; right: 15%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(255, 153, 0, 0.08) 0%, transparent 70%);
+  filter: blur(100px); pointer-events: none; z-index: -1; border-radius: 50%;
+}
+
+/* ── Showcase Viewport ── */
+.showcase-viewport {
+  position: relative;
+  width: 1024px; height: 576px;
+  background: linear-gradient(135deg, #050608 0%, #0d111d 100%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 24px;
+  box-shadow: 
+    0 25px 70px rgba(0,0,0,0.85),
+    inset 0 0 40px rgba(0, 102, 192, 0.03);
+  overflow: hidden;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+/* ── Scene Controller ── */
+.scene {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.05s linear;
+}
+.scene.active { opacity: 1; pointer-events: auto; }
+
+/* ════════════════════════════════════════════ */
+/* SCENE 1: PRODUCT SHOWCASE                   */
+/* ════════════════════════════════════════════ */
+.scene-product {
+  background: radial-gradient(circle at center, #0a1122 0%, #040508 100%);
+}
+
+.product-card-wrapper {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.card-glass-body {
+  width: 340px; height: 440px;
+  background: rgba(10, 15, 30, 0.65);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(0, 102, 192, 0.1),
+    inset 0 0 15px rgba(255, 255, 255, 0.02);
+  transform: rotateX(0deg) rotateY(0deg);
+}
+
+/* Prime tag header */
+.prime-header {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.prime-tag {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900; font-size: 15px;
+  color: #00edff;
+  letter-spacing: -0.5px;
+  text-shadow: 0 0 10px rgba(0, 237, 255, 0.4);
+}
+.delivery-eta {
+  font-size: 9px; color: var(--text-muted); font-weight: 600;
+  background: rgba(255,255,255,0.04);
+  padding: 4px 8px; border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+/* Gadget view */
+.gadget-showcase-container {
+  height: 180px; position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.gadget-glow-halo {
+  position: absolute; width: 100px; height: 100px;
+  background: radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, transparent 70%);
+  filter: blur(15px); pointer-events: none;
+}
+.gadget-svg {
+  width: 140px; height: 140px;
+  filter: drop-shadow(0 10px 20px rgba(0, 242, 254, 0.25));
+}
+
+/* Info block */
+.product-info-block { display: flex; flex-direction: column; gap: 4px; }
+.product-title {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800; font-size: 18px; color: var(--text-primary);
+}
+.product-subtitle { font-size: 10px; color: var(--text-muted); }
+
+.product-rating-row {
+  display: flex; align-items: center; gap: 6px; margin-top: 4px;
+}
+.stars-glowing {
+  color: var(--amazon-orange);
+  font-size: 11px;
+  text-shadow: 0 0 6px var(--amazon-orange-glow);
+}
+.rating-count { font-size: 9px; color: var(--text-muted); }
+
+/* Price badge */
+.price-block {
+  display: flex; align-items: flex-start; margin-top: 8px;
+}
+.price-symbol { font-size: 12px; font-weight: 700; color: var(--text-primary); margin-top: 2px; }
+.price-value {
+  font-family: 'Outfit', sans-serif;
+  font-size: 32px; font-weight: 900; line-height: 1; color: var(--text-primary);
+}
+.price-decimals { font-size: 12px; font-weight: 700; color: var(--text-primary); }
+.prime-savings {
+  align-self: center; font-size: 9px; font-weight: 700;
+  color: var(--text-success); background: rgba(16,185,129,0.08);
+  padding: 2px 6px; border-radius: 4px; margin-left: 10px;
+}
+
+/* Click button */
+.buy-now-btn {
+  width: 100%; height: 38px; border: none; outline: none;
+  background: linear-gradient(135deg, #ffb300 0%, #ff9900 100%);
+  border-radius: 10px;
+  box-shadow: 
+    0 4px 15px rgba(255, 153, 0, 0.25),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+  margin-top: 14px;
+  cursor: pointer;
+  position: relative; overflow: hidden;
+  transition: transform 0.1s, box-shadow 0.2s;
+}
+.buy-now-btn:active { transform: scale(0.97); }
+.btn-text {
+  font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 12px;
+  color: #111; z-index: 2; position: relative;
+}
+.btn-shine {
+  position: absolute; top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transform: skewX(-20deg);
+  transition: none;
+}
+
+/* ════════════════════════════════════════════ */
+/* SCENE 2: ROBOTIC FULFILLMENT                */
+/* ════════════════════════════════════════════ */
+.scene-fulfillment {
+  background: radial-gradient(circle at center, #090e18 0%, #030406 100%);
+}
+.fulfillment-viewport {
+  width: 100%; height: 100%; position: relative;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Conveyor Grid Background */
+.cyber-conveyor-grid {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center;
+  z-index: 1;
+}
+
+/* Conveyor Track */
+.conveyor-belt-track {
+  position: absolute; bottom: 80px; width: 1000px; height: 35px;
+  background: linear-gradient(180deg, #181c24 0%, #0b0c10 100%);
+  border-top: 2px stroke #2d3545;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  z-index: 2;
+  border-radius: 6px;
+}
+.conveyor-belt-track::after {
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: repeating-linear-gradient(90deg, transparent, transparent 15px, #262c38 15px, #262c38 30px);
+  opacity: 0.15;
+}
+
+/* Scanner Sweeping Lines */
+.scanner-laser-line {
+  position: absolute; left: 0; width: 100%; height: 2px;
+  background: var(--amazon-orange);
+  box-shadow: 0 0 15px 4px var(--amazon-orange-glow);
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+}
+.barcode-flicker-data {
+  position: absolute; bottom: 30px; left: 30px;
+  font-family: 'JetBrains Mono', monospace; font-size: 9px;
+  color: var(--amazon-orange); text-shadow: 0 0 5px var(--amazon-orange-glow);
+  background: rgba(0,0,0,0.7); padding: 4px 8px; border-radius: 4px;
+  border: 1px solid var(--amazon-orange-glow);
+  opacity: 0; z-index: 10;
+}
+
+/* Box Assembly */
+.box-assembly-container {
+  z-index: 5;
+  transform: translateY(30px);
+  transform-style: preserve-3d;
+}
+
+/* 3D Package Box */
+.amazon-package-3d {
+  position: relative;
+  width: 140px; height: 95px;
+  transform-style: preserve-3d;
+  transform: rotateX(-15deg) rotateY(35deg) scale(0);
+}
+
+.box-face {
+  position: absolute;
+  background: #996e49;
+  border: 1px solid #755233;
+}
+.face-front  { width: 140px; height: 95px; transform: translateZ(60px); display: flex; align-items: center; justify-content: center; }
+.face-back   { width: 140px; height: 95px; transform: rotateY(180deg) translateZ(60px); }
+.face-left   { width: 120px; height: 95px; transform: rotateY(-90deg) translateZ(70px); background: #87603f; }
+.face-right  { width: 120px; height: 95px; transform: rotateY(90deg) translateZ(70px); background: #87603f; }
+.face-bottom { width: 140px; height: 120px; transform: rotateX(-90deg) translateZ(47px); background: #694b32; }
+.face-top    { 
+  width: 140px; height: 120px; 
+  transform: rotateX(90deg) translateZ(47px); 
+  background: #b58257; 
+  transform-style: preserve-3d;
+}
+
+/* Box logo */
+.box-smile-logo { opacity: 0.8; filter: brightness(0.2); }
+
+/* Flaps */
+.box-flap {
+  position: absolute; top: 0; width: 70px; height: 120px;
+  background: #a87951; border: 1px solid #755233;
+  transition: transform 0.05s linear;
+}
+.flap-left {
+  left: 0; transform-origin: left center;
+  transform: rotateY(90deg); /* 90deg is wide open, 0deg is folded flat shut */
+}
+.flap-right {
+  right: 0; transform-origin: right center;
+  transform: rotateY(-90deg); /* -90deg is wide open, 0deg is shut */
+}
+
+/* Prime Sealing Tape */
+.prime-glowing-tape {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scaleX(0);
+  width: 140px; height: 16px;
+  background: #0066c0;
+  border: 1.5px solid #00a8e8;
+  box-shadow: 0 0 10px rgba(0, 168, 232, 0.6);
+  z-index: 10;
+  display: flex; align-items: center; justify-content: center;
+  transform-origin: left center;
+}
+.tape-txt {
+  font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 8px;
+  color: #fff; text-shadow: 0 0 4px #00a8e8; letter-spacing: -0.2px;
+}
+
+/* Shipping label */
+.shipping-label-card {
+  position: absolute; top: 15px; left: 20px;
+  width: 45px; height: 35px;
+  background: #f8fafc; border: 1px solid #ddd;
+  padding: 3px; font-family: 'Inter', sans-serif;
+  color: #222; opacity: 0; transform: scale(0.5);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  z-index: 12;
+}
+.label-header { font-size: 4px; font-weight: bold; border-bottom: 0.5px solid #bbb; padding-bottom: 1px; }
+.barcode-lines {
+  height: 10px; margin-top: 2px;
+  background: repeating-linear-gradient(90deg, #111, #111 1px, transparent 1px, transparent 3px);
+}
+.barcode-digits { font-size: 3px; font-family: monospace; text-anchor: middle; margin-top: 2px; scale: 0.9; }
+
+/* Robotic arms */
+.robotic-arm {
+  position: absolute; width: 200px; height: 200px;
+  z-index: 6; pointer-events: none;
+}
+.arm-left { bottom: 100px; left: 100px; }
+.arm-right { bottom: 100px; right: 100px; }
+
+/* ════════════════════════════════════════════ */
+/* SCENE 3: DRONE DELIVERY                     */
+/* ════════════════════════════════════════════ */
+.scene-delivery {
+  background: linear-gradient(180deg, #020306 0%, #080c14 100%);
+}
+
+.scrolling-cityscape {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 1; pointer-events: none;
+}
+.city-skyline {
+  position: absolute; bottom: 60px; left: 0; width: 200%; height: 150px;
+  background-repeat: repeat-x;
+  background-position: bottom left;
+}
+.skyline-back {
+  height: 120px; opacity: 0.08;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" preserveAspectRatio="none"><path d="M0,100 L0,40 L20,40 L20,30 L40,30 L40,50 L65,50 L65,20 L80,20 L80,60 L110,60 L110,35 L130,35 L130,10 L150,10 L150,55 L170,55 L170,40 L200,40 L200,100 Z" fill="%23ffffff"/></svg>');
+  background-size: 400px 100%;
+}
+.skyline-mid {
+  height: 90px; opacity: 0.15;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" preserveAspectRatio="none"><path d="M0,100 L0,50 L30,50 L30,60 L60,60 L60,35 L85,35 L85,45 L115,45 L115,50 L140,50 L140,25 L160,25 L160,55 L200,55 L200,100 Z" fill="%23ffffff"/></svg>');
+  background-size: 300px 100%;
+}
+
+.neighborhood-street-row {
+  position: absolute; bottom: 0; left: 0; width: 200%; height: 70px;
+  opacity: 0.22;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50" preserveAspectRatio="none"><rect x="10" y="20" width="30" height="30" fill="%23ffffff" /><polygon points="10,20 25,5 40,20" fill="%23ffffff"/><rect x="80" y="15" width="40" height="35" fill="%23ffffff" /><polygon points="80,15 100,0 120,15" fill="%23ffffff"/><circle cx="170" cy="35" r="10" fill="%23ffffff"/><rect x="168" y="35" width="4" height="15" fill="%23ffffff"/></svg>');
+  background-size: 200px 100%;
+}
+
+.stars-backdrop {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background-image: radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px);
+  background-size: 120px 120px;
+  opacity: 0.35; z-index: 1;
+}
+
+/* Drone visual wrapper */
+.drone-flight-wrapper {
+  position: absolute; top: 35%; left: 50%;
+  transform: translate(-50%, -50%) scale(1.0);
+  z-index: 10;
+  display: flex; flex-direction: column; align-items: center;
+}
+.drone-svg { width: 220px; height: auto; }
+
+/* Drone light cone overlay */
+.searchlight-beam {
+  position: absolute; top: 90px; left: 50%;
+  transform: translateX(-50%);
+  width: 160px; height: 350px;
+  background: fill-gradient;
+  background: linear-gradient(180deg, rgba(0, 242, 254, 0.22) 0%, rgba(255, 153, 0, 0.01) 100%);
+  clip-path: polygon(45% 0, 55% 0, 100% 100%, 0 100%);
+  z-index: 2; pointer-events: none;
+  opacity: 0; transform-origin: top center;
+}
+
+/* Underneath box */
+.drone-payload-box {
+  position: absolute; top: 120px; left: 50%;
+  transform: translateX(-50%);
+  width: 70px; z-index: 3;
+}
+.payload-box-svg { width: 100%; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.6)); }
+
+/* ════════════════════════════════════════════ */
+/* SCENE 4: UNBOXING & BRAND OUTRO             */
+/* ════════════════════════════════════════════ */
+.scene-outro {
+  background: #040507;
+}
+
+/* Warm Doorstep Frame */
+.smart-home-doorstep {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 1; pointer-events: none;
+}
+.house-door-frame {
+  position: absolute; top: 5%; left: 35%; width: 30%; height: 95%;
+  border-left: 8px solid #0f172a;
+  border-right: 8px solid #0f172a;
+  border-top: 8px solid #0f172a;
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.8);
+}
+.warm-interior-glow {
+  position: absolute; top: 5%; left: 35.8%; width: 28.4%; height: 95%;
+  background: radial-gradient(circle at center, rgba(255, 183, 0, 0.45) 0%, rgba(255, 153, 0, 0.05) 80%);
+  opacity: 0;
+}
+
+/* Doorstep Unboxing */
+.doorstep-unboxing-wrapper {
+  position: absolute; bottom: 85px; left: 50%;
+  transform: translateX(-50%) scale(0);
+  z-index: 5;
+}
+
+.package-unboxed {
+  position: relative; width: 130px; height: 90px;
+  transform-style: preserve-3d;
+  transform: rotateX(25deg) rotateY(15deg);
+}
+.unboxed-base {
+  position: absolute; width: 100%; height: 100%;
+  background: #8f633d; border: 1.5px solid #5d3f24;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+}
+.unboxed-flap {
+  position: absolute; background: #a87951; border: 1.2px solid #5d3f24;
+}
+.flap-left-open {
+  top: 0; bottom: 0; left: -45px; width: 45px;
+  transform-origin: right center; transform: rotateY(-130deg);
+}
+.flap-right-open {
+  top: 0; bottom: 0; right: -45px; width: 45px;
+  transform-origin: left center; transform: rotateY(130deg);
+}
+.flap-front-open {
+  left: 0; right: 0; bottom: -45px; height: 45px;
+  transform-origin: center top; transform: rotateX(-120deg);
+}
+.flap-back-open {
+  left: 0; right: 0; top: -45px; height: 45px;
+  transform-origin: center bottom; transform: rotateX(120deg);
+}
+
+/* Floating Smile arrow details */
+.floating-smile-arrow {
+  position: absolute; top: -30px; left: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+  opacity: 0;
+  filter: drop-shadow(0 0 15px var(--amazon-orange));
+}
+
+/* Outro Info Panel */
+.outro-brand-block {
+  z-index: 20; text-align: center;
+  display: flex; flex-direction: column; align-items: center;
+  opacity: 0; transform: scale(0.9);
+  pointer-events: none;
+}
+.amazon-corporate-logo {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900; font-size: 56px; color: #fff;
+  letter-spacing: -2px; line-height: 1;
+}
+.logo-accent { color: var(--amazon-orange); }
+.amazon-corporate-smile {
+  margin-top: -6px; margin-bottom: 24px;
+  filter: drop-shadow(0 4px 10px var(--amazon-orange-glow));
+}
+
+.outro-tagline {
+  font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 28px;
+  letter-spacing: -0.5px; color: var(--text-primary);
+}
+.outro-subtitle { font-size: 13px; color: var(--text-muted); margin-top: 6px; }
+
+/* Stats cards */
+.corporate-stats-row {
+  display: flex; gap: 32px; margin-top: 36px;
+}
+.corporate-stat-card {
+  background: rgba(10,15,30,0.6);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  padding: 16px 20px; border-radius: 14px;
+  min-width: 170px; text-align: center;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+  opacity: 0; transform: translateY(20px);
+}
+.stat-big-num {
+  font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 24px;
+  color: var(--prime-blue); text-shadow: 0 0 8px rgba(0,102,192,0.3);
+}
+#stat-2 .stat-big-num { color: var(--amazon-orange); text-shadow: 0 0 8px var(--amazon-orange-glow); }
+#stat-3 .stat-big-num { color: var(--text-success); text-shadow: 0 0 8px rgba(16,185,129,0.3); }
+
+.stat-small-label {
+  font-size: 10px; color: var(--text-muted); margin-top: 4px;
+  font-weight: 600; font-family: 'Inter', sans-serif;
+}
+
+/* ════════════════════════════════════════════ */
+/* INTERACTIVE OVERLAYS                        */
+/* ════════════════════════════════════════════ */
+
+/* Virtual Cursor */
+.virtual-cursor {
+  position: absolute; top: 0; left: 0; z-index: 500;
+  pointer-events: none; display: none;
+}
+.cursor-ripple {
+  position: absolute; top: 0; left: 0;
+  width: 32px; height: 32px;
+  border: 3px solid var(--amazon-orange); border-radius: 50%;
+  transform: translate(-16px,-16px) scale(0);
+  opacity: 0; pointer-events: none;
+}
+.cursor-ripple.click-wave {
+  animation: cursorRipple 0.5s cubic-bezier(0.1,0.8,0.3,1) forwards;
+}
+@keyframes cursorRipple {
+  0% { transform: translate(-16px,-16px) scale(0.1); opacity: 1; }
+  100% { transform: translate(-16px,-16px) scale(1.6); opacity: 0; }
+}
+
+/* Toast */
+.celebration-toast {
+  position: absolute; top: 32px; left: 50%;
+  transform: translateX(-50%) translateY(-30px);
+  opacity: 0;
+  background: rgba(10,14,26,0.92);
+  border: 1px solid var(--prime-blue-glow);
+  backdrop-filter: blur(12px);
+  border-radius: 14px;
+  padding: 12px 24px;
+  display: flex; align-items: center; gap: 14px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 25px rgba(0,102,192,0.1);
+  transition: transform 0.6s cubic-bezier(0.34,1.56,0.64,1), opacity 0.4s ease;
+  z-index: 200; pointer-events: none;
+  width: 330px;
+}
+.celebration-toast.active {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.toast-icon-badge { font-size: 20px; }
+.toast-body h5 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px; font-weight: 700; color: #fff;
+}
+.toast-body p { font-size: 10px; color: var(--text-muted); margin-top: 1px; }
+
+/* Confetti Canvas */
+.confetti-overlay {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 150;
+}
+
+/* ════════════════════════════════════════════ */
+/* CONTROL PANEL                               */
+/* ════════════════════════════════════════════ */
+.control-panel {
+  width: 1024px;
+  background-color: var(--panel-dark);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 16px;
+  padding: 14px 20px;
+  margin-top: 20px;
+  display: flex; flex-direction: column; gap: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  z-index: 100;
+}
+.control-buttons {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.btn {
+  border: none; outline: none; border-radius: 8px;
+  font-weight: bold; font-size: 12px;
+  padding: 8px 16px; cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--prime-blue) 0%, var(--amazon-orange) 100%);
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 102, 192, 0.2);
+}
+.btn-primary:hover { opacity: 0.95; }
+.btn-secondary {
+  background-color: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: #e4e4e7;
+}
+.btn-secondary:hover { background-color: rgba(255,255,255,0.06); }
+
+.speed-toggle-group {
+  display: flex; background-color: #05070c;
+  padding: 3px; border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.03);
+}
+.speed-btn {
+  background: none; border: none; outline: none;
+  color: #475569; font-weight: 600; font-size: 11px;
+  padding: 4px 10px; border-radius: 4px;
+  cursor: pointer; transition: all 0.2s;
+}
+.speed-btn.active {
+  background-color: rgba(255,255,255,0.06); color: #fff;
+}
+
+.timeline-slider-wrapper {
+  display: flex; align-items: center; gap: 12px;
+}
+.time-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--text-muted); width: 50px;
+}
+.timeline-slider {
+  flex: 1; -webkit-appearance: none; height: 5px;
+  border-radius: 2px; background: #161a24;
+  outline: none; cursor: pointer;
+}
+.timeline-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 14px; height: 14px;
+  border-radius: 50%; background: var(--amazon-orange); cursor: pointer;
+  box-shadow: 0 0 8px rgba(255, 153, 0, 0.5);
+}
+.timeline-slider::-webkit-slider-thumb:hover {
+  background: #ffb300; transform: scale(1.15);
+}
+
+.steps-progress {
+  display: flex; justify-content: space-between;
+  border-top: 1px solid rgba(255,255,255,0.03);
+  padding-top: 10px;
+}
+.step-indicator {
+  display: flex; flex-direction: column; align-items: center;
+  cursor: pointer; opacity: 0.35;
+  transition: opacity 0.3s, transform 0.3s; flex: 1;
+}
+.step-indicator:hover { opacity: 0.75; transform: translateY(-1px); }
+.step-indicator.active { opacity: 1; }
+
+.step-num {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800; font-size: 12px; color: var(--prime-blue);
+  margin-bottom: 1px;
+}
+.step-indicator.active .step-num { color: var(--amazon-orange); }
+.step-txt { font-size: 10px; color: #475569; }

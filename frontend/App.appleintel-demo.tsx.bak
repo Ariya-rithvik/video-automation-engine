@@ -1,0 +1,321 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import { useState, useRef } from "react";
+import { motion, useAnimate } from "motion/react";
+import { Sparkles, Play, Bold, Italic, Link2, MoreHorizontal, Mail, CornerUpLeft, MessageSquarePlus } from "lucide-react";
+
+// --- Demo Engine Configuration ---
+// You can build your own scenes by updating these variables and the script logic below.
+const DEMO_CONFIG = {
+  originalText: "Hey team, this project is taking way too long and I'm annoyed. We need to hurry up and finish by Friday or we're screwed. Let me know what you're doing.",
+  rewrittenText: "Hi team,\n\nI wanted to check in on our progress. Let's ensure we are aligned to meet our Friday deadline. Please provide a brief update on your current tasks.\n\nThank you.",
+};
+
+export default function App() {
+  const [uiScope, animate] = useAnimate();
+  const cursorRef = useRef<HTMLDivElement>(null);
+  
+  // State for orchestrating the UI
+  const [isDemoRunning, setIsDemoRunning] = useState(false);
+  const [displayedText, setDisplayedText] = useState(DEMO_CONFIG.originalText);
+  const [isHighlighted, setIsHighlighted] = useState(false);
+  const [showSparkleCTA, setShowSparkleCTA] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+  const [isGlowing, setIsGlowing] = useState(false);
+  const [showMenuHover, setShowMenuHover] = useState<string | null>(null);
+
+  const startDemo = async () => {
+    if (isDemoRunning) return;
+    setIsDemoRunning(true);
+    
+    // Reset all states
+    setDisplayedText(DEMO_CONFIG.originalText);
+    setIsHighlighted(false);
+    setShowSparkleCTA(false);
+    setShowMenu(false);
+    setIsGlowing(false);
+    setShowMenuHover(null);
+
+    // Initial setup for the camera (uiScope) and cursor
+    await animate(uiScope.current, { scale: 1, x: 0, y: 0, filter: "blur(0px)" }, { duration: 0 });
+    await animate(cursorRef.current!, { opacity: 1, x: 500, y: 700, scale: 1 }, { duration: 0 });
+
+    // 1. Move cursor to the start of the text to highlight
+    await animate(
+      cursorRef.current!,
+      { x: 260, y: 280 },
+      { duration: 1, ease: [0.25, 1, 0.5, 1] }
+    );
+
+    // 2. Click and drag to highlight the text
+    await animate(cursorRef.current!, { scale: 0.9 }, { duration: 0.1 });
+    const dragCursor = animate(cursorRef.current!, { x: 740, y: 350 }, { duration: 0.8, ease: "easeOut" });
+    
+    // Slight delay, then show highlight state simultaneously
+    setTimeout(() => setIsHighlighted(true), 150);
+    await dragCursor;
+    await animate(cursorRef.current!, { scale: 1 }, { duration: 0.1 });
+
+    // 3. Apple Intelligence Sparkle CTA appears briefly after selection
+    await new Promise(r => setTimeout(r, 300));
+    setShowSparkleCTA(true);
+
+    // 4. Move cursor to Sparkle & ZOOM IN (Screen Studio Effect)
+    const moveTask = animate(
+      cursorRef.current!,
+      { x: 340, y: 395 }, // Target coordinate for sparkle button inside the container
+      { duration: 1.2, ease: [0.32, 0.72, 0, 1] }
+    );
+    
+    const zoomTask = animate(
+      uiScope.current,
+      { scale: 1.6, x: 100, y: -50 }, // Zooms toward the sparkle button
+      { duration: 1.2, ease: [0.32, 0.72, 0, 1] }
+    );
+    
+    await Promise.all([moveTask, zoomTask]);
+
+    // 5. Click the Sparkle to open Apple Intelligence Menu
+    await animate(cursorRef.current!, { scale: 0.8 }, { duration: 0.1 });
+    await animate(cursorRef.current!, { scale: 1 }, { duration: 0.1 });
+    setShowSparkleCTA(false);
+    setShowMenu(true);
+    
+    await new Promise(r => setTimeout(r, 400));
+
+    // 6. Navigate Menu to "Professional" and Hover
+    await animate(
+      cursorRef.current!,
+      { x: 380, y: 455 }, 
+      { duration: 0.6, ease: "easeInOut" }
+    );
+    setShowMenuHover("professional");
+    await new Promise(r => setTimeout(r, 300));
+
+    // 7. Click Menu Item
+    await animate(cursorRef.current!, { scale: 0.8 }, { duration: 0.1 });
+    await animate(cursorRef.current!, { scale: 1 }, { duration: 0.1 });
+    
+    // Hide menu and start Apple Intelligence Glow
+    setShowMenu(false);
+    setIsHighlighted(false);
+    setIsGlowing(true);
+
+    // 8. Zoom out to show the whole screen transforming with AI
+    await animate(
+      uiScope.current,
+      { scale: 1.1, x: 0, y: 0 },
+      { duration: 1, ease: [0.32, 0.72, 0, 1] }
+    );
+
+    // 9. Process the rewrite 
+    // Simulate thinking time via the glowing screen
+    await new Promise(r => setTimeout(r, 800));
+
+    // Typewriter effect erasing old text (simulated quickly)
+    setDisplayedText("");
+    await new Promise(r => setTimeout(r, 100));
+
+    // Typewriter effect generating new text
+    let tempText = "";
+    const newTextArr = DEMO_CONFIG.rewrittenText.split(/(?= )/); // Split by words for faster typing
+    for (let i = 0; i < newTextArr.length; i++) {
+       tempText += newTextArr[i];
+       setDisplayedText(tempText);
+       await new Promise(r => setTimeout(r, Math.random() * 20 + 20)); 
+    }
+
+    // 10. AI finished, fade glow
+    await new Promise(r => setTimeout(r, 600));
+    setIsGlowing(false);
+
+    // 11. Final zoom out to original state
+    await animate(
+      uiScope.current,
+      { scale: 1, x: 0, y: 0 },
+      { duration: 1.2, ease: [0.32, 0.72, 0, 1] }
+    );
+
+    // Move cursor out
+    await animate(
+      cursorRef.current!,
+      { x: 1200, y: 900 },
+      { duration: 1.2, ease: "easeInOut" }
+    );
+
+    setIsDemoRunning(false);
+  };
+
+  return (
+    <div className="flex h-screen w-full bg-[#1A1A1A] items-center justify-center overflow-hidden font-sans relative">
+      
+      {/* 
+        The Demo Camera Window
+        This container has overflow hidden, acting as the window.
+        When `uiScope` animates, the content zooms natively within this frame.
+      */}
+      <div className="relative w-[1000px] h-[650px] bg-black rounded-3xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,1)] ring-1 ring-white/10">
+        
+        {/* Apple Intelligence Screen Edge Glow (Controlled by State) */}
+        {isGlowing && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 1, 0.8, 1] }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, repeat: Infinity, repeatType: "mirror" }}
+            className="absolute inset-0 z-50 pointer-events-none rounded-3xl"
+            style={{
+              boxShadow: "inset 0 0 60px 15px rgba(139, 92, 246, 0.4), inset 0 0 100px 30px rgba(236, 72, 153, 0.3), inset 0 0 140px 40px rgba(59, 130, 246, 0.3)"
+            }}
+          />
+        )}
+
+        {/* Scalable UI Canvas */}
+        <motion.div
+          ref={uiScope}
+          className="w-full h-full flex flex-col items-center justify-center relative bg-[url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center"
+        >
+          {/* Simulated "Mail" Application Window */}
+          <div className="w-[700px] bg-[#1E1E1E]/80 backdrop-blur-3xl rounded-xl shadow-2xl ring-1 ring-white/10 flex flex-col overflow-hidden text-neutral-100 relative mt-8 z-10">
+            
+            {/* Native OS Header */}
+            <div className="h-12 border-b border-white/10 flex items-center px-4 justify-between bg-black/20">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]"></div>
+                <div className="w-3 h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]"></div>
+                <div className="w-3 h-3 rounded-full bg-[#27C93F] border border-[#1AAB29]"></div>
+              </div>
+              <div className="flex items-center gap-4 text-white/50">
+                <CornerUpLeft className="w-4 h-4 cursor-default" />
+                <Mail className="w-4 h-4 cursor-default" />
+                <MessageSquarePlus className="w-4 h-4 cursor-default" />
+              </div>
+            </div>
+
+            {/* Email Metadata */}
+            <div className="px-8 py-6 border-b border-white/10 bg-black/10">
+              <div className="flex items-center text-sm mb-3">
+                <span className="w-16 text-white/40 font-medium">To:</span>
+                <span className="bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded cursor-default">Product Team</span>
+              </div>
+              <div className="flex items-center text-sm">
+                <span className="w-16 text-white/40 font-medium">Subject:</span>
+                <span className="text-white font-medium">Project Delta Update</span>
+              </div>
+            </div>
+
+            {/* Editor Formatting Ribbon */}
+            <div className="flex gap-4 px-8 py-2 border-b border-white/10 text-white/50 bg-black/5">
+              <select className="bg-transparent border-none outline-none text-sm appearance-none cursor-default font-medium">
+                <option>San Francisco</option>
+              </select>
+              <div className="w-px h-4 bg-white/10 my-auto"></div>
+              <Bold className="w-4 h-4 cursor-default hover:text-white" />
+              <Italic className="w-4 h-4 cursor-default hover:text-white" />
+              <Link2 className="w-4 h-4 cursor-default hover:text-white" />
+              <MoreHorizontal className="w-4 h-4 cursor-default hover:text-white ml-auto" />
+            </div>
+
+            {/* Email Body Area */}
+            <div className="p-8 pb-32 h-64 relative font-serif text-lg leading-relaxed text-white/90">
+              <span className={`transition-colors duration-100 p-1 rounded -ml-1 ${isHighlighted ? 'bg-blue-500/40' : 'bg-transparent'}`}>
+                {displayedText.split('\n').map((line, i) => (
+                  <span key={i}>
+                    {line}
+                    <br />
+                  </span>
+                ))}
+              </span>
+
+              {/* ✨ Apple Intelligence Floating Trigger */}
+              {showSparkleCTA && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  className="absolute z-20 left-[60px] top-[140px]" // Relative to the text area structure
+                >
+                  <div className="bg-[#1C1C1E] ring-1 ring-white/10 shadow-2xl p-1.5 rounded-full flex items-center justify-center cursor-default">
+                    <div className="bg-gradient-to-tr from-blue-500 via-purple-500 to-orange-400 rounded-full p-1.5 shine-effect">
+                      <Sparkles className="w-4 h-4 text-white" />
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* ✨ Apple Intelligence Rewrite Menu */}
+              {showMenu && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  className="absolute z-30 left-[30px] top-[180px] w-56 bg-[#252528]/95 backdrop-blur-xl ring-1 ring-white/10 rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] overflow-hidden p-1 flex flex-col"
+                >
+                  <div className="px-3 py-2 border-b border-white/10 flex items-center gap-2 mb-1">
+                    <Sparkles className="w-3.5 h-3.5 text-[#B968F8]" />
+                    <span className="text-xs font-semibold text-white/70">Apple Intelligence</span>
+                  </div>
+                  
+                  <div className="p-1 gap-1 flex flex-col">
+                    <div className="text-sm px-3 py-1.5 rounded-lg text-white/90 cursor-default">Proofread</div>
+                    <div className={`text-sm px-3 py-1.5 rounded-lg text-white/90 cursor-default transition-colors ${showMenuHover === 'professional' ? 'bg-blue-500 text-white' : ''}`}>Rewrite • Professional</div>
+                    <div className="text-sm px-3 py-1.5 rounded-lg text-white/90 cursor-default">Rewrite • Friendly</div>
+                    <div className="text-sm px-3 py-1.5 rounded-lg text-white/90 cursor-default">Summarize</div>
+                  </div>
+                </motion.div>
+              )}
+            </div>
+            
+          </div>
+
+          {/* 
+            Orchestrated Native Cursor 
+            Remains locked in coordinate space of the canvas
+          */}
+          <motion.div
+            ref={cursorRef}
+            className="absolute z-50 pointer-events-none drop-shadow-2xl"
+            initial={{ opacity: 0, x: 500, y: 700 }}
+          >
+            <svg
+              width="36"
+              height="36"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="-translate-x-[4px] -translate-y-[4px]"
+            >
+              <path
+                d="M10.9999 5.5L25.4999 18L16.4999 19L19.4999 26.5L15.9999 28L12.4999 20L6.4999 24V5.5Z"
+                fill="black"
+                stroke="white"
+                strokeWidth="2.5"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Demo Play Overlay Trigger */}
+      {!isDemoRunning && (
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="absolute bottom-10 z-50"
+        >
+          <button
+            onClick={startDemo}
+            className="bg-white/10 backdrop-blur-3xl border border-white/20 shadow-2xl rounded-full pl-4 pr-6 py-3 flex items-center gap-3 text-white hover:bg-white/20 hover:scale-105 active:scale-95 transition-all outline-none focus:ring-4 focus:ring-white/10"
+          >
+            <div className="bg-white text-black rounded-full p-2">
+              <Play className="w-4 h-4 fill-black text-black" />
+            </div>
+            <span className="font-semibold text-sm tracking-wide">Play AI Demo</span>
+          </button>
+        </motion.div>
+      )}
+    </div>
+  );
+}

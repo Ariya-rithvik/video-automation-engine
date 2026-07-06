@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amazon Prime — Clicks to Delivery Cinematic Showcase</title>
+  
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="amazon-style.css">
+</head>
+<body>
+
+  <!-- Ambient Backdrop Glows -->
+  <div class="ambient-glow"></div>
+  <div class="ambient-glow-secondary"></div>
+
+  <!-- Main Showcase Viewport (16:9 Canvas) -->
+  <div class="showcase-viewport" id="showcase-viewport">
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCENE 1: Product Showcase & Click               -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="scene scene-product active" id="scene-product">
+      <div class="product-card-wrapper" id="product-card">
+        <div class="card-glass-body">
+          <div class="prime-header">
+            <span class="prime-tag">prime</span>
+            <span class="delivery-eta">FREE Delivery Tomorrow</span>
+          </div>
+
+          <!-- Futuristic Glowing Device Showcase -->
+          <div class="gadget-showcase-container">
+            <div class="gadget-glow-halo"></div>
+            <!-- Dynamic Floating Gadget (SVG) -->
+            <svg class="gadget-svg" viewBox="0 0 160 160">
+              <defs>
+                <linearGradient id="sph-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#00f2fe" />
+                  <stop offset="100%" stop-color="#4facfe" />
+                </linearGradient>
+                <linearGradient id="ring-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ff0844" />
+                  <stop offset="100%" stop-color="#ffb199" />
+                </linearGradient>
+                <filter id="glow-ring">
+                  <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+              <!-- Glass Base Ring -->
+              <ellipse cx="80" cy="120" rx="45" ry="12" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2" />
+              <!-- Hologram Light Rays -->
+              <path d="M40 120 L80 40 L120 120 Z" fill="rgba(0,138,150,0.08)" />
+              <!-- Rotating Inner Orb -->
+              <circle cx="80" cy="70" r="22" fill="url(#sph-grad)" filter="url(#glow-ring)" />
+              <!-- Outer Intersecting Rings -->
+              <ellipse cx="80" cy="70" rx="35" ry="10" fill="none" stroke="url(#ring-grad)" stroke-width="2" transform="rotate(-30 80 70)" filter="url(#glow-ring)" />
+              <ellipse cx="80" cy="70" rx="35" ry="10" fill="none" stroke="#00f2fe" stroke-width="1.5" transform="rotate(40 80 70)" filter="url(#glow-ring)" />
+              <!-- Floating Energy Dots -->
+              <circle cx="50" cy="50" r="2" fill="#fff" opacity="0.8" />
+              <circle cx="110" cy="90" r="3" fill="#00f2fe" opacity="0.9" />
+              <circle cx="65" cy="95" r="1.5" fill="#ffb199" opacity="0.7" />
+            </svg>
+          </div>
+
+          <!-- Product Details -->
+          <div class="product-info-block">
+            <h3 class="product-title">Echo Sphere Max</h3>
+            <p class="product-subtitle">Next-Gen Intelligent Holographic Hub</p>
+            
+            <div class="product-rating-row">
+              <span class="stars-glowing">★★★★★</span>
+              <span class="rating-count">12,492 reviews</span>
+            </div>
+
+            <div class="price-block">
+              <span class="price-symbol">$</span>
+              <span class="price-value">199</span>
+              <span class="price-decimals">.99</span>
+              <span class="prime-savings">Save 20% with Prime</span>
+            </div>
+
+            <button class="buy-now-btn" id="buy-now-btn">
+              <span class="btn-shine"></span>
+              <span class="btn-text">Buy Now</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCENE 2: Robotic Fulfillment & Packaging       -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="scene scene-fulfillment" id="scene-fulfillment">
+      <div class="fulfillment-viewport">
+        <!-- Laser scanner sweeps (absolute overlays) -->
+        <div class="scanner-laser-line" id="scanner-laser"></div>
+        <div class="barcode-flicker-data" id="barcode-log">SYS_OK: LABEL_PRINT_DONE</div>
+
+        <!-- Wireframe grid backdrop -->
+        <div class="cyber-conveyor-grid"></div>
+
+        <!-- Central Box Building Area -->
+        <div class="conveyor-belt-track"></div>
+        
+        <div class="box-assembly-container" id="box-assembly">
+          <!-- The box constructed of flaps -->
+          <div class="amazon-package-3d" id="amazon-box">
+            <div class="box-face face-front">
+              <div class="box-smile-logo">
+                <svg viewBox="0 0 100 30" width="80">
+                  <path d="M10,10 Q50,28 90,10" fill="none" stroke="#ff9900" stroke-width="4" stroke-linecap="round"/>
+                  <path d="M85,6 L91,12 L81,15 Z" fill="#ff9900" />
+                </svg>
+              </div>
+            </div>
+            <div class="box-face face-back"></div>
+            <div class="box-face face-left"></div>
+            <div class="box-face face-right"></div>
+            <div class="box-face face-top">
+              <!-- Top flap structures that fold -->
+              <div class="box-flap flap-left" id="flap-l"></div>
+              <div class="box-flap flap-right" id="flap-r"></div>
+              <!-- Glowing Prime Sealing Tape -->
+              <div class="prime-glowing-tape" id="sealing-tape">
+                <span class="tape-txt">prime</span>
+              </div>
+            </div>
+            <div class="box-face face-bottom"></div>
+            <!-- Shipping Label barcode -->
+            <div class="shipping-label-card" id="shipping-label">
+              <div class="label-header">Amazon Logistics</div>
+              <div class="label-barcodes">
+                <div class="barcode-lines"></div>
+                <div class="barcode-digits">US-9823-DELIV</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SVG Robotic Arm Left -->
+        <svg class="robotic-arm arm-left" id="arm-left" viewBox="0 0 200 200">
+          <g fill="none" stroke="#2c3e50" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Base -->
+            <rect x="10" y="150" width="40" height="40" rx="5" fill="#1e293b" stroke="#475569" stroke-width="4"/>
+            <!-- Shoulder joint -->
+            <circle cx="30" cy="150" r="10" fill="#ff9900" stroke="#d97706" stroke-width="3" />
+            <!-- Upper arm segment -->
+            <line id="arm-l-seg1" x1="30" y1="150" x2="80" y2="100" stroke="#475569" stroke-width="10"/>
+            <!-- Elbow joint -->
+            <circle id="arm-l-joint2" cx="80" cy="100" r="8" fill="#ff9900" stroke="#d97706" stroke-width="2"/>
+            <!-- Forearm segment -->
+            <line id="arm-l-seg2" x1="80" y1="100" x2="130" y2="120" stroke="#64748b" stroke-width="7"/>
+            <!-- Wrist & Claw -->
+            <g id="arm-l-claw" transform="translate(130, 120)">
+              <circle cx="0" cy="0" r="6" fill="#1e293b" />
+              <path d="M-10,-5 Q-20,15 0,20 L0,5 Q-10,0 -10,-5 Z" fill="#ff9900" />
+            </g>
+          </g>
+        </svg>
+
+        <!-- SVG Robotic Arm Right -->
+        <svg class="robotic-arm arm-right" id="arm-right" viewBox="0 0 200 200">
+          <g fill="none" stroke="#2c3e50" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Base -->
+            <rect x="150" y="150" width="40" height="40" rx="5" fill="#1e293b" stroke="#475569" stroke-width="4"/>
+            <!-- Shoulder joint -->
+            <circle cx="170" cy="150" r="10" fill="#ff9900" stroke="#d97706" stroke-width="3"/>
+            <!-- Upper arm -->
+            <line id="arm-r-seg1" x1="170" y1="150" x2="120" y2="90" stroke="#475569" stroke-width="10"/>
+            <!-- Elbow joint -->
+            <circle id="arm-r-joint2" cx="120" cy="90" r="8" fill="#ff9900" stroke="#d97706" stroke-width="2"/>
+            <!-- Forearm -->
+            <line id="arm-r-seg2" x1="120" y1="90" x2="70" y2="110" stroke="#64748b" stroke-width="7"/>
+            <!-- Claw -->
+            <g id="arm-r-claw" transform="translate(70, 110)">
+              <circle cx="0" cy="0" r="6" fill="#1e293b"/>
+              <path d="M10,-5 Q20,15 0,20 L0,5 Q10,0 10,-5 Z" fill="#ff9900" />
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCENE 3: Flight of the Prime Drone             -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="scene scene-delivery" id="scene-delivery">
+      
+      <!-- Night City Grid Backdrop (scrolling) -->
+      <div class="scrolling-cityscape" id="scrolling-city">
+        <!-- City Silhouettes Layer 1 (Distant) -->
+        <div class="city-skyline skyline-back"></div>
+        <!-- City Silhouettes Layer 2 (Midground) -->
+        <div class="city-skyline skyline-mid"></div>
+        <!-- Neighborhood Street Layer 3 (Foreground) -->
+        <div class="neighborhood-street-row" id="street-row"></div>
+      </div>
+
+      <!-- Constellation Stars -->
+      <div class="stars-backdrop"></div>
+
+      <!-- Prime Drone Wrapper -->
+      <div class="drone-flight-wrapper" id="drone-wrapper">
+        <div class="searchlight-beam" id="drone-searchlight"></div>
+        
+        <svg class="drone-svg" viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="drone-body-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#2c3e50" />
+              <stop offset="50%" stop-color="#1e293b" />
+              <stop offset="100%" stop-color="#0f172a" />
+            </linearGradient>
+            <linearGradient id="drone-accent" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#00a8e8" />
+              <stop offset="100%" stop-color="#0066c0" />
+            </linearGradient>
+            <filter id="glow-led">
+              <feGaussianBlur stdDeviation="3" result="blur"/>
+              <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+            </filter>
+          </defs>
+
+          <!-- Arm structures -->
+          <path d="M 60 80 L 160 110 L 260 80" stroke="#475569" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <path d="M 90 130 L 160 110 L 230 130" stroke="#475569" stroke-width="10" stroke-linecap="round" fill="none"/>
+
+          <!-- Motors & Rotors Left Rear -->
+          <g id="motor-lr">
+            <rect x="52" y="66" width="16" height="20" rx="3" fill="#334155"/>
+            <!-- Spinning Propeller Lines -->
+            <ellipse id="prop-lr" cx="60" cy="66" rx="40" ry="4" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+          </g>
+
+          <!-- Motors & Rotors Right Rear -->
+          <g id="motor-rr">
+            <rect x="252" y="66" width="16" height="20" rx="3" fill="#334155"/>
+            <ellipse id="prop-rr" cx="260" cy="66" rx="40" ry="4" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+          </g>
+
+          <!-- Motors & Rotors Left Front -->
+          <g id="motor-lf">
+            <rect x="82" y="120" width="16" height="20" rx="3" fill="#1e293b"/>
+            <ellipse id="prop-lf" cx="90" cy="120" rx="45" ry="5" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+          </g>
+
+          <!-- Motors & Rotors Right Front -->
+          <g id="motor-rf">
+            <rect x="222" y="120" width="16" height="20" rx="3" fill="#1e293b"/>
+            <ellipse id="prop-rf" cx="230" cy="120" rx="45" ry="5" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+          </g>
+
+          <!-- Drone Core Chassis -->
+          <path d="M 110 110 C 110 80, 210 80, 210 110 C 210 135, 110 135, 110 110 Z" fill="url(#drone-body-grad)" stroke="#334155" stroke-width="2"/>
+          <path d="M 125 105 C 125 90, 195 90, 195 105 Z" fill="url(#drone-accent)"/>
+          
+          <!-- Prime branding text on drone core -->
+          <text x="160" y="122" font-family="'Outfit', sans-serif" font-weight="900" font-size="13" fill="#fff" text-anchor="middle" letter-spacing="-0.5">prime</text>
+
+          <!-- LEDs (Glowing indicators) -->
+          <circle cx="120" cy="110" r="4" fill="#00f2fe" filter="url(#glow-led)" />
+          <circle cx="200" cy="110" r="4" fill="#00f2fe" filter="url(#glow-led)" />
+          <circle cx="160" cy="92" r="3.5" fill="#ff9900" filter="url(#glow-led)" />
+
+          <!-- Camera Gimbal & Lens -->
+          <g id="drone-camera" transform="translate(160, 138)">
+            <rect x="-12" y="0" width="24" height="15" rx="3" fill="#334155"/>
+            <circle cx="0" cy="7" r="5" fill="#111" stroke="#00f2fe" stroke-width="1.5"/>
+            <circle cx="2" cy="5" r="1.5" fill="#fff" opacity="0.8"/>
+          </g>
+
+          <!-- Payload Claws carrying the box -->
+          <g id="drone-claws">
+            <!-- Left Claw -->
+            <path d="M 135 130 C 135 155, 125 160, 130 170" fill="none" stroke="#475569" stroke-width="6" stroke-linecap="round"/>
+            <!-- Right Claw -->
+            <path d="M 185 130 C 185 155, 195 160, 190 170" fill="none" stroke="#475569" stroke-width="6" stroke-linecap="round"/>
+          </g>
+        </svg>
+
+        <!-- Drone Package (slung underneath, floats with drone) -->
+        <div class="drone-payload-box" id="drone-payload">
+          <svg viewBox="0 0 100 65" class="payload-box-svg">
+            <rect x="10" y="5" width="80" height="55" rx="6" fill="#8f633d" stroke="#5d3f24" stroke-width="2"/>
+            <path d="M 10 32 L 90 32" stroke="#ff9900" stroke-width="10" opacity="0.8"/>
+            <text x="50" y="36" font-family="'Outfit', sans-serif" font-weight="900" font-size="10" fill="#fff" text-anchor="middle">prime</text>
+            <!-- Label sticker -->
+            <rect x="20" y="10" width="18" height="12" fill="#fff" rx="1"/>
+            <line x1="22" y1="14" x2="34" y2="14" stroke="#555" stroke-width="1"/>
+            <line x1="22" y1="18" x2="30" y2="18" stroke="#555" stroke-width="1"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Prime Escort Drone (Duplicate with offset styles and custom IDs) -->
+      <div class="drone-flight-wrapper escort-drone" id="drone-wrapper-2" style="scale: 0.68; opacity: 0.85; filter: brightness(0.7); z-index: 9;">
+        <div class="searchlight-beam" id="drone-searchlight-2" style="transform-origin: top center;"></div>
+        
+        <svg class="drone-svg" viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="#475569" stroke-width="12" stroke-linecap="round" fill="none">
+            <!-- Arm structures -->
+            <path d="M 60 80 L 160 110 L 260 80" stroke-width="12"/>
+            <path d="M 90 130 L 160 110 L 230 130" stroke-width="10"/>
+          </g>
+
+          <!-- Motors & Rotors Left Rear -->
+          <g>
+            <rect x="52" y="66" width="16" height="20" rx="3" fill="#334155"/>
+            <ellipse id="prop-lr-2" cx="60" cy="66" rx="40" ry="4" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+          </g>
+
+          <!-- Motors & Rotors Right Rear -->
+          <g>
+            <rect x="252" y="66" width="16" height="20" rx="3" fill="#334155"/>
+            <ellipse id="prop-rr-2" cx="260" cy="66" rx="40" ry="4" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+          </g>
+
+          <!-- Motors & Rotors Left Front -->
+          <g>
+            <rect x="82" y="120" width="16" height="20" rx="3" fill="#1e293b"/>
+            <ellipse id="prop-lf-2" cx="90" cy="120" rx="45" ry="5" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+          </g>
+
+          <!-- Motors & Rotors Right Front -->
+          <g>
+            <rect x="222" y="120" width="16" height="20" rx="3" fill="#1e293b"/>
+            <ellipse id="prop-rf-2" cx="230" cy="120" rx="45" ry="5" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+          </g>
+
+          <!-- Drone Core Chassis -->
+          <path d="M 110 110 C 110 80, 210 80, 210 110 C 210 135, 110 135, 110 110 Z" fill="url(#drone-body-grad)" stroke="#334155" stroke-width="2"/>
+          <path d="M 125 105 C 125 90, 195 90, 195 105 Z" fill="url(#drone-accent)"/>
+          
+          <text x="160" y="122" font-family="'Outfit', sans-serif" font-weight="900" font-size="13" fill="#fff" text-anchor="middle" letter-spacing="-0.5">prime</text>
+
+          <!-- LEDs (Glowing indicators) -->
+          <circle cx="120" cy="110" r="4" fill="#00f2fe" filter="url(#glow-led)" />
+          <circle cx="200" cy="110" r="4" fill="#00f2fe" filter="url(#glow-led)" />
+          <circle cx="160" cy="92" r="3.5" fill="#ff9900" filter="url(#glow-led)" />
+
+          <!-- Camera Gimbal & Lens -->
+          <g transform="translate(160, 138)">
+            <rect x="-12" y="0" width="24" height="15" rx="3" fill="#334155"/>
+            <circle cx="0" cy="7" r="5" fill="#111" stroke="#00f2fe" stroke-width="1.5"/>
+            <circle cx="2" cy="5" r="1.5" fill="#fff" opacity="0.8"/>
+          </g>
+
+          <!-- No claws holding package for background escort drone -->
+        </svg>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCENE 4: Outro Celebration & Unboxing          -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="scene scene-outro" id="scene-outro">
+      
+      <!-- Smart Home Porch / Entrance Overlay background -->
+      <div class="smart-home-doorstep">
+        <div class="house-door-frame"></div>
+        <div class="warm-interior-glow" id="door-glow"></div>
+      </div>
+
+      <!-- Doorstep Box (Opens up dynamically) -->
+      <div class="doorstep-unboxing-wrapper" id="doorstep-package">
+        <!-- Opened flaps version of box -->
+        <div class="package-unboxed" id="package-visuals">
+          <div class="unboxed-base"></div>
+          <!-- Flaps spread wide -->
+          <div class="unboxed-flap flap-left-open"></div>
+          <div class="unboxed-flap flap-right-open"></div>
+          <div class="unboxed-flap flap-front-open"></div>
+          <div class="unboxed-flap flap-back-open"></div>
+          
+          <!-- Floating Amazon Smile rising up -->
+          <div class="floating-smile-arrow" id="floating-smile">
+            <svg viewBox="0 0 100 30" width="120" height="40">
+              <path d="M10,8 Q50,28 90,8" fill="none" stroke="#ff9900" stroke-width="6" stroke-linecap="round"/>
+              <path d="M83,2 L91,10 L79,14 Z" fill="#ff9900" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Outro Brand Banner -->
+      <div class="outro-brand-block" id="outro-content">
+        <div class="amazon-corporate-logo" id="outro-logo">
+          amazon<span class="logo-accent">.</span>
+        </div>
+        <div class="amazon-corporate-smile">
+          <svg viewBox="0 0 160 40" width="160">
+            <path d="M10,10 Q80,35 150,10" fill="none" stroke="#ff9900" stroke-width="5" stroke-linecap="round"/>
+            <path d="M140,5 L152,12 L136,18 Z" fill="#ff9900"/>
+          </svg>
+        </div>
+
+        <h1 class="outro-tagline" id="outro-tagline">Deliver Delights. Every Single Day.</h1>
+        <p class="outro-subtitle" id="outro-subtitle">Fastest shipping network on the planet</p>
+
+        <div class="corporate-stats-row" id="outro-stats">
+          <div class="corporate-stat-card" id="stat-1">
+            <div class="stat-big-num">200M+</div>
+            <div class="stat-small-label">Prime Subscribers</div>
+          </div>
+          <div class="corporate-stat-card" id="stat-2">
+            <div class="stat-big-num">1-Day</div>
+            <div class="stat-small-label">Guaranteed Shipping</div>
+          </div>
+          <div class="corporate-stat-card" id="stat-3">
+            <div class="stat-big-num">2040</div>
+            <div class="stat-small-label">Net-Zero Carbon Goal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- INTERACTIVE OVERLAYS                           -->
+    <!-- ═══════════════════════════════════════════════ -->
+
+    <!-- Virtual Mouse Cursor -->
+    <div class="virtual-cursor" id="virtual-cursor">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="white" stroke="#ff9900" stroke-width="1.8">
+        <polygon points="5 3 21 11 13 13 11 21 5 3"/>
+      </svg>
+      <div class="cursor-ripple" id="cursor-ripple"></div>
+    </div>
+
+    <!-- Delivered Toast Alert -->
+    <div class="celebration-toast" id="celebration-toast">
+      <div class="toast-icon-badge">📦</div>
+      <div class="toast-body">
+        <h5>Package Delivered!</h5>
+        <p>Left at front door. Handled with Prime care.</p>
+      </div>
+    </div>
+
+    <!-- Confetti Overlay Canvas -->
+    <canvas class="confetti-overlay" id="confetti-canvas"></canvas>
+
+  </div>
+
+  <!-- Media Playback Control Bar -->
+  <div class="control-panel">
+    <div class="control-buttons">
+      <button class="btn btn-primary" id="btn-play">Pause</button>
+      <button class="btn btn-secondary" id="btn-restart">Restart</button>
+      <div class="speed-toggle-group">
+        <button class="speed-btn active" data-speed="1">1x</button>
+        <button class="speed-btn" data-speed="2">2x</button>
+        <button class="speed-btn" data-speed="0.5">0.5x</button>
+      </div>
+    </div>
+    <div class="timeline-slider-wrapper">
+      <span class="time-label" id="current-time">0.00s</span>
+      <input type="range" class="timeline-slider" id="timeline-slider" min="0" max="1350" value="0">
+      <span class="time-label">45.00s</span>
+    </div>
+    <div class="steps-progress">
+      <div class="step-indicator active" data-frame="0">
+        <span class="step-num">1</span>
+        <span class="step-txt">Product Click</span>
+      </div>
+      <div class="step-indicator" data-frame="270">
+        <span class="step-num">2</span>
+        <span class="step-txt">Fulfillment Center</span>
+      </div>
+      <div class="step-indicator" data-frame="660">
+        <span class="step-num">3</span>
+        <span class="step-txt">Drone Flight</span>
+      </div>
+      <div class="step-indicator" data-frame="1020">
+        <span class="step-num">4</span>
+        <span class="step-txt">Unboxing Delight</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="amazon-script.js"></script>
+</body>
+</html>

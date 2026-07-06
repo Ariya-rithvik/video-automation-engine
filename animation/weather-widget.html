@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iOS Dynamic Island & Unlock Transition Showcase</title>
+  
+  <!-- Premium Google Fonts: Playfair Display for Lock Screen clock, Outfit & Inter for UI -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="weather-widget-style.css">
+</head>
+<body>
+
+  <!-- Ambient background glow elements -->
+  <div class="ambient-glow"></div>
+  <div class="ambient-glow-secondary"></div>
+
+  <!-- Main Showcase Viewport (16:9) -->
+  <div class="showcase-viewport" id="showcase-viewport">
+    
+    <!-- Phone Bezel & Screen Container -->
+    <div class="phone-container" id="phone-container">
+      
+      <!-- Physical Buttons on Bezel -->
+      <div class="phone-button btn-volume-up"></div>
+      <div class="phone-button btn-volume-down"></div>
+      <div class="phone-button btn-power"></div>
+      
+      <!-- Metallic Bezel Frame -->
+      <div class="phone-bezel">
+        <div class="phone-bezel-reflection"></div>
+        
+        <!-- Screen (19.5:9 Aspect Ratio) -->
+        <div class="phone-screen" id="phone-screen">
+          
+          <!-- Wallpaper Base (shared by both screens for continuity) -->
+          <div class="wallpaper-container">
+            <div class="wallpaper-base"></div>
+            <!-- Parallax Wave 1 (Back) -->
+            <div class="wallpaper-wave wave-back" id="wave-back"></div>
+          </div>
+
+          <!-- ═══════════════════════════════════════════════ -->
+          <!-- SCREEN 1: LOCK SCREEN VIEW                      -->
+          <!-- ═══════════════════════════════════════════════ -->
+          <div class="lockscreen-view active" id="lockscreen-view">
+            <!-- Lock Screen Date & Time -->
+            <div class="lockscreen-header" id="lockscreen-header">
+              <div class="lockscreen-date">Wednesday, June 10</div>
+              <div class="lockscreen-clock">9:41</div>
+            </div>
+            
+            <!-- Parallax Wave 2 (Front) - Places clock behind it for depth -->
+            <div class="wallpaper-wave wave-front" id="wave-front"></div>
+            
+            <!-- Screen bottom shortcut icons -->
+            <div class="lockscreen-footer" id="lockscreen-footer">
+              <div class="footer-icon icon-flashlight">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 6h-2M6 6h2M12 2v4M12 18v4M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h4M18 12h4M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+                  <path d="M9 10h6v6H9z" fill="currentColor"/>
+                </svg>
+              </div>
+              <div class="footer-swipe-indicator">Swipe up to open</div>
+              <div class="footer-icon icon-camera">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                  <circle cx="12" cy="13" r="4"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- ═══════════════════════════════════════════════ -->
+          <!-- SCREEN 2: HOME SCREEN VIEW                      -->
+          <!-- ═══════════════════════════════════════════════ -->
+          <div class="homescreen-view" id="homescreen-view">
+            
+            <!-- Frosted Home Screen wave layer to tone down wallpaper details -->
+            <div class="homescreen-wave-blur"></div>
+
+            <!-- Home Screen Content (Widgets & App Icons Grid) -->
+            <div class="homescreen-content" id="homescreen-content">
+              
+              <!-- 1. WIDGETS ROW -->
+              <div class="widgets-row">
+                <!-- Weather Widget -->
+                <div class="widget widget-weather" id="widget-weather">
+                  <div class="widget-weather-header">
+                    <span class="weather-city">San Francisco</span>
+                    <svg class="weather-nav-arrow" viewBox="0 0 24 24" fill="currentColor">
+                      <polygon points="3,12 21,3 12,21 11,13"/>
+                    </svg>
+                  </div>
+                  <div class="widget-weather-main">
+                    <span class="weather-temp" id="widget-temp">62°</span>
+                    <div class="weather-icon-wrap">
+                      <!-- Cloudy weather icon SVG -->
+                      <svg class="weather-cloud-sun" viewBox="0 0 64 64">
+                        <circle cx="38" cy="26" r="10" fill="#fdb827"/>
+                        <path d="M46 38a14 14 0 0 0-26.6-6 10 10 0 0 0-5.4 18h32z" fill="#eceff1" stroke="#b0bec5" stroke-width="1.5"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="widget-weather-footer">
+                    <div class="weather-condition">Partly Cloudy</div>
+                    <div class="weather-range">H:67° L:57°</div>
+                  </div>
+                </div>
+
+                <!-- Calendar Widget -->
+                <div class="widget widget-calendar" id="widget-calendar">
+                  <div class="widget-calendar-header">
+                    <span class="calendar-month">JUNE</span>
+                    <span class="calendar-day-label">Wednesday 10</span>
+                  </div>
+                  <div class="widget-calendar-grid">
+                    <!-- Date grid (7x4 layout) -->
+                    <span>7</span><span>8</span><span>9</span><span class="active">10</span><span>11</span><span>12</span><span>13</span>
+                    <span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span>
+                    <span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span>
+                    <span>28</span><span>29</span><span>30</span><span>1</span><span>2</span><span>3</span><span>4</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2. APPLICATION GRID -->
+              <div class="app-grid">
+                <!-- Row 1 -->
+                <div class="app-item" id="app-facetime">
+                  <div class="app-icon facetime-bg">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11z"/>
+                    </svg>
+                  </div>
+                  <span class="app-label">FaceTime</span>
+                </div>
+
+                <div class="app-item" id="app-vision">
+                  <div class="app-icon vision-bg">
+                    <svg viewBox="0 0 60 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                      <path d="M10 20 C 10 12, 16 8, 30 8 C 44 8, 50 12, 50 20 C 50 28, 44 32, 30 32 C 16 32, 10 28, 10 20 Z" stroke="url(#vision-glow)"/>
+                      <path d="M23 20c0 4 7 4 7 0s-7-4-7 0" stroke="#00f0ff" stroke-width="1.5"/>
+                      <defs>
+                        <linearGradient id="vision-glow" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stop-color="#bf5af2"/>
+                          <stop offset="100%" stop-color="#0A84FF"/>
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                  </div>
+                  <span class="app-label">Vision Pro</span>
+                </div>
+
+                <div class="app-item" id="app-photos">
+                  <div class="app-icon photos-bg">
+                    <!-- Styled abstract photos petal flower svg -->
+                    <svg viewBox="0 0 30 30" fill="currentColor">
+                      <circle cx="15" cy="9" r="4" fill="#ff453a" opacity="0.85"/>
+                      <circle cx="21" cy="15" r="4" fill="#ff9f0a" opacity="0.85"/>
+                      <circle cx="15" cy="21" r="4" fill="#30d158" opacity="0.85"/>
+                      <circle cx="9" cy="15" r="4" fill="#0a84ff" opacity="0.85"/>
+                      <circle cx="11" cy="11" r="3.5" fill="#bf5af2" opacity="0.75"/>
+                      <circle cx="19" cy="11" r="3.5" fill="#ff375f" opacity="0.75"/>
+                      <circle cx="19" cy="19" r="3.5" fill="#ffd60a" opacity="0.75"/>
+                      <circle cx="11" cy="19" r="3.5" fill="#64d2ff" opacity="0.75"/>
+                    </svg>
+                  </div>
+                  <span class="app-label">Photos</span>
+                </div>
+
+                <div class="app-item" id="app-camera">
+                  <div class="app-icon camera-bg">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <circle cx="12" cy="12" r="10" fill="#3a3a3c"/>
+                      <circle cx="12" cy="12" r="7" fill="#1c1c1e"/>
+                      <circle cx="12" cy="12" r="4" fill="#000"/>
+                      <circle cx="14" cy="10" r="1" fill="#007aff"/>
+                    </svg>
+                  </div>
+                  <span class="app-label">Camera</span>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="app-item" id="app-mail">
+                  <div class="app-icon mail-bg">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <rect x="2" y="4" width="20" height="16" rx="3" fill="url(#mail-grad)"/>
+                      <path d="M22 6l-10 7L2 6" fill="none" stroke="#fff" stroke-width="1.5"/>
+                      <defs>
+                        <linearGradient id="mail-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" stop-color="#5ac8fa"/>
+                          <stop offset="100%" stop-color="#007aff"/>
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                  </div>
+                  <span class="app-label">Mail</span>
+                </div>
+
+                <div class="app-item" id="app-notes">
+                  <div class="app-icon notes-bg">
+                    <div class="notes-header"></div>
+                    <div class="notes-line"></div>
+                    <div class="notes-line"></div>
+                  </div>
+                  <span class="app-label">Notes</span>
+                </div>
+
+                <div class="app-item" id="app-clock">
+                  <div class="app-icon clock-bg">
+                    <!-- Clock Face dial with hands we rotate in Javascript -->
+                    <div class="clock-face">
+                      <div class="clock-hand hand-hour" id="clock-hand-hour"></div>
+                      <div class="clock-hand hand-minute" id="clock-hand-minute"></div>
+                      <div class="clock-hand hand-second" id="clock-hand-second"></div>
+                      <div class="clock-center-dot"></div>
+                    </div>
+                  </div>
+                  <span class="app-label">Clock</span>
+                </div>
+
+                <div class="app-item" id="app-maps">
+                  <div class="app-icon maps-bg">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3V6z"/>
+                      <circle cx="12" cy="11" r="3" fill="#ff453a" stroke="none"/>
+                      <line x1="9" y1="3" x2="9" y2="21" stroke="rgba(0,0,0,0.1)"/>
+                      <line x1="15" y1="3" x2="15" y2="21" stroke="rgba(0,0,0,0.1)"/>
+                    </svg>
+                  </div>
+                  <span class="app-label">Maps</span>
+                </div>
+
+                <!-- Row 3 -->
+                <div class="app-item" id="app-tv">
+                  <div class="app-icon tv-bg">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2z" fill="#1c1c1e"/>
+                      <!-- Apple Logo path -->
+                      <path d="M15.5 11.1c-.1-1.6 1.3-2.4 1.4-2.4-.7-1.1-1.9-1.2-2.3-1.3-1-.1-2 .6-2.5.6s-1.3-.5-2.1-.5c-1.1 0-2.1.6-2.7 1.6-1.2 2.1-.3 5.2.9 6.9.6.8 1.3 1.8 2.2 1.7.9 0 1.2-.5 2.3-.5s1.3.5 2.2.5c.9-.1 1.5-.9 2.1-1.7.7-1 1-2 1-2.1-.1 0-1.8-.7-1.8-2.7zM14.2 7c.4-.5.7-1.2.6-1.9-.6.1-1.4.5-1.8 1-.4.4-.7 1.1-.6 1.8.7.1 1.4-.4 1.8-.9z" fill="#fff"/>
+                      <text x="14" y="21" font-size="5" font-family="sans-serif" font-weight="bold" fill="#fff" text-anchor="middle">tv</text>
+                    </svg>
+                  </div>
+                  <span class="app-label">TV</span>
+                </div>
+
+                <div class="app-item" id="app-news">
+                  <div class="app-icon news-bg">
+                    <span class="news-logo">N</span>
+                  </div>
+                  <span class="app-label">News</span>
+                </div>
+
+                <div class="app-item" id="app-appstore">
+                  <div class="app-icon appstore-bg">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round">
+                      <polygon points="12,3 21,19 3,19" />
+                      <line x1="12" y1="3" x2="12" y2="19"/>
+                      <line x1="6.5" y1="13" x2="17.5" y2="13"/>
+                    </svg>
+                  </div>
+                  <span class="app-label">App Store</span>
+                </div>
+
+                <div class="app-item" id="app-rocket">
+                  <div class="app-icon rocket-bg">
+                    <!-- Antigravity orange rocket icon -->
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2s-6 4-6 10c0 3 2 6 6 10 4-4 6-7 6-10 0-6-6-6-6-6zm0 12c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                      <path d="M10 20s-2-2-2-4h8c0 2-2 4-2 4z" fill="#ff6a00"/>
+                    </svg>
+                  </div>
+                  <span class="app-label">Antigravity</span>
+                </div>
+
+                <!-- Row 4 -->
+                <div class="app-item" id="app-health">
+                  <div class="app-icon health-bg">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                  </div>
+                  <span class="app-label">Health</span>
+                </div>
+
+                <div class="app-item" id="app-wallet">
+                  <div class="app-icon wallet-bg">
+                    <!-- Frosted layered credit cards -->
+                    <div class="wallet-card card-orange"></div>
+                    <div class="wallet-card card-blue"></div>
+                    <div class="wallet-card card-black"></div>
+                  </div>
+                  <span class="app-label">Wallet</span>
+                </div>
+
+                <div class="app-item" id="app-siri">
+                  <div class="app-icon siri-bg">
+                    <!-- Glow orb siri simulation -->
+                    <div class="siri-glow-orb"></div>
+                  </div>
+                  <span class="app-label">Siri</span>
+                </div>
+
+                <div class="app-item" id="app-settings">
+                  <div class="app-icon settings-bg">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="3"/>
+                      <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                  </div>
+                  <span class="app-label">Settings</span>
+                </div>
+              </div>
+
+              <!-- 3. SEARCH PILL -->
+              <div class="search-pill">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <circle cx="11" cy="11" r="8"/>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <span>Search</span>
+              </div>
+
+              <!-- 4. DOCK -->
+              <div class="homescreen-dock-container">
+                <div class="homescreen-dock">
+                  <div class="dock-item" id="dock-phone">
+                    <div class="app-icon phone-bg">
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.62 10.79a15.15 15.15 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.11-.27c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.27 1.11z"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="dock-item" id="dock-safari">
+                    <div class="app-icon safari-bg">
+                      <div class="safari-compass">
+                        <div class="compass-needle"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="dock-item" id="dock-messages">
+                    <div class="app-icon messages-bg">
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="dock-item" id="dock-music">
+                    <div class="app-icon music-bg">
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h6V3h-6z"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ═══════════════════════════════════════════════ -->
+          <!-- OVERLAY: DYNAMIC ISLAND CONTAINER               -->
+          <!-- ═══════════════════════════════════════════════ -->
+          <div class="dynamic-island-container">
+            <div class="dynamic-island" id="dynamic-island">
+              
+              <!-- 1. COMPACT/PILL STATE CONTENT -->
+              <div class="island-pill-content" id="island-pill-content">
+                <div class="camera-lens"></div>
+                <!-- Small indicators, like green mic/camera active dots -->
+                <div class="pill-indicator" id="pill-indicator"></div>
+              </div>
+
+              <!-- 2. EXPANDED TENNIS STATE CONTENT -->
+              <div class="island-expanded-tennis" id="island-expanded-tennis">
+                <!-- Top dark text notification bubble -->
+                <div class="tennis-text-bubble">
+                  It’ll be fantastic weather for your upcoming tennis lesson this Sunday.
+                </div>
+                
+                <!-- Slide-out Blue Weather Card inside Dynamic Island -->
+                <div class="tennis-weather-card" id="tennis-weather-card">
+                  <div class="tw-header">
+                    <span class="tw-city">San Francisco</span>
+                    <svg class="tw-arrow" viewBox="0 0 24 24" fill="currentColor">
+                      <polygon points="3,12 21,3 12,21 11,13"/>
+                    </svg>
+                  </div>
+                  <div class="tw-main">
+                    <span class="tw-temp">63°</span>
+                    <div class="tw-icon-wrap">
+                      <svg class="tw-sun-icon" id="tw-sun-icon" viewBox="0 0 64 64">
+                        <defs>
+                          <radialGradient id="sun-glow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#fff5cc"/>
+                            <stop offset="100%" stop-color="rgba(253,184,39,0)"/>
+                          </radialGradient>
+                        </defs>
+                        <!-- Glowing backdrop circle -->
+                        <circle cx="32" cy="32" r="28" fill="url(#sun-glow)"/>
+                        <!-- Sun core -->
+                        <circle cx="32" cy="32" r="12" fill="#fdb827"/>
+                        <!-- Sun rays -->
+                        <path d="M32 4v6M32 54v6M4 32h6M54 32h6M12.2 12.2l4.2 4.2M47.6 47.6l4.2 4.2M12.2 51.8l4.2-4.2M47.6 16.4l4.2-4.2" stroke="#fdb827" stroke-width="4.5" stroke-linecap="round"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="tw-footer">
+                    <span class="tw-cond">Sunny</span>
+                    <span class="tw-range">H:63° L:52°</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3. EXPANDED CONCERT STATE CONTENT -->
+              <div class="island-expanded-concert" id="island-expanded-concert">
+                <div class="concert-header">
+                  <span class="concert-tag">NEWS ALERT</span>
+                  <div class="concert-indicator-ring"></div>
+                </div>
+                <div class="concert-text-bubble">
+                  Suki Waterhouse is scheduled to perform at the Stern Grove Festival in San Francisco on Sunday, July 26, 2026.
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ═══════════════════════════════════════════════ -->
+          <!-- PHASE 4: Siri & Gemini AI Integration Elements  -->
+          <!-- ═══════════════════════════════════════════════ -->
+          
+          <!-- Siri Orb & Gemini Spark Container -->
+          <div class="ai-assistant-container" id="ai-assistant-container">
+            <!-- Siri Orb (Image 2 style: glossy black circle with vibrant waves and white core) -->
+            <div class="siri-orb-wrapper" id="siri-orb-wrapper">
+              <div class="siri-orb-glow"></div>
+              <div class="siri-orb">
+                <div class="siri-wave wave-cyan"></div>
+                <div class="siri-wave wave-magenta"></div>
+                <div class="siri-wave wave-blue"></div>
+                <div class="siri-wave wave-green"></div>
+                <div class="siri-core"></div>
+              </div>
+            </div>
+            
+            <!-- Gemini Spark Star (4-pointed star, shown when Siri morphs to Gemini) -->
+            <div class="gemini-spark-wrapper" id="gemini-spark-wrapper">
+              <svg class="gemini-spark-svg" viewBox="0 0 100 100">
+                <defs>
+                  <linearGradient id="gemini-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#9b51e0" />
+                    <stop offset="30%" stop-color="#3082ff" />
+                    <stop offset="70%" stop-color="#00f0ff" />
+                    <stop offset="100%" stop-color="#ffffff" />
+                  </linearGradient>
+                  <filter id="glow-spark" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="6" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
+                </defs>
+                <path d="M 50 0 Q 50 50 0 50 Q 50 50 50 100 Q 50 50 100 50 Q 50 50 50 0 Z" fill="url(#gemini-grad)" filter="url(#glow-spark)"/>
+              </svg>
+            </div>
+
+            <!-- Apple outline (Image 2 style) -->
+            <svg class="ai-svg-logo svg-apple-outline" id="ai-apple-outline" viewBox="0 0 170 200">
+              <defs>
+                <linearGradient id="apple-neon-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#ff9500" />
+                  <stop offset="40%" stop-color="#ff2d55" />
+                  <stop offset="75%" stop-color="#af52de" />
+                  <stop offset="100%" stop-color="#5ac8fa" />
+                </linearGradient>
+              </defs>
+              <path class="glow-path" d="M120.7 59.1c-5.3-6.7-13.2-10.6-20.4-10.6-9.6 0-13.7 4.6-20.3 4.6-6.9 0-12.1-4.5-20.4-4.5-8.1 0-16.7 4.9-22.1 13.3-7.6 11.8-6.3 34 6 54.6 4.4 7.4 10.3 15.7 18.1 15.8h.2c6.9 0 8.8-4.5 18.2-4.5 9.3 0 11 4.5 18 4.5h.2c7.8-.1 14-9.3 18.4-16.6 3.2-5.3 4.3-8 6.7-14-17.6-6.7-20.4-31.6-3-41.2zM95.2 43.3c4.1-5.3 7.2-12.7 6.1-20.3-6.7.5-14.5 4.7-19.1 10.3-4.2 5-7.6 12.5-6.3 19.8 7.3.3 14.9-4.1 19.3-9.8z" fill="none" stroke="url(#apple-neon-grad)" stroke-width="2.2" />
+            </svg>
+
+            <!-- Google outline (Image 4 & 5 style) -->
+            <svg class="ai-svg-logo svg-google-outline" id="ai-google-outline" viewBox="0 0 24 24">
+              <defs>
+                <linearGradient id="google-neon-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ea4335" />
+                  <stop offset="30%" stop-color="#fbbc05" />
+                  <stop offset="65%" stop-color="#34a853" />
+                  <stop offset="100%" stop-color="#4285f4" />
+                </linearGradient>
+              </defs>
+              <path class="glow-path" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="none" stroke="url(#google-neon-grad)" stroke-width="0.32" />
+            </svg>
+
+            <!-- Star flare overlay (Image 3 style: glowing four-pointed spark lens flare) -->
+            <div class="ai-star-flare" id="ai-star-flare">
+              <svg viewBox="0 0 100 100">
+                <defs>
+                  <radialGradient id="star-glow-grad" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#ffffff"/>
+                    <stop offset="40%" stop-color="rgba(175, 82, 222, 0.45)"/>
+                    <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+                  </radialGradient>
+                </defs>
+                <circle cx="50" cy="50" r="45" fill="url(#star-glow-grad)" />
+                <path d="M 50 15 Q 50 50 15 50 Q 50 50 50 85 Q 50 50 85 50 Q 50 50 50 15 Z" fill="#ffffff" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Shasta Photos Search Card (Image 1 style) -->
+          <div class="shasta-photo-card" id="shasta-photo-card">
+            <div class="shasta-photo-card-header">
+              I found 30 photos from your trip to Shasta last weekend.
+            </div>
+            <div class="shasta-grid">
+              <div class="shasta-thumb thumb-1"><div class="thumb-caption">Shasta</div></div>
+              <div class="shasta-thumb thumb-2"><div class="thumb-caption">Lake</div></div>
+              <div class="shasta-thumb thumb-3"><div class="thumb-caption">Cows</div></div>
+              <div class="shasta-thumb thumb-4"><div class="thumb-caption">Sunset</div></div>
+              <div class="shasta-thumb thumb-5"><div class="thumb-caption">Hike</div></div>
+              <div class="shasta-thumb thumb-6"><div class="thumb-caption">Falls</div></div>
+              <div class="shasta-thumb thumb-7"><div class="thumb-caption">Forest</div></div>
+              <div class="shasta-thumb thumb-8"><div class="thumb-caption">Cabin</div></div>
+              <div class="shasta-thumb thumb-9"><div class="thumb-caption">Peak</div></div>
+            </div>
+            <div class="shasta-show-all-btn">Show All</div>
+          </div>
+
+          <!-- Private Cloud Compute Concentric Circle Network (Image 3/4 style) -->
+          <div class="private-cloud-diagram" id="private-cloud-diagram">
+            <div class="private-cloud-bg-fade"></div>
+            <!-- Central user node with profile silhouette -->
+            <div class="cloud-user-node">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+              </svg>
+            </div>
+            <!-- Concentric circles SVG (Image 3/4) -->
+            <svg class="concentric-rings-svg" viewBox="0 0 200 200">
+              <circle cx="100" cy="100" r="45" class="ring-line ring-inner" />
+              <circle cx="100" cy="100" r="75" class="ring-line ring-outer" />
+            </svg>
+            <!-- Orbiting App Nodes -->
+            <div class="orbiting-node node-photos" id="node-photos">
+              <div class="node-icon photos-bg">
+                <svg viewBox="0 0 30 30" fill="currentColor">
+                  <circle cx="15" cy="9" r="4" fill="#ff453a" opacity="0.85"/>
+                  <circle cx="21" cy="15" r="4" fill="#ff9f0a" opacity="0.85"/>
+                  <circle cx="15" cy="21" r="4" fill="#30d158" opacity="0.85"/>
+                  <circle cx="9" cy="15" r="4" fill="#0a84ff" opacity="0.85"/>
+                </svg>
+              </div>
+            </div>
+            <div class="orbiting-node node-mail" id="node-mail">
+              <div class="node-icon mail-bg">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <rect x="2" y="4" width="20" height="16" rx="3" fill="url(#mail-grad-cloud)"/>
+                  <path d="M22 6l-10 7L2 6" fill="none" stroke="#fff" stroke-width="1.5"/>
+                  <defs>
+                    <linearGradient id="mail-grad-cloud" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#5ac8fa"/>
+                      <stop offset="100%" stop-color="#007aff"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+            </div>
+            <div class="orbiting-node node-messages" id="node-messages">
+              <div class="node-icon messages-bg">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="orbiting-node node-calendar" id="node-calendar">
+              <div class="node-icon calendar-bg-node">
+                <span class="cal-node-mon">MON</span>
+                <span class="cal-node-day">10</span>
+              </div>
+            </div>
+            <!-- Label -->
+            <div class="private-cloud-label">Private Cloud Compute</div>
+          </div>
+
+          <!-- Gemini Travel Summary Card -->
+          <div class="gemini-summary-card" id="gemini-summary-card">
+            <div class="gemini-card-spark">
+              <svg viewBox="0 0 100 100" fill="currentColor">
+                <path d="M 50 0 Q 50 50 0 50 Q 50 50 50 100 Q 50 50 100 50 Q 50 50 50 0 Z" />
+              </svg>
+            </div>
+            <div class="gemini-card-title">Shasta Weekend Trip</div>
+            <div class="gemini-card-bullets">
+              <div class="bullet-item">
+                <span class="bullet-dot"></span>
+                <span class="bullet-text">Hiked McCloud Falls and captured 12 scenic photos.</span>
+              </div>
+              <div class="bullet-item">
+                <span class="bullet-dot"></span>
+                <span class="bullet-text">Discovered highland cows grazing in the valley fields.</span>
+              </div>
+              <div class="bullet-item">
+                <span class="bullet-dot"></span>
+                <span class="bullet-text">Completed kayak loop on Lake Siskiyou under Mount Shasta.</span>
+              </div>
+            </div>
+            <div class="gemini-card-footer">
+              <span class="gemini-brand">Gemini AI</span>
+              <span class="gemini-status">Summary Generated</span>
+            </div>
+          </div>
+
+          <!-- Starry sky background overlay inside the phone screen for the logo morph -->
+          <div class="ai-starry-sky" id="ai-starry-sky"></div>
+
+          <!-- White flash overlay for peak morph scene inside phone -->
+          <div class="ai-phone-flash" id="ai-phone-flash"></div>
+
+          <!-- Screen glare overlay -->
+          <div class="phone-screen-glare"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Media Playback Control Bar -->
+  <div class="control-panel">
+    <div class="control-buttons">
+      <button class="btn btn-primary" id="btn-play">Pause</button>
+      <button class="btn btn-secondary" id="btn-restart">Restart</button>
+      <div class="speed-toggle-group">
+        <button class="speed-btn active" data-speed="1">1x</button>
+        <button class="speed-btn" data-speed="2">2x</button>
+        <button class="speed-btn" data-speed="0.5">0.5x</button>
+      </div>
+    </div>
+    <div class="timeline-slider-wrapper">
+      <span class="time-label" id="current-time">0.00s</span>
+      <input type="range" class="timeline-slider" id="timeline-slider" min="0" max="1500" value="0">
+      <span class="time-label">50.00s</span>
+    </div>
+    <div class="steps-progress">
+      <div class="step-indicator active" data-frame="0">
+        <span class="step-num">1</span>
+        <span class="step-txt">Lock Screen</span>
+      </div>
+      <div class="step-indicator" data-frame="300">
+        <span class="step-num">2</span>
+        <span class="step-txt">Island Expand</span>
+      </div>
+      <div class="step-indicator" data-frame="600">
+        <span class="step-num">3</span>
+        <span class="step-txt">Home Transition</span>
+      </div>
+      <div class="step-indicator" data-frame="900">
+        <span class="step-num">4</span>
+        <span class="step-txt">Siri + Gemini AI</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="weather-widget-script.js"></script>
+</body>
+</html>

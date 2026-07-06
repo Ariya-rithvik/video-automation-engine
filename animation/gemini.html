@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autonomous Multi-Agent AI Development Command Grid</title>
+  
+  <!-- Premium Google Fonts: Outfit, Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="gemini-style.css">
+</head>
+<body>
+
+  <!-- Ambient Background Gradients (AI Cyan/Purple) -->
+  <div class="ambient-glow"></div>
+  <div class="ambient-glow-secondary"></div>
+
+  <!-- Main Showcase Viewport (16:9 Canvas) -->
+  <div class="showcase-viewport">
+    
+    <!-- SVG Glowing Network Connectors Layer -->
+    <svg class="connectors-svg" viewBox="0 0 1024 576">
+      <defs>
+        <linearGradient id="glow-grad-ai-1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="rgba(239, 68, 68, 0.8)" />
+          <stop offset="100%" stop-color="rgba(6, 182, 212, 0.1)" />
+        </linearGradient>
+        <linearGradient id="glow-grad-ai-2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="rgba(168, 85, 247, 0.8)" />
+          <stop offset="100%" stop-color="rgba(6, 182, 212, 0.1)" />
+        </linearGradient>
+        <linearGradient id="glow-grad-ai-3" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="rgba(16, 185, 129, 0.8)" />
+          <stop offset="100%" stop-color="rgba(6, 182, 212, 0.1)" />
+        </linearGradient>
+        <filter id="glow-blur" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="6" result="blur" />
+          <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+      </defs>
+      <!-- Paths connecting Agent Nodes to Panels -->
+      <path id="path-director" d="M 120 180 C 180 180, 200 240, 240 240" stroke="url(#glow-grad-ai-1)" stroke-width="3" fill="none" filter="url(#glow-blur)" />
+      <path id="path-developer" d="M 512 80 C 512 120, 520 160, 580 180" stroke="url(#glow-grad-ai-2)" stroke-width="3" fill="none" filter="url(#glow-blur)" />
+      <path id="path-inspector" d="M 880 75 C 840 150, 800 220, 780 280" stroke="url(#glow-grad-ai-3)" stroke-width="3" fill="none" filter="url(#glow-blur)" />
+    </svg>
+
+    <!-- Global Zoom Wrapper (Enables close-up shot of Editor at the end) -->
+    <div class="zoom-wrapper" id="zoom-wrapper">
+
+      <!-- Widescreen Console Command Grid -->
+      <div class="dashboard-wrapper" id="phone-mockup-wrapper">
+        
+        <!-- Header Bar -->
+        <div class="dashboard-header">
+          <div class="window-controls">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <div class="dashboard-title">🤖 COLLABORATIVE MULTI-AGENT DEVELOPMENT GRID</div>
+          <div class="dashboard-telemetry">
+            <span class="telemetry-badge">CPU: 1.2%</span>
+            <span class="telemetry-badge">NET: SYNC</span>
+          </div>
+        </div>
+
+        <!-- Multi-Panel Layout Grid -->
+        <div class="dashboard-workspace">
+          
+          <!-- PANEL 1: Reasoning Console (DeepSeek-R1) -->
+          <div class="dashboard-panel panel-reasoning" id="panel-reasoning">
+            <div class="panel-header">
+              <span class="panel-badge red">DeepSeek-R1</span>
+              <h4>DIRECTOR REASONING LOGS</h4>
+            </div>
+            <div class="panel-body text-console">
+              <span class="food-tagline">|</span><span class="blinking-cursor-prompt">|</span>
+            </div>
+            <div class="panel-footer">
+              <span class="footer-badge">Thinking State: Active</span>
+            </div>
+          </div>
+
+          <!-- PANEL 2: Code Editor Workspace (Gemini/Claude) -->
+          <div class="dashboard-panel panel-editor" id="phone-card-1">
+            <div class="panel-header">
+              <span class="panel-badge purple">Gemini-1.5</span>
+              <h4>CODE SYNTHESIS EDITOR</h4>
+              <span class="tab-badge">useWSStream.js</span>
+            </div>
+            <div class="panel-body code-workspace-bg">
+              <div class="mock-code-block">
+                <span id="typing-code-area">// Waiting for Director handoff...</span><span class="blinking-cursor">_</span>
+              </div>
+            </div>
+            <div class="panel-footer">
+              <span class="footer-badge text-cyan">STATUS: IDLE</span>
+              <button class="action-btn" id="btn-get-started">Compile Code</button>
+            </div>
+          </div>
+
+          <!-- PANEL 3: QA Inspector Terminal (Visual QA) -->
+          <div class="dashboard-panel panel-inspector" id="panel-inspector">
+            <div class="panel-header">
+              <span class="panel-badge green">Visual-QA</span>
+              <h4>AUTONOMOUS DIAGNOSTICS</h4>
+            </div>
+            <div class="panel-body text-console text-green-glow">
+              <!-- QA Checklist & Logs Stream -->
+              <div class="qa-log-wrapper" id="qa-log-stream">
+                <div class="qa-log-row">&gt; Diagnostics system initialized. Waiting...</div>
+              </div>
+            </div>
+            <div class="panel-footer">
+              <span class="footer-badge">VERIFIED: v1.0.0</span>
+              <button class="action-btn bg-green-gradient" id="btn-deploy-service">Verify & Deploy</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+  
+      <!-- ── AGENT ACTIVE STATUS NODES (FLOAT AROUND GRID) ── -->
+      
+      <!-- Node 1: Director Agent Node (Top Left) -->
+      <div class="glass-bubble" id="bubble-calendar">
+        <div class="bubble-sphere border-red">
+          <div class="bubble-glare"></div>
+          <div class="bubble-content">
+            <div class="agent-logo-glow text-red">🧠</div>
+            <div class="bubble-label font-red">DIRECTOR</div>
+            <div class="bubble-sub-label">DEEPSEEK-R1</div>
+          </div>
+        </div>
+      </div>
+ 
+      <!-- Node 2: Developer Agent Node (Top Center) -->
+      <div class="glass-bubble" id="bubble-downloads">
+        <div class="bubble-sphere border-purple">
+          <div class="bubble-glare"></div>
+          <div class="bubble-content">
+            <div class="agent-logo-glow text-purple">💻</div>
+            <div class="bubble-label font-purple">DEVELOPER</div>
+            <div class="bubble-sub-label">GEMINI-1.5</div>
+          </div>
+        </div>
+      </div>
+ 
+      <!-- Node 3: QA Inspector Agent Node (Top Right) -->
+      <div class="glass-bubble" id="bubble-course">
+        <div class="bubble-sphere border-green">
+          <div class="bubble-glare"></div>
+          <div class="bubble-content">
+            <div class="agent-logo-glow text-green">🔍</div>
+            <div class="bubble-label font-green">INSPECTOR</div>
+            <div class="bubble-sub-label">VISUAL-QA</div>
+          </div>
+        </div>
+      </div>
+ 
+      <!-- Node 4: Decorative Ambient Node (Bottom Right) -->
+      <div class="glass-bubble" id="bubble-decor">
+        <div class="bubble-sphere">
+          <div class="bubble-glare"></div>
+        </div>
+      </div>
+    </div> <!-- /zoom-wrapper -->
+
+    <!-- ── VIRTUAL MOUSE CURSOR ── -->
+    <div class="virtual-cursor" id="virtual-cursor">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="white" stroke="#06b6d4" stroke-width="1.5">
+        <polygon points="5 3 21 11 13 13 11 21 5 3"/>
+      </svg>
+      <div class="cursor-ripple" id="cursor-ripple"></div>
+    </div>
+
+    <!-- ── SUCCESS CELEBRATION TOAST ── -->
+    <div class="celebration-toast" id="celebration-toast">
+      <div class="toast-confetti-badge">🚀</div>
+      <div class="toast-body">
+        <h5>Autonomous Loop Synced!</h5>
+        <p>Real-time compilation and multi-agent deployment successful.</p>
+      </div>
+    </div>
+
+    <!-- Canvas for Confetti Overlay -->
+    <canvas class="confetti-overlay" id="confetti-canvas"></canvas>
+
+  </div>
+
+  <!-- Media Playback Control Bar -->
+  <div class="control-panel">
+    <div class="control-buttons">
+      <button class="btn btn-primary" id="btn-play">Pause</button>
+      <button class="btn btn-secondary" id="btn-restart">Restart</button>
+      <div class="speed-toggle-group">
+        <button class="speed-btn active" data-speed="1">1x</button>
+        <button class="speed-btn" data-speed="2">2x</button>
+        <button class="speed-btn" data-speed="0.5">0.5x</button>
+      </div>
+    </div>
+    
+    <div class="timeline-slider-wrapper">
+      <span class="time-label">0.00s</span>
+      <input type="range" class="timeline-slider" id="timeline-slider" min="0" max="1350" value="0">
+      <span class="time-label" id="total-time-label">45.00s</span>
+    </div>
+
+    <div class="steps-progress">
+      <div class="step-indicator active" data-frame="0">
+        <span class="step-num">1</span>
+        <span class="step-txt">DeepSeek Reasoning</span>
+      </div>
+      <div class="step-indicator" data-frame="270">
+        <span class="step-num">2</span>
+        <span class="step-txt">Gemini Synthesizing</span>
+      </div>
+      <div class="step-indicator" data-frame="660">
+        <span class="step-num">3</span>
+        <span class="step-txt">Autonomous QA Audit</span>
+      </div>
+      <div class="step-indicator" data-frame="1020">
+        <span class="step-num">4</span>
+        <span class="step-txt">Deployment Wave</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="gemini-script.js"></script>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keynote Cinematic Product Showcase</title>
+  
+  <!-- Premium Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Gradients -->
+  <div class="ambient-glow"></div>
+  <div class="ambient-glow-secondary"></div>
+
+  <!-- Main Showcase Container (16:9 1920x1080 perspective box) -->
+  <div class="showcase-viewport">
+    
+    <!-- Phase 1 & 2: Amazon Search Screen -->
+    <div class="screen amazon-screen active" id="amazon-screen">
+      <!-- Mock Amazon Header -->
+      <header class="mock-header">
+        <div class="header-logo">amazon<span>.in</span></div>
+        <div class="header-search-slot"></div> <!-- Empty slot where the floating search bar sits -->
+        <div class="header-links">
+          <div class="mock-link">Deliver to India</div>
+          <div class="mock-link">Registry</div>
+          <div class="mock-link">Gift Cards</div>
+          <div class="mock-link">Sell</div>
+        </div>
+      </header>
+
+      <!-- Mock Amazon Grid Body -->
+      <main class="mock-grid">
+        <div class="mock-card hero-banner">
+          <h2>Up to 60% off | Styles for Men & Women</h2>
+          <p>Explore clothing, shoes, watches, bags, and more</p>
+        </div>
+        <div class="mock-card sub-card">
+          <h3>Summer Trends</h3>
+          <div class="card-thumb"></div>
+        </div>
+        <div class="mock-card sub-card">
+          <h3>Easy Returns</h3>
+          <div class="card-thumb"></div>
+        </div>
+        <div class="mock-card sub-card">
+          <h3>Deal of the Day</h3>
+          <div class="card-thumb"></div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Phase 3: The Glowing Brand Grid (Floating Shoes) -->
+    <div class="screen brand-screen" id="brand-screen">
+      <div class="brand-header">
+        <span class="badge">Amazon Search Results</span>
+        <h2>Premium Footwear Collection</h2>
+        <p>Curated styles with high-performance cushioning</p>
+      </div>
+
+      <!-- 3D Card Grid container -->
+      <div class="shoes-grid-container">
+        <!-- Shoe Card 1 (Selected card) -->
+        <div class="shoe-card" id="shoe-card-1">
+          <div class="card-inner">
+            <div class="shoe-img-wrapper gradient-red">
+              <!-- Inline SVG Shoe Illustration -->
+              <svg viewBox="0 0 100 60" class="shoe-svg">
+                <path d="M10,45 C20,38 35,38 45,28 C50,23 58,15 75,15 C85,15 90,25 90,38 C90,48 80,48 65,48 C50,48 40,48 10,48 Z" fill="none" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                <path d="M40,25 C50,30 65,30 75,25" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+                <path d="M15,48 L85,48" stroke="white" stroke-width="5"/>
+              </svg>
+            </div>
+            <div class="card-info">
+              <span class="category">SPORTS</span>
+              <h4>Pulse Runner Pro</h4>
+              <div class="price-row">
+                <span class="price">₹4,999</span>
+                <span class="rating">4.8 ★</span>
+              </div>
+              <button class="buy-button">Select Option</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shoe Card 2 -->
+        <div class="shoe-card" id="shoe-card-2">
+          <div class="card-inner">
+            <div class="shoe-img-wrapper gradient-teal">
+              <svg viewBox="0 0 100 60" class="shoe-svg">
+                <path d="M10,45 C20,38 35,38 45,28 C50,23 58,15 75,15 C85,15 90,25 90,38 C90,48 80,48 65,48 C50,48 40,48 10,48 Z" fill="none" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                <path d="M15,48 L85,48" stroke="white" stroke-width="5"/>
+              </svg>
+            </div>
+            <div class="card-info">
+              <span class="category">COMFORT</span>
+              <h4>Air Cloud Lite</h4>
+              <div class="price-row">
+                <span class="price">₹3,499</span>
+                <span class="rating">4.6 ★</span>
+              </div>
+              <button class="buy-button">Select Option</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shoe Card 3 -->
+        <div class="shoe-card" id="shoe-card-3">
+          <div class="card-inner">
+            <div class="shoe-img-wrapper gradient-purple">
+              <svg viewBox="0 0 100 60" class="shoe-svg">
+                <path d="M10,45 C20,38 35,38 45,28 C50,23 58,15 75,15 C85,15 90,25 90,38 C90,48 80,48 65,48 C50,48 40,48 10,48 Z" fill="none" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                <path d="M15,48 L85,48" stroke="white" stroke-width="5"/>
+              </svg>
+            </div>
+            <div class="card-info">
+              <span class="category">URBAN</span>
+              <h4>Veloce Cyber</h4>
+              <div class="price-row">
+                <span class="price">₹5,999</span>
+                <span class="rating">4.9 ★</span>
+              </div>
+              <button class="buy-button">Select Option</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shoe Card 4 -->
+        <div class="shoe-card" id="shoe-card-4">
+          <div class="card-inner">
+            <div class="shoe-img-wrapper gradient-gold">
+              <svg viewBox="0 0 100 60" class="shoe-svg">
+                <path d="M10,45 C20,38 35,38 45,28 C50,23 58,15 75,15 C85,15 90,25 90,38 C90,48 80,48 65,48 C50,48 40,48 10,48 Z" fill="none" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                <path d="M15,48 L85,48" stroke="white" stroke-width="5"/>
+              </svg>
+            </div>
+            <div class="card-info">
+              <span class="category">CLASSIC</span>
+              <h4>Retro Court OG</h4>
+              <div class="price-row">
+                <span class="price">₹3,999</span>
+                <span class="rating">4.7 ★</span>
+              </div>
+              <button class="buy-button">Select Option</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 4: Delivery Porch Door & Morphing Box -->
+    <div class="screen delivery-screen" id="delivery-screen">
+      <!-- House Front Door -->
+      <div class="door-frame">
+        <div class="door-house-arch">
+          <!-- House Entry Pillars -->
+          <div class="pillar pillar-left"></div>
+          <div class="pillar pillar-right"></div>
+          <div class="roof-arch"></div>
+        </div>
+        <!-- Stylized Door (HTML elements for rich 3D wood styling) -->
+        <div class="porch-door-wrapper">
+          <div class="door-frame-inner">
+            <!-- Left Door Panel -->
+            <div class="door-panel door-left">
+              <div class="door-beading-panel"></div>
+              <div class="door-beading-panel"></div>
+              <div class="door-handle left-handle"></div>
+            </div>
+            <!-- Right Door Panel -->
+            <div class="door-panel door-right">
+              <div class="door-beading-panel"></div>
+              <div class="door-beading-panel"></div>
+              <div class="door-handle right-handle"></div>
+            </div>
+          </div>
+          <div class="welcome-mat">WELCOME</div>
+        </div>
+      </div>
+
+      <!-- Celebratory Success Banner -->
+      <div class="delivery-toast" id="delivery-toast">
+        <div class="toast-icon">✓</div>
+        <div class="toast-text">
+          <h5>Order Delivered!</h5>
+          <p>Pulse Runner Pro received on porch step.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── FLOATING SEARCH BAR (Moves between layouts) ── -->
+    <div class="floating-search-bar" id="floating-search-bar">
+      <div class="search-icon-slot">
+        <!-- SVG magnifying glass -->
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </div>
+      <div class="search-input-wrapper">
+        <span class="search-placeholder" id="search-placeholder"></span>
+        <span class="search-cursor" id="search-cursor">|</span>
+      </div>
+      <button class="mock-search-btn" id="search-btn">Search</button>
+    </div>
+
+    <!-- ── 3D MORPHING TARGET (Contains the morphed card / box) ── -->
+    <div class="morph-container" id="morph-container">
+      <!-- Card structure that will squash into a box -->
+      <div class="morphing-box-element" id="morphing-box-element">
+        <!-- Box Front flap -->
+        <div class="box-face front"></div>
+        <!-- Box Top flap -->
+        <div class="box-face top"></div>
+        <!-- Box Side flap -->
+        <div class="box-face side"></div>
+        
+        <!-- Embedded Shoe Image that fades out during morph -->
+        <div class="box-shoe-inner" id="box-shoe-inner">
+          <svg viewBox="0 0 100 60" width="80">
+            <path d="M10,45 C20,38 35,38 45,28 C50,23 58,15 75,15 C85,15 90,25 90,38 C90,48 80,48 65,48 C50,48 40,48 10,48 Z" fill="none" stroke="white" stroke-width="5"/>
+            <path d="M15,48 L85,48" stroke="white" stroke-width="6"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── VIRTUAL MOUSE CURSOR ── -->
+    <div class="virtual-cursor" id="virtual-cursor">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="white" stroke="#2563eb" stroke-width="1.5">
+        <polygon points="5 3 21 11 13 13 11 21 5 3"/>
+      </svg>
+      <div class="cursor-ripple" id="cursor-ripple"></div>
+    </div>
+
+    <!-- Canvas for Confetti Overlay -->
+    <canvas class="confetti-overlay" id="confetti-canvas"></canvas>
+
+  </div>
+
+  <!-- Media Playback Control Bar -->
+  <div class="control-panel">
+    <div class="control-buttons">
+      <button class="btn btn-primary" id="btn-play">Pause</button>
+      <button class="btn btn-secondary" id="btn-restart">Restart</button>
+      <div class="speed-toggle-group">
+        <button class="speed-btn active" data-speed="1">1x</button>
+        <button class="speed-btn" data-speed="2">2x</button>
+        <button class="speed-btn" data-speed="0.5">0.5x</button>
+      </div>
+    </div>
+    
+    <div class="timeline-slider-wrapper">
+      <span class="time-label">0.00s</span>
+      <input type="range" class="timeline-slider" id="timeline-slider" min="0" max="240" value="0">
+      <span class="time-label" id="total-time-label">8.00s</span>
+    </div>
+
+    <div class="steps-progress">
+      <div class="step-indicator active" data-frame="0">
+        <span class="step-num">1</span>
+        <span class="step-txt">Search Focus</span>
+      </div>
+      <div class="step-indicator" data-frame="60">
+        <span class="step-num">2</span>
+        <span class="step-txt">Typewriter</span>
+      </div>
+      <div class="step-indicator" data-frame="90">
+        <span class="step-num">3</span>
+        <span class="step-txt">3D Shoe Grid</span>
+      </div>
+      <div class="step-indicator" data-frame="150">
+        <span class="step-num">4</span>
+        <span class="step-txt">Parcel Morph</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>

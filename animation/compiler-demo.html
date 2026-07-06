@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADE — Metadata Timeline Compiler Demo</title>
+  
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="compiler-demo-style.css">
+</head>
+<body>
+
+  <!-- Ambient Gradients -->
+  <div class="ambient-glow"></div>
+  <div class="ambient-glow-secondary"></div>
+
+  <!-- Header Banner -->
+  <header class="showcase-header">
+    <div class="header-logo"> ADE ⚡ <span>Compiler Studio</span></div>
+    <p class="header-subtitle">Edit the JSON metadata configuration on the left and see the animation compile instantly on the right.</p>
+  </header>
+
+  <!-- Split Screen Workspace -->
+  <div class="compiler-workspace">
+    
+    <!-- Left Column: JSON Editor -->
+    <div class="editor-pane">
+      <div class="pane-header">
+        <span class="pane-title">📝 metadata.json</span>
+        <button class="compile-btn" id="btn-compile">Apply & Compile</button>
+      </div>
+      <textarea class="json-textarea" id="json-editor" spellcheck="false">{
+  "theme": "Spotify Dark",
+  "canvasSize": [540, 360],
+  "timeline": [
+    {
+      "time": "0.0s",
+      "action": "move_cursor",
+      "target": "#search-bar",
+      "description": "Cursor hovers search input"
+    },
+    {
+      "time": "2.0s",
+      "action": "typewrite",
+      "target": "#search-bar-text",
+      "text": "Queen",
+      "description": "Types search query"
+    },
+    {
+      "time": "4.0s",
+      "action": "click",
+      "target": "#album-card",
+      "trigger": "show_element(#now-playing)",
+      "description": "Selects Queen album"
+    },
+    {
+      "time": "6.0s",
+      "action": "zoom_to",
+      "target": "#now-playing",
+      "scale": 1.4,
+      "description": "Camera zooms in on play bar"
+    },
+    {
+      "time": "7.5s",
+      "action": "click",
+      "target": "#play-btn",
+      "trigger": "play_music",
+      "description": "Clicks play, visualizer reacts"
+    },
+    {
+      "time": "9.5s",
+      "action": "zoom_out",
+      "description": "Camera zooms out"
+    }
+  ],
+  "narration": {
+    "words": [
+      { "text": "SEARCHING", "start": 0.2, "end": 0.9 },
+      { "text": "FOR", "start": 0.9, "end": 1.3 },
+      { "text": "QUEEN", "start": 1.3, "end": 2.0 },
+      { "text": "ON", "start": 2.1, "end": 2.4 },
+      { "text": "SPOTIFY...", "start": 2.4, "end": 3.8 },
+      { "text": "LET'S", "start": 4.1, "end": 4.5 },
+      { "text": "SELECT", "start": 4.5, "end": 5.0 },
+      { "text": "THE", "start": 5.0, "end": 5.3 },
+      { "text": "ALBUM", "start": 5.3, "end": 6.2 },
+      { "text": "AND", "start": 7.0, "end": 7.4 },
+      { "text": "BOUNCE", "start": 7.4, "end": 7.9 },
+      { "text": "TO", "start": 7.9, "end": 8.2 },
+      { "text": "THE", "start": 8.2, "end": 8.5 },
+      { "text": "MUSIC!", "start": 8.5, "end": 9.5 }
+    ]
+  }
+}</textarea>
+      <div id="error-console" class="error-console">Console: Ready</div>
+    </div>
+
+    <!-- Right Column: Visual Stage (Screen Studio Viewport) -->
+    <div class="stage-pane">
+      <div class="pane-header">
+        <span class="pane-title">📺 Screen Studio Viewport</span>
+        <span class="zoom-indicator" id="zoom-value">Zoom: 100%</span>
+      </div>
+      
+      <!-- 16:9 Viewport -->
+      <div class="stage" id="stage">
+        <div class="showcase-viewport" id="viewport">
+          
+          <div class="camera-canvas" id="camera-canvas">
+            <!-- Simulated Sonoma Wallpaper -->
+            <div class="wallpaper">
+              <div class="wp-layer wp-purple"></div>
+              <div class="wp-layer wp-cyan"></div>
+            </div>
+
+            <!-- Mock Spotify Client Window -->
+            <div class="spotify-window" id="spotify-window">
+              <!-- Window header -->
+              <div class="win-header">
+                <div class="traffic-lights">
+                  <div class="light close"></div>
+                  <div class="light minimize"></div>
+                  <div class="light maximize"></div>
+                </div>
+                <span class="win-title">Spotify Premium</span>
+              </div>
+
+              <!-- Sidebar & Main grid -->
+              <div class="win-body">
+                <aside class="spotify-sidebar">
+                  <div class="nav-item active">🏠 Home</div>
+                  <div class="nav-item">🔍 Search</div>
+                  <div class="nav-item">📚 Library</div>
+                </aside>
+                
+                <main class="spotify-main">
+                  <!-- Custom Search Bar -->
+                  <div class="search-bar" id="search-bar">
+                    <span class="search-icon">🔍</span>
+                    <span class="search-text" id="search-bar-text">Search artist, song...</span>
+                  </div>
+
+                  <!-- Albums Results (hidden initially, fades in) -->
+                  <div class="search-results" id="search-results">
+                    <div class="album-card" id="album-card">
+                      <div class="album-art">👑</div>
+                      <div class="album-info">
+                        <h4>Bohemian Rhapsody</h4>
+                        <p>Queen · Album</p>
+                      </div>
+                    </div>
+                  </div>
+                </main>
+              </div>
+
+              <!-- Now Playing Bar (hidden initially, slides up) -->
+              <div class="now-playing-bar" id="now-playing">
+                <div class="np-left">
+                  <div class="np-art">👑</div>
+                  <div class="np-title">
+                    <h5>Bohemian Rhapsody</h5>
+                    <p>Queen</p>
+                  </div>
+                </div>
+                <div class="np-center">
+                  <button class="play-btn" id="play-btn">▶</button>
+                  <!-- Audio visualizer bars -->
+                  <div class="audio-visualizer" id="audio-bars">
+                    <div class="v-bar"></div>
+                    <div class="v-bar"></div>
+                    <div class="v-bar"></div>
+                    <div class="v-bar"></div>
+                    <div class="v-bar"></div>
+                  </div>
+                </div>
+              </div>
+            </div> <!-- /spotify-window -->
+
+          </div> <!-- /camera-canvas -->
+
+          <!-- Virtual cursor (absolute screen coordinate tracking) -->
+          <div class="virtual-cursor" id="virtual-cursor">
+            <svg viewBox="0 0 24 24" width="20" height="20">
+              <path d="M3 3v13.55l3.96-3.96 2.58 5.68 2.05-.93-2.58-5.68h5.36L3 3z" fill="black" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
+            </svg>
+            <div class="cursor-ripple" id="cursor-ripple"></div>
+          </div>
+
+          <!-- Bouncy Dynamic Subtitle Captions overlay -->
+          <div class="caption-container" id="caption-container"></div>
+
+          <!-- Export overlay progress -->
+          <div class="export-overlay" id="export-overlay">
+            <div class="export-spinner-box">
+              <div class="export-spinner"></div>
+              <h3 id="export-status-txt">Rendering MP4 Video...</h3>
+              <p id="export-progress-txt">0% completed</p>
+            </div>
+          </div>
+
+        </div> <!-- /showcase-viewport -->
+      </div> <!-- /stage -->
+
+    </div> <!-- /stage-pane -->
+
+  </div> <!-- /compiler-workspace -->
+
+  <!-- Playback Console -->
+  <div class="control-panel">
+    <div class="control-buttons">
+      <button class="btn btn-primary" id="btn-play">Pause</button>
+      <button class="btn btn-secondary" id="btn-restart">Restart</button>
+      <div class="speed-toggle-group">
+        <button class="speed-btn active" data-speed="1">1x</button>
+        <button class="speed-btn" data-speed="2">2x</button>
+        <button class="speed-btn" data-speed="0.5">0.5x</button>
+      </div>
+      <!-- EXPORT TO MP4 BUTTON -->
+      <button class="btn btn-export" id="btn-export">
+        <span>📤 Export to MP4</span>
+      </button>
+    </div>
+    
+    <div class="timeline-slider-wrapper">
+      <span class="time-label" id="current-time">0.00s</span>
+      <input type="range" class="timeline-slider" id="timeline-slider" min="0" max="300" value="0">
+      <span class="time-label" id="duration-label">10.00s</span>
+    </div>
+
+    <!-- Compile indicators -->
+    <div class="steps-progress" id="steps-progress">
+      <!-- Generated dynamically based on JSON events -->
+    </div>
+  </div>
+
+  <script src="compiler-demo-script.js"></script>
+</body>
+</html>

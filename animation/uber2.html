@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uber Moto — Premium 3D Ride Journey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="uber2-style.css">
+</head>
+<body>
+
+  <!-- Background Glows -->
+  <div class="ambient-glow bg-blue-glow"></div>
+  <div class="ambient-glow bg-green-glow"></div>
+
+  <!-- Main Showcase Viewport -->
+  <div class="showcase-viewport" id="showcase-viewport">
+    
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCENE 1: High-Fidelity Phone Booking           -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="scene scene-phone active" id="scene-phone">
+      <div class="phone-wrapper" id="phone-wrapper">
+        <div class="phone-shell">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <!-- Uber App Header -->
+            <div class="app-header">
+              <span class="uber-wordmark">Uber</span>
+              <div class="header-profile">
+                <div class="profile-pic">R</div>
+              </div>
+            </div>
+
+            <!-- Mini Map Background (Phone Screen) -->
+            <div class="phone-map-view">
+              <svg class="phone-map-svg" viewBox="0 0 240 160">
+                <!-- Roads -->
+                <path d="M-10 40 L250 40 M-10 120 L250 120 M80 -10 L80 170 M160 -10 L160 170" stroke="rgba(255,255,255,0.06)" stroke-width="3" fill="none" />
+                <path id="phone-route-line" d="M 60 120 Q 120 120 120 60 T 180 40" stroke="#276EF1" stroke-width="3" stroke-dasharray="6 4" fill="none" opacity="0" />
+                
+                <!-- Current Location Pin (Green) -->
+                <g id="phone-pin-start" transform="translate(60, 120)" opacity="0">
+                  <circle r="8" fill="rgba(6,193,103,0.2)" />
+                  <circle r="4" fill="#06C167" />
+                </g>
+                <!-- Destination Pin (Red) -->
+                <g id="phone-pin-end" transform="translate(180, 40)" opacity="0">
+                  <circle r="8" fill="rgba(239,68,68,0.2)" />
+                  <circle r="4" fill="#ef4444" />
+                </g>
+              </svg>
+            </div>
+
+            <!-- Booking Input Form -->
+            <div class="booking-inputs-panel">
+              <div class="inputs-dots-indicator">
+                <div class="dot-indicator green"></div>
+                <div class="dot-indicator-line"></div>
+                <div class="dot-indicator red"></div>
+              </div>
+              <div class="inputs-fields">
+                <div class="input-box" id="box-pickup">
+                  <div class="input-label">Current Location</div>
+                  <div class="input-text-container">
+                    <span class="input-value" id="text-pickup"></span><span class="blink-cursor cursor-pickup">|</span>
+                  </div>
+                </div>
+                <div class="input-box" id="box-destination">
+                  <div class="input-label">Where to?</div>
+                  <div class="input-text-container">
+                    <span class="input-value" id="text-destination"></span><span class="blink-cursor cursor-dest">|</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ride Offers Panel (Slides up after typing) -->
+            <div class="ride-offers-panel" id="ride-offers-panel">
+              <h4 class="panel-title">Choose a ride</h4>
+              <div class="offers-list">
+                <!-- Moto Card -->
+                <div class="offer-card" id="card-moto">
+                  <div class="offer-icon">
+                    <span class="emoji-icon">🏍️</span>
+                  </div>
+                  <div class="offer-details">
+                    <div class="offer-name">Uber Moto</div>
+                    <div class="offer-meta">2 min away · Fastest</div>
+                  </div>
+                  <div class="offer-price">₹75</div>
+                </div>
+                <!-- Auto Card -->
+                <div class="offer-card" id="card-auto">
+                  <div class="offer-icon">
+                    <span class="emoji-icon">🛺</span>
+                  </div>
+                  <div class="offer-details">
+                    <div class="offer-name">Uber Auto</div>
+                    <div class="offer-meta">5 min away · Eco</div>
+                  </div>
+                  <div class="offer-price">₹130</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Confirm Booking Button -->
+            <div class="confirm-button-container">
+              <button class="btn-confirm-ride" id="btn-confirm-ride">Confirm Uber Moto</button>
+            </div>
+
+            <!-- Screen Overlay for Loader (Booking Stage) -->
+            <div class="booking-loader-overlay" id="booking-loader-overlay">
+              <div class="loader-circle"></div>
+              <h3 class="loader-title">Finding your Ride</h3>
+              <p class="loader-subtitle">Connecting with nearby Moto drivers...</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCENE 2: The Motorbike Burst Cinematic         -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="scene scene-burst" id="scene-burst">
+      <div class="burst-light-beam"></div>
+      <div class="speed-lines-container" id="speed-lines-container">
+        <!-- Dynamically generated or styled lines -->
+        <div class="speed-line line-1"></div>
+        <div class="speed-line line-2"></div>
+        <div class="speed-line line-3"></div>
+        <div class="speed-line line-4"></div>
+        <div class="speed-line line-5"></div>
+      </div>
+      
+      <!-- Detailed Motorbike illustration (Premium SVG) -->
+      <div class="bike-container" id="bike-container">
+        <svg class="detailed-bike-svg" viewBox="0 0 420 280">
+          <defs>
+            <!-- Metallic gradients for chassis and engine -->
+            <linearGradient id="metal-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#4b5563" />
+              <stop offset="50%" stop-color="#1f2937" />
+              <stop offset="100%" stop-color="#111827" />
+            </linearGradient>
+            <linearGradient id="body-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#276EF1" />
+              <stop offset="100%" stop-color="#06C167" />
+            </linearGradient>
+            <linearGradient id="tire-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#2e2e2e" />
+              <stop offset="50%" stop-color="#1a1a1a" />
+              <stop offset="100%" stop-color="#0b0b0b" />
+            </linearGradient>
+            <filter id="headlight-glow">
+              <feGaussianBlur stdDeviation="8" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          <!-- Headlight Beam (Backdrop) -->
+          <path id="headlight-beam" d="M 330 115 L 450 80 L 450 160 Z" fill="rgba(255, 235, 100, 0.15)" filter="url(#headlight-glow)" opacity="0" />
+
+          <!-- Exaust Trail (Smoke vectors) -->
+          <g id="exhaust-particles" opacity="0.6">
+            <!-- Will animate path shapes or dots -->
+          </g>
+
+          <!-- Motorbike Frame & Engine Assembly -->
+          <g class="bike-chassis">
+            <!-- Front fork & suspension -->
+            <line x1="325" y1="110" x2="355" y2="210" stroke="#9ca3af" stroke-width="6" stroke-linecap="round" />
+            <line x1="332" y1="110" x2="359" y2="200" stroke="#374151" stroke-width="4" stroke-linecap="round" />
+            
+            <!-- Handlebars and dashboard -->
+            <path d="M 320 90 L 332 110 M 325 80 L 310 82" stroke="#1f2937" stroke-width="5" stroke-linecap="round" fill="none" />
+            <circle cx="320" cy="90" r="5" fill="#3b82f6" />
+            
+            <!-- Main frame bars -->
+            <path d="M 120 200 L 190 120 L 325 110" stroke="url(#metal-grad)" stroke-width="10" stroke-linejoin="round" fill="none" />
+            <path d="M 120 200 L 220 210 L 325 110" stroke="url(#metal-grad)" stroke-width="8" stroke-linejoin="round" fill="none" />
+            
+            <!-- Swingarm (Rear wheel holder) -->
+            <path d="M 120 200 L 200 200 L 180 150" stroke="#4b5563" stroke-width="7" stroke-linejoin="round" fill="none" />
+            
+            <!-- Engine Block -->
+            <rect x="180" y="150" width="70" height="55" rx="8" fill="url(#metal-grad)" stroke="#111827" stroke-width="2" />
+            <!-- Cylinder cooling fins -->
+            <line x1="190" y1="160" x2="240" y2="160" stroke="#6b7280" stroke-width="3" />
+            <line x1="190" y1="168" x2="240" y2="168" stroke="#6b7280" stroke-width="3" />
+            <line x1="190" y1="176" x2="240" y2="176" stroke="#6b7280" stroke-width="3" />
+            <line x1="190" y1="184" x2="240" y2="184" stroke="#6b7280" stroke-width="3" />
+            <circle cx="215" cy="178" r="10" fill="#374151" />
+
+            <!-- Fuel Tank (Gleaming Blue/Green Gradient) -->
+            <path d="M 230 110 C 250 110, 310 110, 320 120 C 310 145, 250 155, 230 140 Z" fill="url(#body-grad)" stroke="#ffffff" stroke-width="1" />
+            
+            <!-- Seat (Rider and Pillion) -->
+            <path d="M 155 125 C 170 125, 210 125, 235 140 C 230 142, 175 142, 155 135 Z" fill="#111827" stroke="#1f2937" stroke-width="1.5" />
+            <path d="M 120 135 C 130 130, 150 130, 160 135 C 158 138, 130 138, 120 135 Z" fill="#030712" />
+
+            <!-- Exhaust Pipe -->
+            <path d="M 210 195 Q 260 215 310 195 L 305 188" stroke="#d1d5db" stroke-width="6" stroke-linecap="round" fill="none" />
+            <path d="M 280 198 L 315 190" stroke="#1f2937" stroke-width="8" stroke-linecap="round" fill="none" />
+
+            <!-- Mudguards -->
+            <path d="M 90 170 C 90 140, 150 150, 155 170" stroke="url(#body-grad)" stroke-width="5" fill="none" />
+            <path d="M 330 160 C 340 140, 375 150, 385 180" stroke="url(#body-grad)" stroke-width="5" fill="none" />
+          </g>
+
+          <!-- Rear Wheel Group (Rotated dynamically) -->
+          <g id="rear-wheel" transform="translate(120, 200)">
+            <!-- Outer Tire -->
+            <circle cx="0" cy="0" r="48" fill="none" stroke="url(#tire-grad)" stroke-width="18" />
+            <!-- Inner Rim -->
+            <circle cx="0" cy="0" r="40" fill="none" stroke="#d1d5db" stroke-width="4" />
+            <!-- Spokes -->
+            <line x1="-40" y1="0" x2="40" y2="0" stroke="#ffffff" stroke-width="1.5" />
+            <line x1="0" y1="-40" x2="0" y2="40" stroke="#ffffff" stroke-width="1.5" />
+            <line x1="-28" y1="-28" x2="28" y2="28" stroke="#ffffff" stroke-width="1.5" />
+            <line x1="-28" y1="28" x2="28" y2="-28" stroke="#ffffff" stroke-width="1.5" />
+            <!-- Hub -->
+            <circle cx="0" cy="0" r="12" fill="#374151" stroke="#111827" stroke-width="2" />
+            <!-- Brake Disc -->
+            <circle cx="0" cy="0" r="22" fill="none" stroke="#9ca3af" stroke-width="2.5" stroke-dasharray="3 3" />
+          </g>
+
+          <!-- Front Wheel Group (Rotated dynamically) -->
+          <g id="front-wheel" transform="translate(355, 210)">
+            <!-- Outer Tire -->
+            <circle cx="0" cy="0" r="48" fill="none" stroke="url(#tire-grad)" stroke-width="16" />
+            <!-- Inner Rim -->
+            <circle cx="0" cy="0" r="40" fill="none" stroke="#d1d5db" stroke-width="4" />
+            <!-- Spokes -->
+            <line x1="-40" y1="0" x2="40" y2="0" stroke="#ffffff" stroke-width="1.5" />
+            <line x1="0" y1="-40" x2="0" y2="40" stroke="#ffffff" stroke-width="1.5" />
+            <line x1="-28" y1="-28" x2="28" y2="28" stroke="#ffffff" stroke-width="1.5" />
+            <line x1="-28" y1="28" x2="28" y2="-28" stroke="#ffffff" stroke-width="1.5" />
+            <!-- Hub -->
+            <circle cx="0" cy="0" r="10" fill="#374151" stroke="#111827" stroke-width="2" />
+          </g>
+
+          <!-- Headlight (Front) -->
+          <circle cx="340" cy="118" r="8" fill="#fef08a" filter="url(#headlight-glow)" />
+          
+          <!-- Animated Brake Light (Rear) -->
+          <path id="brake-light" d="M 102 145 Q 98 148 100 152" stroke="#ef4444" stroke-width="5" stroke-linecap="round" fill="none" />
+        </svg>
+
+        <!-- Speedometer Badge overlaying on Bike Screen -->
+        <div class="bike-telemetry-badge" id="bike-telemetry">
+          <div class="speed-val">120</div>
+          <div class="speed-unit">KM/H</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCENE 3: Cyber-Map Journey Tracking            -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="scene scene-map" id="scene-map">
+      <!-- 3D Panning Map Wrapper -->
+      <div class="cyber-map-container" id="cyber-map-container">
+        <svg class="cyber-map-svg" viewBox="0 0 1600 900">
+          <defs>
+            <!-- Map road lighting filter -->
+            <filter id="road-glow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="6" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+            <!-- Driver glow -->
+            <filter id="driver-glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="8" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+            <!-- Building grid pattern -->
+            <pattern id="grid-pattern" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255, 255, 255, 0.02)" stroke-width="1" />
+            </pattern>
+          </defs>
+
+          <!-- Background grid -->
+          <rect width="1600" height="900" fill="url(#grid-pattern)" />
+
+          <!-- Background City Blocks (Translucent isometric buildings) -->
+          <g class="isometric-buildings" fill="rgba(255, 255, 255, 0.02)" stroke="rgba(255,255,255,0.04)" stroke-width="1">
+            <rect x="100" y="80" width="160" height="120" rx="8" />
+            <rect x="320" y="60" width="200" height="100" rx="8" />
+            <rect x="650" y="80" width="140" height="150" rx="8" />
+            <rect x="900" y="50" width="180" height="110" rx="8" />
+            <rect x="1140" y="80" width="220" height="140" rx="8" />
+
+            <rect x="100" y="320" width="120" height="180" rx="8" />
+            <rect x="360" y="360" width="160" height="140" rx="8" />
+            <rect x="850" y="380" width="150" height="150" rx="8" />
+            <rect x="1100" y="350" width="180" height="120" rx="8" />
+            <rect x="1350" y="320" width="140" height="200" rx="8" />
+
+            <rect x="150" y="650" width="240" height="150" rx="8" />
+            <rect x="520" y="680" width="150" height="120" rx="8" />
+            <rect x="800" y="640" width="180" height="160" rx="8" />
+            <rect x="1080" y="660" width="200" height="140" rx="8" />
+            <rect x="1350" y="640" width="160" height="150" rx="8" />
+          </g>
+
+          <!-- Glowing Road Networks -->
+          <g class="road-networks" stroke="rgba(255, 255, 255, 0.08)" stroke-width="4" stroke-linecap="round" fill="none">
+            <!-- Grid Roads -->
+            <line x1="0" y1="240" x2="1600" y2="240" />
+            <line x1="0" y1="560" x2="1600" y2="560" />
+            <line x1="300" y1="0" x2="300" y2="900" />
+            <line x1="600" y1="0" x2="600" y2="900" />
+            <line x1="1050" y1="0" x2="1050" y2="900" />
+            <line x1="1300" y1="0" x2="1300" y2="900" />
+          </g>
+
+          <!-- Winding Route Path (neon glowing blue) -->
+          <path id="route-path-main" 
+                d="M 150 720 L 450 720 Q 560 720 560 620 L 560 400 Q 560 300 680 300 L 980 300 Q 1120 300 1120 400 L 1120 600 Q 1120 700 1260 700 L 1450 700" 
+                fill="none" stroke="#276EF1" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#road-glow)" />
+
+          <!-- Dynamic progress path (Green glowing overlay) -->
+          <path id="route-path-progress" 
+                d="M 150 720 L 450 720 Q 560 720 560 620 L 560 400 Q 560 300 680 300 L 980 300 Q 1120 300 1120 400 L 1120 600 Q 1120 700 1260 700 L 1450 700" 
+                fill="none" stroke="#06C167" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#road-glow)" stroke-dasharray="1600" stroke-dashoffset="1600" />
+
+          <!-- Start Pin (Hotel) -->
+          <g id="map-pin-hotel" transform="translate(150, 720)">
+            <circle r="20" fill="rgba(39, 110, 241, 0.2)" />
+            <circle r="8" fill="#276EF1" />
+            <text y="-25" font-family="'Outfit', sans-serif" font-weight="700" font-size="14" fill="#ffffff" text-anchor="middle">Hotel Royal Orchid</text>
+          </g>
+
+          <!-- End Pin (Home / Airport) -->
+          <g id="map-pin-home" transform="translate(1450, 700)">
+            <circle class="destination-pulse" r="24" fill="rgba(6, 193, 103, 0.15)" />
+            <circle r="12" fill="#06C167" filter="url(#driver-glow)" />
+            <text y="4" font-size="14" fill="#fff" text-anchor="middle">🏠</text>
+            <text y="-25" font-family="'Outfit', sans-serif" font-weight="800" font-size="16" fill="#06C167" text-anchor="middle">HOME</text>
+          </g>
+
+          <!-- Driver Tracker Node (Icon + Pulse) -->
+          <g id="map-driver-tracker">
+            <circle r="20" fill="rgba(39, 110, 241, 0.3)" class="driver-ping-pulse" />
+            <circle r="10" fill="#276EF1" filter="url(#driver-glow)" />
+            <text y="4" font-size="12" fill="#ffffff" text-anchor="middle">🏍️</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Floating HUD Cards on Map -->
+      <div class="hud-card driver-hud-card" id="hud-driver">
+        <div class="hud-driver-avatar">R</div>
+        <div class="hud-driver-details">
+          <div class="hud-driver-name">Rajesh K. <span class="badge-rating">★ 4.9</span></div>
+          <div class="hud-driver-moto">TVS Apache Black · KA-03-EX-9988</div>
+        </div>
+      </div>
+
+      <div class="hud-card status-hud-card" id="hud-status">
+        <div class="status-col">
+          <div class="status-num" id="hud-eta-val">5</div>
+          <div class="status-lbl">MINUTES AWAY</div>
+        </div>
+        <div class="status-divider"></div>
+        <div class="status-col">
+          <div class="status-num" id="hud-dist-val">4.8</div>
+          <div class="status-lbl">KM REMAINING</div>
+        </div>
+      </div>
+
+      <div class="hud-card pin-hud-card" id="hud-pin">
+        <div class="pin-label">SHARE PIN</div>
+        <div class="pin-code">4092</div>
+      </div>
+      
+      <div class="hud-card safety-hud-card" id="hud-safety">
+        <span class="safety-shield">🛡️</span>
+        <div class="safety-desc">GPS Tracking Active & Verified</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCENE 4: Brand Celebration Outro              -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="scene scene-brand" id="scene-brand">
+      <div class="brand-outro-container">
+        
+        <!-- Large Glowing Uber Logo -->
+        <h1 class="celebration-logo" id="outro-logo">Uber</h1>
+        
+        <!-- Staggered Typography Quotes -->
+        <h2 class="celebration-tagline" id="outro-tagline">Fast delivering you.</h2>
+        <p class="celebration-quote" id="outro-quote">The world's most trusted ride network.</p>
+
+        <!-- Dynamic Trust Stat Indicators -->
+        <div class="outro-stats-container">
+          <div class="outro-stat-box" id="box-stat1">
+            <div class="stat-number" data-target="1000000000">0</div>
+            <div class="stat-plus">+</div>
+            <div class="stat-label">Rides Completed</div>
+          </div>
+          <div class="outro-stat-box" id="box-stat2">
+            <div class="stat-number" data-target="25000">0</div>
+            <div class="stat-plus">+</div>
+            <div class="stat-label">Moto Partners</div>
+          </div>
+          <div class="outro-stat-box" id="box-stat3">
+            <div class="stat-number" data-target="4.8">0</div>
+            <div class="stat-label">Average Rating</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- OVERLAYS: Confetti, Cursor, Toast               -->
+    <!-- ═══════════════════════════════════════════════ -->
+    
+    <!-- Virtual Mouse Cursor -->
+    <div class="virtual-cursor" id="virtual-cursor">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="white" stroke="#276EF1" stroke-width="1.5">
+        <polygon points="5 3 21 11 13 13 11 21 5 3"/>
+      </svg>
+      <div class="cursor-ripple" id="cursor-ripple"></div>
+    </div>
+
+    <!-- Confetti Canvas -->
+    <canvas class="confetti-overlay" id="confetti-canvas"></canvas>
+
+    <!-- Celebration Toast notification -->
+    <div class="toast-notification" id="toast-notification">
+      <div class="toast-badge">🏍️</div>
+      <div class="toast-content">
+        <h4>Arrived Safely!</h4>
+        <p>You paid Rajesh ₹75. Rate your ride ★★★★★</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Media Timeline Controls -->
+  <div class="control-panel">
+    <div class="controls-row">
+      <button class="btn btn-primary" id="btn-play">Pause</button>
+      <button class="btn btn-secondary" id="btn-restart">Restart</button>
+      
+      <div class="speed-control-group">
+        <button class="speed-toggle active" data-speed="1">1x</button>
+        <button class="speed-toggle" data-speed="2">2x</button>
+        <button class="speed-toggle" data-speed="0.5">0.5x</button>
+      </div>
+    </div>
+
+    <div class="timeline-slider-row">
+      <span class="timeline-time" id="current-time-label">0.00s</span>
+      <input type="range" class="timeline-scrubber" id="timeline-scrubber" min="0" max="1350" value="0">
+      <span class="timeline-time">45.00s</span>
+    </div>
+
+    <div class="steps-progress-row">
+      <div class="step-indicator active" data-frame="0">
+        <div class="step-bullet">1</div>
+        <span class="step-label">Open & Route</span>
+      </div>
+      <div class="step-indicator" data-frame="360">
+        <div class="step-bullet">2</div>
+        <span class="step-label">Book & Burst</span>
+      </div>
+      <div class="step-indicator" data-frame="540">
+        <div class="step-bullet">3</div>
+        <span class="step-label">Live Journey</span>
+      </div>
+      <div class="step-indicator" data-frame="1020">
+        <div class="step-bullet">4</div>
+        <span class="step-label">Arrive & Trust</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Playback script file links -->
+  <script src="uber2-script.js"></script>
+</body>
+</html>

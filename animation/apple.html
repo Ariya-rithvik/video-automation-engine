@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apple — Think Different Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="apple-style.css">
+</head>
+<body>
+
+  <!-- Ambient Background Glows -->
+  <div class="ambient-glow"></div>
+  <div class="ambient-glow-secondary"></div>
+
+  <!-- Main Showcase Viewport (16:9) -->
+  <div class="showcase-viewport" id="showcase-viewport">
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCENE 1: Keynote Stage — "One More Thing"      -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="scene scene-keynote" id="scene-keynote">
+      <!-- Stage floor reflection -->
+      <div class="keynote-floor-reflection"></div>
+      <!-- Spotlights -->
+      <div class="keynote-spotlight spot-left" id="spot-left"></div>
+      <div class="keynote-spotlight spot-center" id="spot-center"></div>
+      <div class="keynote-spotlight spot-right" id="spot-right"></div>
+
+      <!-- Projection screen -->
+      <div class="keynote-screen" id="keynote-screen">
+        <div class="keynote-screen-inner">
+          <!-- Apple Logo on screen -->
+          <div class="keynote-logo-wrap" id="keynote-logo-wrap">
+            <svg class="keynote-apple-logo" id="keynote-apple-logo" viewBox="0 0 170 170" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="logo-glow-g" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="rgba(255,255,255,0.25)"/>
+                  <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+                </radialGradient>
+              </defs>
+              <circle cx="85" cy="85" r="80" fill="url(#logo-glow-g)" id="logo-glow-circle" opacity="0"/>
+              <path id="apple-logo-path" d="M120.7 44.1c-5.3-6.7-13.2-10.6-20.4-10.6-9.6 0-13.7 4.6-20.3 4.6-6.9 0-12.1-4.5-20.4-4.5-8.1 0-16.7 4.9-22.1 13.3-7.6 11.8-6.3 34 6 54.6 4.4 7.4 10.3 15.7 18.1 15.8h.2c6.9 0 8.8-4.5 18.2-4.5 9.3 0 11 4.5 18 4.5h.2c7.8-.1 14-9.3 18.4-16.6 3.2-5.3 4.3-8 6.7-14-17.6-6.7-20.4-31.6-3-41.2zM95.2 28.3c4.1-5.3 7.2-12.7 6.1-20.3-6.7.5-14.5 4.7-19.1 10.3-4.2 5-7.6 12.5-6.3 19.8 7.3.3 14.9-4.1 19.3-9.8z" fill="#ffffff" opacity="0"/>
+            </svg>
+          </div>
+          <!-- "One more thing..." text -->
+          <div class="keynote-omt" id="keynote-omt"></div>
+          <!-- Product silhouette -->
+          <div class="keynote-product" id="keynote-product">
+            <svg viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="10" width="180" height="380" rx="28" ry="28" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+              <rect x="70" y="18" width="60" height="18" rx="9" ry="9" fill="rgba(255,255,255,0.2)"/>
+              <rect x="20" y="45" width="160" height="335" rx="4" ry="4" fill="rgba(255,255,255,0.05)"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Audience applause wave -->
+      <div class="keynote-audience" id="keynote-audience">
+        <canvas id="audience-canvas" width="1024" height="80"></canvas>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCENE 2: iPhone Line-Draw Reveal               -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="scene scene-linedraw" id="scene-linedraw">
+      <canvas class="linedraw-canvas" id="linedraw-canvas" width="1024" height="576"></canvas>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCENE 3: Product Ecosystem Showcase             -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="scene scene-ecosystem" id="scene-ecosystem">
+      <canvas class="ecosystem-particles-canvas" id="ecosystem-particles" width="1024" height="576"></canvas>
+
+      <!-- Products -->
+      <div class="eco-product" id="eco-iphone">
+        <svg viewBox="0 0 60 110" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="56" height="106" rx="10" fill="none" stroke="#a1a1a6" stroke-width="1.5"/>
+          <rect x="6" y="10" width="48" height="88" rx="3" fill="rgba(255,255,255,0.05)"/>
+          <rect x="20" y="4" width="20" height="5" rx="2.5" fill="rgba(255,255,255,0.15)"/>
+        </svg>
+        <span class="eco-label">iPhone</span>
+      </div>
+
+      <div class="eco-product" id="eco-ipad">
+        <svg viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="96" height="136" rx="8" fill="none" stroke="#a1a1a6" stroke-width="1.5"/>
+          <rect x="6" y="6" width="88" height="128" rx="4" fill="rgba(255,255,255,0.05)"/>
+          <circle cx="50" cy="130" r="3" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+        </svg>
+        <span class="eco-label">iPad</span>
+      </div>
+
+      <div class="eco-product" id="eco-macbook">
+        <svg viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 8 L145 8 Q150 8 150 14 L150 72 Q150 76 146 76 L14 76 Q10 76 10 72 L10 14 Q10 8 15 8 Z" fill="none" stroke="#a1a1a6" stroke-width="1.5"/>
+          <rect x="18" y="14" width="124" height="56" rx="2" fill="rgba(255,255,255,0.05)"/>
+          <path d="M2 76 L158 76 Q160 76 160 80 L160 84 Q160 86 158 86 L2 86 Q0 86 0 84 L0 80 Q0 76 2 76 Z" fill="none" stroke="#a1a1a6" stroke-width="1.5"/>
+        </svg>
+        <span class="eco-label">MacBook</span>
+      </div>
+
+      <div class="eco-product" id="eco-watch">
+        <svg viewBox="0 0 50 70" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 0 L35 0 Q38 0 38 3 L38 10" fill="none" stroke="#a1a1a6" stroke-width="1.5"/>
+          <path d="M15 70 L35 70 Q38 70 38 67 L38 60" fill="none" stroke="#a1a1a6" stroke-width="1.5"/>
+          <path d="M12 0 L15 0" fill="none" stroke="#a1a1a6" stroke-width="1.5"/>
+          <path d="M12 70 L15 70" fill="none" stroke="#a1a1a6" stroke-width="1.5"/>
+          <rect x="5" y="10" width="40" height="50" rx="10" fill="none" stroke="#a1a1a6" stroke-width="1.5"/>
+          <rect x="9" y="14" width="32" height="42" rx="6" fill="rgba(255,255,255,0.05)"/>
+          <rect x="46" y="22" width="4" height="10" rx="1" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+        </svg>
+        <span class="eco-label">Watch</span>
+      </div>
+
+      <div class="eco-product" id="eco-airpods">
+        <svg viewBox="0 0 60 50" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="30" cy="20" rx="20" ry="16" fill="none" stroke="#a1a1a6" stroke-width="1.5"/>
+          <ellipse cx="22" cy="18" rx="6" ry="5" fill="rgba(255,255,255,0.08)"/>
+          <ellipse cx="38" cy="18" rx="6" ry="5" fill="rgba(255,255,255,0.08)"/>
+          <line x1="22" y1="23" x2="22" y2="42" stroke="#a1a1a6" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="38" y1="23" x2="38" y2="42" stroke="#a1a1a6" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <span class="eco-label">AirPods</span>
+      </div>
+
+      <!-- Connecting lines drawn by Canvas -->
+      <!-- "Designed in California" text -->
+      <div class="eco-california" id="eco-california">Designed by Apple in California</div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCENE 4: Brand Celebration                      -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="scene scene-brand" id="scene-brand">
+      <canvas class="confetti-overlay" id="confetti-canvas"></canvas>
+      <div class="brand-container" id="brand-container">
+        <!-- Apple logo with rainbow glow -->
+        <div class="brand-apple-logo" id="brand-apple-logo">
+          <svg viewBox="0 0 170 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="rainbow-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#61bb46"/>
+                <stop offset="17%" stop-color="#fdb827"/>
+                <stop offset="34%" stop-color="#f5821f"/>
+                <stop offset="51%" stop-color="#e03a3e"/>
+                <stop offset="68%" stop-color="#963d97"/>
+                <stop offset="85%" stop-color="#009ddc"/>
+              </linearGradient>
+              <filter id="rainbow-glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="12" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <path d="M120.7 59.1c-5.3-6.7-13.2-10.6-20.4-10.6-9.6 0-13.7 4.6-20.3 4.6-6.9 0-12.1-4.5-20.4-4.5-8.1 0-16.7 4.9-22.1 13.3-7.6 11.8-6.3 34 6 54.6 4.4 7.4 10.3 15.7 18.1 15.8h.2c6.9 0 8.8-4.5 18.2-4.5 9.3 0 11 4.5 18 4.5h.2c7.8-.1 14-9.3 18.4-16.6 3.2-5.3 4.3-8 6.7-14-17.6-6.7-20.4-31.6-3-41.2zM95.2 43.3c4.1-5.3 7.2-12.7 6.1-20.3-6.7.5-14.5 4.7-19.1 10.3-4.2 5-7.6 12.5-6.3 19.8 7.3.3 14.9-4.1 19.3-9.8z" fill="url(#rainbow-grad)" filter="url(#rainbow-glow)" id="brand-logo-path"/>
+          </svg>
+        </div>
+        <h1 class="brand-tagline" id="brand-tagline">Think Different.</h1>
+        <p class="brand-subtitle" id="brand-subtitle">Innovation that changes everything</p>
+        <div class="apple-stats-row" id="apple-stats-row">
+          <div class="apple-stat-item" id="stat-1">
+            <div class="apple-stat-number">2B+</div>
+            <div class="apple-stat-label">active devices</div>
+          </div>
+          <div class="apple-stat-item" id="stat-2">
+            <div class="apple-stat-number">1.8M+</div>
+            <div class="apple-stat-label">apps on App Store</div>
+          </div>
+          <div class="apple-stat-item" id="stat-3">
+            <div class="apple-stat-number">$3T</div>
+            <div class="apple-stat-label">market cap</div>
+          </div>
+          <div class="apple-stat-item" id="stat-4">
+            <div class="apple-stat-number">50+</div>
+            <div class="apple-stat-label">years of innovation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Media Playback Control Bar -->
+  <div class="control-panel">
+    <div class="control-buttons">
+      <button class="btn btn-primary" id="btn-play">Pause</button>
+      <button class="btn btn-secondary" id="btn-restart">Restart</button>
+      <div class="speed-toggle-group">
+        <button class="speed-btn active" data-speed="1">1x</button>
+        <button class="speed-btn" data-speed="2">2x</button>
+        <button class="speed-btn" data-speed="0.5">0.5x</button>
+      </div>
+    </div>
+    <div class="timeline-slider-wrapper">
+      <span class="time-label" id="current-time">0.00s</span>
+      <input type="range" class="timeline-slider" id="timeline-slider" min="0" max="1800" value="0">
+      <span class="time-label">60.00s</span>
+    </div>
+    <div class="steps-progress">
+      <div class="step-indicator active" data-frame="0">
+        <span class="step-num">1</span>
+        <span class="step-txt">Keynote Stage</span>
+      </div>
+      <div class="step-indicator" data-frame="360">
+        <span class="step-num">2</span>
+        <span class="step-txt">iPhone Reveal</span>
+      </div>
+      <div class="step-indicator" data-frame="720">
+        <span class="step-num">3</span>
+        <span class="step-txt">Ecosystem</span>
+      </div>
+      <div class="step-indicator" data-frame="1080">
+        <span class="step-num">4</span>
+        <span class="step-txt">Celebration</span>
+      </div>
+      <div class="step-indicator" data-frame="1440">
+        <span class="step-num">5</span>
+        <span class="step-txt">Siri + Gemini</span>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCENE 5: AI Partnership (Apple + Google)        -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="scene scene-ai-partnership" id="scene-ai-partnership">
+      <!-- Starry background dots -->
+      <div class="starry-background" id="starry-background"></div>
+      
+      <div class="partnership-container">
+        <!-- SVG containing both Apple & Google outlines -->
+        <div class="ai-logo-showcase" id="ai-logo-showcase">
+          
+          <!-- Apple outline (Image 2 style) -->
+          <svg class="ai-svg-logo svg-apple-outline" id="ai-apple-outline" viewBox="0 0 170 200">
+            <defs>
+              <linearGradient id="apple-neon-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ff9500" />
+                <stop offset="40%" stop-color="#ff2d55" />
+                <stop offset="75%" stop-color="#af52de" />
+                <stop offset="100%" stop-color="#5ac8fa" />
+              </linearGradient>
+            </defs>
+            <path class="glow-path" d="M120.7 59.1c-5.3-6.7-13.2-10.6-20.4-10.6-9.6 0-13.7 4.6-20.3 4.6-6.9 0-12.1-4.5-20.4-4.5-8.1 0-16.7 4.9-22.1 13.3-7.6 11.8-6.3 34 6 54.6 4.4 7.4 10.3 15.7 18.1 15.8h.2c6.9 0 8.8-4.5 18.2-4.5 9.3 0 11 4.5 18 4.5h.2c7.8-.1 14-9.3 18.4-16.6 3.2-5.3 4.3-8 6.7-14-17.6-6.7-20.4-31.6-3-41.2zM95.2 43.3c4.1-5.3 7.2-12.7 6.1-20.3-6.7.5-14.5 4.7-19.1 10.3-4.2 5-7.6 12.5-6.3 19.8 7.3.3 14.9-4.1 19.3-9.8z" fill="none" stroke="url(#apple-neon-grad)" stroke-width="2.2" />
+          </svg>
+
+          <!-- Google outline (Image 4 & 5 style) -->
+          <svg class="ai-svg-logo svg-google-outline" id="ai-google-outline" viewBox="0 0 24 24">
+            <defs>
+              <linearGradient id="google-neon-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ea4335" />
+                <stop offset="30%" stop-color="#fbbc05" />
+                <stop offset="65%" stop-color="#34a853" />
+                <stop offset="100%" stop-color="#4285f4" />
+              </linearGradient>
+            </defs>
+            <path class="glow-path" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="none" stroke="url(#google-neon-grad)" stroke-width="0.32" />
+          </svg>
+
+          <!-- Star flare overlay (Image 3 style: glowing four-pointed spark lens flare) -->
+          <div class="ai-star-flare" id="ai-star-flare">
+            <svg viewBox="0 0 100 100">
+              <defs>
+                <radialGradient id="star-glow-grad" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#ffffff"/>
+                  <stop offset="40%" stop-color="rgba(175, 82, 222, 0.45)"/>
+                  <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+                </radialGradient>
+              </defs>
+              <circle cx="50" cy="50" r="45" fill="url(#star-glow-grad)" />
+              <path d="M 50 15 Q 50 50 15 50 Q 50 50 50 85 Q 50 50 85 50 Q 50 50 50 15 Z" fill="#ffffff" />
+            </svg>
+          </div>
+        </div>
+
+        <h1 class="ai-partnership-tagline" id="ai-partnership-tagline">Siri meets Gemini.</h1>
+        <p class="ai-partnership-subtitle" id="ai-partnership-subtitle">Intelligence, Unified.</p>
+      </div>
+
+      <!-- White flash overlay for peak morph scene -->
+      <div class="ai-flash-overlay" id="ai-flash-overlay"></div>
+    </div>
+
+  </div>
+
+  <script src="apple-script.js"></script>
+</body>
+</html>

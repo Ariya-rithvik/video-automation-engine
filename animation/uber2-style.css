@@ -1,0 +1,1187 @@
+/* ═══════════════════════════════════════════════════════════ */
+/* UBER MOTO 3D JOURNEY — CINEMATIC SHOWCASE STYLE            */
+/* ═══════════════════════════════════════════════════════════ */
+
+/* ── Global Styles & Fonts ── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #030306;
+  color: #f4f4f7;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  padding: 20px;
+}
+
+/* ── Ambient Background Glows ── */
+.ambient-glow {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.65;
+  transition: all 1s ease-in-out;
+}
+
+.bg-blue-glow {
+  top: -10%;
+  left: 10%;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(39, 110, 241, 0.15) 0%, transparent 70%);
+}
+
+.bg-green-glow {
+  bottom: -10%;
+  right: 10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(6, 193, 103, 0.12) 0%, transparent 70%);
+}
+
+/* ── Showcase Viewport (16:9 Cinema Aspect Ratio) ── */
+.showcase-viewport {
+  position: relative;
+  width: 1024px;
+  height: 576px;
+  background: linear-gradient(135deg, #050509 0%, #0c0c16 100%);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 24px;
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.85),
+    0 0 40px rgba(39, 110, 241, 0.06);
+  overflow: hidden;
+  perspective: 1400px;
+  transform-style: preserve-3d;
+}
+
+/* ── Scene Controller ── */
+.scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.scene.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ════════════════════════════════════════════ */
+/* SCENE 1: PREMIUM 3D PHONE MOCKUP             */
+/* ════════════════════════════════════════════ */
+.phone-wrapper {
+  transform-style: preserve-3d;
+  transform: rotateX(15deg) rotateY(-10deg) rotateZ(0deg);
+  transition: transform 0.1s linear, opacity 0.3s ease;
+}
+
+.phone-shell {
+  width: 256px;
+  height: 512px;
+  background: #000000;
+  border-radius: 40px;
+  border: 3.5px solid #222226;
+  box-shadow: 
+    -20px 25px 50px rgba(0, 0, 0, 0.75),
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    inset 0 0 15px rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.phone-notch {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 84px;
+  height: 20px;
+  background: #000000;
+  border-radius: 12px;
+  z-index: 100;
+  border: 0.5px solid rgba(255, 255, 255, 0.05);
+}
+
+.phone-screen {
+  flex: 1;
+  padding: 38px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #07070b 0%, #12121c 100%);
+  position: relative;
+}
+
+/* Uber App branding */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.uber-wordmark {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+  letter-spacing: -1px;
+  color: #ffffff;
+}
+
+.header-profile {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #276EF1, #06C167);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(39, 110, 241, 0.3);
+}
+
+.profile-pic {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 11px;
+  color: #fff;
+}
+
+/* Phone Map Preview */
+.phone-map-view {
+  height: 140px;
+  border-radius: 14px;
+  background: #09090f;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.phone-map-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Booking inputs styling */
+.booking-inputs-panel {
+  display: flex;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.inputs-dots-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 0;
+}
+
+.dot-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.dot-indicator.green { background: #06C167; box-shadow: 0 0 8px rgba(6,193,103,0.5); }
+.dot-indicator.red { background: #ef4444; box-shadow: 0 0 8px rgba(239,68,68,0.5); }
+
+.dot-indicator-line {
+  width: 1px;
+  flex: 1;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.inputs-fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-box {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  transition: all 0.20s ease;
+}
+
+.input-box.active {
+  border-color: rgba(39, 110, 241, 0.4);
+}
+
+.input-label {
+  font-size: 8px;
+  color: #71717a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.input-text-container {
+  display: flex;
+  align-items: center;
+  min-height: 15px;
+}
+
+.input-value {
+  font-size: 11px;
+  color: #ffffff;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 170px;
+}
+
+.blink-cursor {
+  color: #276EF1;
+  font-weight: bold;
+  font-size: 11px;
+  margin-left: 2px;
+  animation: cursor-blink 0.7s step-end infinite;
+}
+
+.cursor-pickup, .cursor-dest {
+  display: none;
+}
+
+@keyframes cursor-blink {
+  from, to { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* Offers Panel */
+.ride-offers-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ride-offers-panel.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.panel-title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #a1a1aa;
+}
+
+.offers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.offer-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.offer-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.offer-card.selected {
+  border-color: #276EF1;
+  background: rgba(39, 110, 241, 0.08);
+  box-shadow: 0 4px 15px rgba(39, 110, 241, 0.1);
+}
+
+.offer-icon {
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.offer-card.selected .offer-icon {
+  background: rgba(39, 110, 241, 0.15);
+}
+
+.offer-details {
+  flex: 1;
+}
+
+.offer-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+}
+
+.offer-meta {
+  font-size: 8px;
+  color: #71717a;
+  margin-top: 1px;
+}
+
+.offer-price {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  color: #fff;
+}
+
+/* Confirm Booking Button styling */
+.confirm-button-container {
+  margin-top: auto;
+}
+
+.btn-confirm-ride {
+  width: 100%;
+  padding: 11px;
+  background: #111116;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 700;
+  font-size: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: 'Outfit', sans-serif;
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
+}
+
+.btn-confirm-ride.visible {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.btn-confirm-ride.active {
+  background: #276EF1;
+  color: #ffffff;
+  border-color: #276EF1;
+  box-shadow: 0 4px 15px rgba(39, 110, 241, 0.3);
+}
+
+.btn-confirm-ride.clicked {
+  transform: scale(0.95);
+  background: #06C167;
+  border-color: #06C167;
+  box-shadow: 0 4px 20px rgba(6, 193, 103, 0.4);
+}
+
+/* Loader Screen Overlay */
+.booking-loader-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(7, 7, 11, 0.95);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.booking-loader-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.loader-circle {
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(39, 110, 241, 0.15);
+  border-top-color: #276EF1;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 20px;
+}
+
+.loader-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.loader-subtitle {
+  font-size: 10px;
+  color: #71717a;
+  max-width: 160px;
+  line-height: 1.4;
+}
+
+/* ════════════════════════════════════════════ */
+/* SCENE 2: MOTORBIKE BURST CINEMATIC           */
+/* ════════════════════════════════════════════ */
+.scene-burst {
+  background: radial-gradient(circle, #0e1220 0%, #030307 100%);
+  overflow: hidden;
+}
+
+/* Light Beam behind bike */
+.burst-light-beam {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(39,110,241,0.18) 0%, transparent 65%);
+  filter: blur(25px);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+}
+
+/* Speed Lines Layer */
+.speed-lines-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.speed-lines-container.active {
+  opacity: 1;
+}
+
+.speed-line {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35) 50%, transparent);
+  border-radius: 2px;
+  animation: speed-line-anim 0.6s linear infinite;
+}
+
+/* Diverse speeds and vertical offsets */
+.line-1 { top: 20%; left: 0; width: 150px; animation-duration: 0.4s; }
+.line-2 { top: 40%; left: 0; width: 220px; animation-duration: 0.5s; }
+.line-3 { top: 60%; left: 0; width: 180px; animation-duration: 0.45s; }
+.line-4 { top: 80%; left: 0; width: 240px; animation-duration: 0.35s; }
+.line-5 { top: 30%; left: 0; width: 120px; animation-duration: 0.6s; }
+
+@keyframes speed-line-anim {
+  0% { transform: translateX(1024px); }
+  100% { transform: translateX(-300px); }
+}
+
+/* Bike Frame Container */
+.bike-container {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  z-index: 10;
+  transition: transform 0.1s linear, opacity 0.1s linear;
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.5));
+}
+
+.detailed-bike-svg {
+  width: 380px;
+  height: auto;
+  overflow: visible;
+}
+
+/* Bike dynamics: bobbing / idle engine vibrate */
+.bike-container.bobbing {
+  animation: bike-bob 2.5s ease-in-out infinite;
+}
+
+.bike-container.vibrating {
+  animation: bike-vibrate 0.12s linear infinite;
+}
+
+@keyframes bike-bob {
+  0%, 100% { transform: translate(-50%, -50%) scale(1.15) rotate(0deg); }
+  50% { transform: translate(-50%, -53%) scale(1.15) rotate(-1.5deg); }
+}
+
+@keyframes bike-vibrate {
+  0% { transform: translate(-50%, -49.5%) scale(1.15) rotate(0.3deg); }
+  50% { transform: translate(-50%, -50.5%) scale(1.15) rotate(-0.3deg); }
+  100% { transform: translate(-50%, -49.5%) scale(1.15) rotate(0.3deg); }
+}
+
+/* Telemetry display */
+.bike-telemetry-badge {
+  position: absolute;
+  top: 15px;
+  right: 60px;
+  background: rgba(10, 10, 16, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 6px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  font-family: 'JetBrains Mono', monospace;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.4s ease;
+}
+
+.bike-telemetry-badge.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.speed-val {
+  font-size: 16px;
+  font-weight: 700;
+  color: #06C167;
+}
+
+.speed-unit {
+  font-size: 8px;
+  color: #71717a;
+  margin-top: 1px;
+}
+
+/* Wheel Spin Animation Keyframe */
+/* Triggered by JS modifying CSS variables or classes */
+.wheel-spinning {
+  animation: wheel-spin-anim 0.3s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes wheel-spin-anim {
+  100% { transform: rotate(360deg); }
+}
+
+/* ════════════════════════════════════════════ */
+/* SCENE 3: CYBER-MAP TRACKING VIEW             */
+/* ════════════════════════════════════════════ */
+.scene-map {
+  background: #030307;
+  overflow: hidden;
+  perspective: 1200px;
+}
+
+.cyber-map-container {
+  width: 1400px;
+  height: 800px;
+  position: absolute;
+  transform-style: preserve-3d;
+  transform: rotateX(36deg) rotateZ(-12deg) translateZ(-50px) scale(0.9);
+  transition: transform 0.1s linear;
+}
+
+.cyber-map-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Neon destination pulse marker */
+.destination-pulse {
+  animation: dest-pulse 2s ease-in-out infinite;
+}
+
+@keyframes dest-pulse {
+  0% { r: 12; opacity: 0.6; }
+  50% { r: 24; opacity: 0.15; }
+  100% { r: 12; opacity: 0.6; }
+}
+
+/* Driver tracker pulse and ping */
+.driver-ping-pulse {
+  animation: driver-ping 1.5s ease-in-out infinite;
+}
+
+@keyframes driver-ping {
+  0% { r: 10; opacity: 0.8; }
+  100% { r: 25; opacity: 0; }
+}
+
+/* Dynamic Floating HUD Cards */
+.hud-card {
+  position: absolute;
+  background: rgba(7, 7, 12, 0.85);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 12px 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 100;
+}
+
+.hud-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Driver HUD Card */
+.driver-hud-card {
+  top: 30px;
+  left: 30px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hud-driver-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #276EF1, #06C167);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  color: #fff;
+}
+
+.hud-driver-name {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  color: #fff;
+}
+
+.badge-rating {
+  font-size: 10px;
+  color: #f59e0b;
+  margin-left: 4px;
+}
+
+.hud-driver-moto {
+  font-size: 9px;
+  color: #8c8c94;
+  margin-top: 2px;
+}
+
+/* Status HUD Card */
+.status-hud-card {
+  top: 30px;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.status-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.status-num {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900;
+  font-size: 26px;
+  color: #276EF1;
+  line-height: 1;
+}
+
+.status-lbl {
+  font-size: 8px;
+  color: #8c8c94;
+  margin-top: 4px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.status-divider {
+  width: 1px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* PIN HUD Card */
+.pin-hud-card {
+  bottom: 30px;
+  left: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  text-align: center;
+}
+
+.pin-label {
+  font-size: 8px;
+  font-weight: 700;
+  color: #8c8c94;
+  letter-spacing: 0.5px;
+}
+
+.pin-code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 20px;
+  font-weight: 700;
+  color: #06C167;
+}
+
+/* Safety HUD Card */
+.safety-hud-card {
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.safety-shield {
+  font-size: 16px;
+}
+
+.safety-desc {
+  font-size: 9px;
+  color: #8c8c94;
+  font-weight: 500;
+}
+
+/* ════════════════════════════════════════════ */
+/* SCENE 4: BRAND CELEBRATION OUTRO             */
+/* ════════════════════════════════════════════ */
+.scene-brand {
+  background: #000000;
+}
+
+.brand-outro-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.celebration-logo {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900;
+  font-size: 64px;
+  letter-spacing: -2px;
+  color: #ffffff;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  text-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+}
+
+.celebration-logo.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.celebration-tagline {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 38px;
+  color: #ffffff;
+  margin-top: 10px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.celebration-tagline.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.celebration-quote {
+  font-size: 16px;
+  color: #a1a1aa;
+  margin-top: 8px;
+  max-width: 450px;
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.celebration-quote.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Outro Trust Stats grid */
+.outro-stats-container {
+  display: flex;
+  gap: 48px;
+  margin-top: 36px;
+}
+
+.outro-stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.outro-stat-box.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stat-number {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900;
+  font-size: 26px;
+  color: #276EF1;
+  display: inline-block;
+}
+
+.stat-plus {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: #276EF1;
+  display: inline-block;
+  vertical-align: super;
+}
+
+.stat-label {
+  font-size: 9px;
+  color: #52525b;
+  margin-top: 4px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ════════════════════════════════════════════ */
+/* OVERLAYS: Virtual Cursor, Toast, Confetti    */
+/* ════════════════════════════════════════════ */
+
+/* Virtual Cursor */
+.virtual-cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 500;
+  pointer-events: none;
+  display: none;
+  transform-origin: 0% 0%;
+  transition: transform 0.05s linear;
+}
+
+.cursor-ripple {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 3px solid #276EF1;
+  border-radius: 50%;
+  transform: translate(-18px, -18px) scale(0);
+  opacity: 0;
+}
+
+.cursor-ripple.ripple-active {
+  animation: cursor-ripple-anim 0.5s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+
+@keyframes cursor-ripple-anim {
+  0% { transform: translate(-18px, -18px) scale(0.1); opacity: 1; }
+  100% { transform: translate(-18px, -18px) scale(1.6); opacity: 0; }
+}
+
+/* Confetti overlay */
+.confetti-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 400;
+}
+
+/* Toast notification */
+.toast-notification {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(30px);
+  opacity: 0;
+  background: rgba(10, 10, 16, 0.9);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(6, 193, 103, 0.25);
+  border-radius: 16px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+  z-index: 450;
+  width: 360px;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+
+.toast-notification.active {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast-badge {
+  width: 36px;
+  height: 36px;
+  background: rgba(6, 193, 103, 0.12);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.toast-content h4 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.toast-content p {
+  font-size: 10px;
+  color: #a1a1aa;
+  margin-top: 2px;
+}
+
+/* ════════════════════════════════════════════ */
+/* MEDIA PLAYBACK CONTROL PANEL                 */
+/* ════════════════════════════════════════════ */
+.control-panel {
+  width: 1024px;
+  background: #08080c;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 20px;
+  padding: 14px 24px;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+.controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn {
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 8px 20px;
+  cursor: pointer;
+  transition: all 0.25s;
+  font-family: 'Outfit', sans-serif;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #276EF1 0%, #06C167 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(39, 110, 241, 0.25);
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: #e4e4e7;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.speed-control-group {
+  display: flex;
+  background: #030305;
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.speed-toggle {
+  background: none;
+  border: none;
+  outline: none;
+  color: #71717a;
+  font-weight: 700;
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.speed-toggle.active {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+}
+
+/* timeline scrubbing row */
+.timeline-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.timeline-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #71717a;
+  width: 50px;
+}
+
+.timeline-scrubber {
+  flex: 1;
+  -webkit-appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: #18181b;
+  outline: none;
+  cursor: pointer;
+}
+
+.timeline-scrubber::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #276EF1;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(39, 110, 241, 0.5);
+  transition: transform 0.15s;
+}
+
+.timeline-scrubber::-webkit-slider-thumb:hover {
+  transform: scale(1.25);
+  background: #3b82f6;
+}
+
+/* Steps progression indicator */
+.steps-progress-row {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  padding-top: 12px;
+}
+
+.step-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  opacity: 0.35;
+  transition: all 0.3s;
+  flex: 1;
+  justify-content: center;
+}
+
+.step-indicator:hover {
+  opacity: 0.75;
+}
+
+.step-indicator.active {
+  opacity: 1;
+}
+
+.step-bullet {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 800;
+  color: #71717a;
+  font-family: 'Outfit', sans-serif;
+  transition: all 0.3s;
+}
+
+.step-indicator.active .step-bullet {
+  background: rgba(39, 110, 241, 0.12);
+  border-color: #276EF1;
+  color: #276EF1;
+  box-shadow: 0 0 8px rgba(39, 110, 241, 0.25);
+}
+
+.step-label {
+  font-size: 10px;
+  color: #71717a;
+  font-weight: 500;
+}
+
+.step-indicator.active .step-label {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Spin animation for general purpose loaders */
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}

@@ -1,0 +1,540 @@
+/* ═══════════════════════════════════════════════════════════ */
+/* UBER MOTO RIDE JOURNEY — CINEMATIC SHOWCASE STYLES        */
+/* ═══════════════════════════════════════════════════════════ */
+
+/* ── Core Reset ── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: #030305;
+  color: #fafafa;
+  font-family: 'Inter', system-ui, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  padding: 20px;
+}
+
+/* ── Ambient Glows ── */
+.ambient-glow {
+  position: fixed; top: 5%; left: 10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(39,110,241,0.12) 0%, transparent 70%);
+  filter: blur(80px); pointer-events: none; z-index: -1; border-radius: 50%;
+}
+.ambient-glow-secondary {
+  position: fixed; bottom: 5%; right: 10%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(6,193,103,0.10) 0%, transparent 70%);
+  filter: blur(80px); pointer-events: none; z-index: -1; border-radius: 50%;
+}
+
+/* ── Showcase Viewport ── */
+.showcase-viewport {
+  position: relative;
+  width: 1024px; height: 576px;
+  background: linear-gradient(145deg, #050508 0%, #0a0a12 100%);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.9), 0 0 30px rgba(39,110,241,0.05);
+  overflow: hidden;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+/* ── Scene Containers ── */
+.scene {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.05s linear;
+}
+.scene.active { opacity: 1; pointer-events: auto; }
+
+/* ════════════════════════════════════════════ */
+/* SCENE 1: UBER PHONE APP                     */
+/* ════════════════════════════════════════════ */
+
+.uber-phone-wrapper {
+  transform-style: preserve-3d;
+  transition: transform 0.05s linear, opacity 0.05s linear;
+}
+
+.uber-phone-shell {
+  width: 260px; height: 520px;
+  background: #000;
+  border-radius: 36px;
+  border: 3px solid #222;
+  box-shadow:
+    0 30px 60px rgba(0,0,0,0.8),
+    0 0 0 1px rgba(255,255,255,0.05),
+    inset 0 0 30px rgba(0,0,0,0.5);
+  overflow: hidden;
+  position: relative;
+}
+
+.uber-notch {
+  position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+  width: 90px; height: 22px;
+  background: #111; border-radius: 0 0 14px 14px;
+  z-index: 10;
+}
+
+.uber-screen {
+  width: 100%; height: 100%;
+  padding: 40px 16px 16px;
+  display: flex; flex-direction: column;
+  background: linear-gradient(180deg, #0a0a0a 0%, #111118 100%);
+}
+
+/* Header */
+.uber-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 10px;
+}
+.uber-logo {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900; font-size: 22px; color: #fff;
+  letter-spacing: -0.5px;
+}
+.uber-profile-dot {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: linear-gradient(135deg, #276EF1, #06C167);
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Map Preview */
+.uber-map-bg {
+  flex: 1; border-radius: 12px; overflow: hidden;
+  background: #0d0d14;
+  border: 1px solid rgba(255,255,255,0.04);
+  position: relative;
+  margin-bottom: 10px;
+  min-height: 120px;
+}
+.map-grid-svg { width: 100%; height: 100%; }
+
+.location-pin {
+  position: absolute; top: 30%; left: 55%;
+  transform: translate(-50%, -100%) scale(0);
+  transition: transform 0.05s linear;
+  filter: drop-shadow(0 4px 8px rgba(6,193,103,0.4));
+}
+
+/* Search Bar */
+.uber-search-bar {
+  display: flex; gap: 10px; align-items: stretch;
+  background: #1a1a24; border-radius: 10px;
+  padding: 10px 12px; margin-bottom: 10px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.search-dots-col {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 2px; padding: 4px 0;
+}
+.search-dot-green {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #06C167;
+}
+.search-dot-line {
+  width: 1px; flex: 1; background: rgba(255,255,255,0.15);
+}
+.search-dot-red {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #ef4444;
+}
+.search-fields { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.search-from {
+  font-size: 10px; color: #71717a;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.search-to {
+  font-size: 11px; color: #fff;
+  font-family: 'Inter', sans-serif; font-weight: 500;
+  min-height: 14px;
+}
+.typing-cursor {
+  color: #276EF1; font-weight: bold;
+  animation: cursorBlink 0.7s step-end infinite;
+}
+@keyframes cursorBlink {
+  from, to { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* Ride Options */
+.ride-options {
+  display: flex; flex-direction: column; gap: 6px;
+  margin-bottom: 8px;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.05s, transform 0.05s;
+}
+.ride-card {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 10px; border-radius: 10px;
+  background: rgba(255,255,255,0.03);
+  border: 1.5px solid rgba(255,255,255,0.06);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.ride-card.selected {
+  border-color: #276EF1;
+  background: rgba(39,110,241,0.08);
+  box-shadow: 0 0 12px rgba(39,110,241,0.15);
+}
+.ride-vehicle { width: 42px; flex-shrink: 0; }
+.ride-info { flex: 1; }
+.ride-name {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700; font-size: 11px; color: #fff;
+}
+.ride-eta { font-size: 9px; color: #71717a; margin-top: 1px; }
+.ride-price {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800; font-size: 13px; color: #fff;
+}
+
+/* Confirm Button */
+.uber-confirm-btn {
+  width: 100%; padding: 10px;
+  background: #000; color: #fff;
+  border: none; border-radius: 8px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700; font-size: 12px;
+  cursor: pointer;
+  opacity: 0; transform: translateY(10px);
+  transition: opacity 0.05s, transform 0.05s, background 0.2s;
+}
+.uber-confirm-btn.visible {
+  opacity: 1; transform: translateY(0);
+}
+.uber-confirm-btn.active-btn {
+  background: #276EF1;
+  box-shadow: 0 4px 15px rgba(39,110,241,0.3);
+}
+.uber-confirm-btn.clicked {
+  transform: scale(0.95);
+}
+
+/* ════════════════════════════════════════════ */
+/* BIKE BURST                                  */
+/* ════════════════════════════════════════════ */
+.bike-burst {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  z-index: 50;
+  transition: transform 0.05s linear, opacity 0.05s linear;
+  filter: drop-shadow(0 0 20px rgba(39,110,241,0.4));
+}
+.bike-svg { width: 280px; height: auto; }
+
+.exhaust-trail {
+  position: absolute; left: -20px; top: 55%;
+  width: 60px; height: 30px;
+}
+
+/* ════════════════════════════════════════════ */
+/* SCENE 2: MAP JOURNEY                        */
+/* ════════════════════════════════════════════ */
+.scene-map {
+  background: linear-gradient(180deg, #06060c 0%, #0a0a14 100%);
+}
+.map-svg {
+  width: 100%; height: 100%;
+  position: absolute; top: 0; left: 0;
+}
+
+/* Driver pulse animation */
+.driver-pulse {
+  animation: driverPulse 1.5s ease-in-out infinite;
+}
+@keyframes driverPulse {
+  0%, 100% { r: 14; opacity: 0.3; }
+  50% { r: 20; opacity: 0.1; }
+}
+
+/* Floating Map Info Cards */
+.map-card {
+  position: absolute;
+  background: rgba(10,10,18,0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 10px 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.05s, transform 0.05s;
+  z-index: 10;
+}
+
+/* Driver Card */
+.driver-info-card {
+  top: 30px; left: 30px;
+  display: flex; gap: 10px; align-items: center;
+}
+.driver-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, #276EF1, #06C167);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Outfit', sans-serif; font-weight: 800;
+  font-size: 16px; color: #fff;
+}
+.driver-name {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700; font-size: 12px; color: #fff;
+}
+.driver-rating { color: #FFD700; font-size: 11px; }
+.driver-vehicle {
+  font-size: 9px; color: #71717a; margin-top: 2px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ETA Card */
+.eta-card {
+  top: 30px; right: 30px;
+  text-align: center;
+}
+.eta-number {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900; font-size: 28px; color: #276EF1;
+  line-height: 1;
+}
+.eta-label {
+  font-size: 9px; color: #71717a; margin-top: 2px;
+  font-family: 'Outfit', sans-serif; font-weight: 600;
+}
+
+/* Distance Card */
+.distance-card {
+  bottom: 80px; left: 30px;
+  font-family: 'Outfit', sans-serif;
+}
+.distance-value {
+  font-weight: 900; font-size: 18px; color: #06C167;
+}
+.distance-unit {
+  font-weight: 600; font-size: 11px; color: #71717a;
+  margin-left: 3px;
+}
+
+/* Safety Card */
+.safety-card {
+  bottom: 30px; right: 30px;
+  display: flex; gap: 8px; align-items: center;
+}
+.safety-icon { font-size: 16px; }
+.safety-text {
+  font-size: 9px; color: #a1a1aa;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ════════════════════════════════════════════ */
+/* SCENE 3: BRAND CELEBRATION                  */
+/* ════════════════════════════════════════════ */
+.scene-brand {
+  background: #000;
+}
+.brand-container {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; gap: 16px;
+}
+
+.brand-uber-logo {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900; font-size: 52px; color: #fff;
+  letter-spacing: -2px;
+  opacity: 0; transform: scale(0.8);
+  transition: opacity 0.05s, transform 0.05s;
+}
+
+.brand-tagline {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800; font-size: 32px; color: #fff;
+  letter-spacing: -0.5px;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.05s, transform 0.05s;
+}
+
+.brand-subtitle {
+  font-size: 14px; color: #71717a;
+  font-family: 'Inter', sans-serif; font-weight: 500;
+  opacity: 0; transform: translateY(15px);
+  transition: opacity 0.05s, transform 0.05s;
+}
+
+.trust-stats {
+  display: flex; gap: 40px; margin-top: 12px;
+}
+.stat-item {
+  text-align: center;
+  opacity: 0; transform: translateY(15px);
+  transition: opacity 0.05s, transform 0.05s;
+}
+.stat-number {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900; font-size: 20px; color: #276EF1;
+}
+.stat-label {
+  font-size: 9px; color: #52525b; margin-top: 2px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ════════════════════════════════════════════ */
+/* OVERLAYS                                    */
+/* ════════════════════════════════════════════ */
+
+/* Virtual Cursor */
+.virtual-cursor {
+  position: absolute; top: 0; left: 0; z-index: 500;
+  pointer-events: none;
+  transition: transform 0.05s linear;
+  transform-origin: 0% 0%;
+  display: none;
+}
+.cursor-ripple {
+  position: absolute; top: 0; left: 0;
+  width: 32px; height: 32px;
+  border: 3px solid #276EF1; border-radius: 50%;
+  transform: translate(-16px,-16px) scale(0);
+  opacity: 0; pointer-events: none;
+}
+.cursor-ripple.click-wave {
+  animation: cursorRipple 0.5s cubic-bezier(0.1,0.8,0.3,1) forwards;
+}
+@keyframes cursorRipple {
+  0% { transform: translate(-16px,-16px) scale(0.1); opacity: 1; }
+  100% { transform: translate(-16px,-16px) scale(1.6); opacity: 0; }
+}
+
+/* Toast */
+.celebration-toast {
+  position: absolute; top: 36px; left: 50%;
+  transform: translateX(-50%) translateY(-30px);
+  opacity: 0;
+  background: rgba(9,9,11,0.92);
+  border: 1px solid rgba(39,110,241,0.25);
+  backdrop-filter: blur(12px);
+  border-radius: 14px;
+  padding: 14px 24px;
+  display: flex; align-items: center; gap: 14px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.75), 0 0 25px rgba(39,110,241,0.1);
+  transition: transform 0.6s cubic-bezier(0.34,1.56,0.64,1), opacity 0.4s ease;
+  z-index: 200; pointer-events: none;
+  width: 340px;
+}
+.celebration-toast.active {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.toast-icon-badge { font-size: 22px; }
+.toast-body h5 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px; font-weight: 700; color: #fff;
+}
+.toast-body p {
+  font-size: 10px; color: #a1a1aa; margin-top: 1px;
+}
+
+/* Confetti Canvas */
+.confetti-overlay {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 150;
+}
+
+/* ════════════════════════════════════════════ */
+/* CONTROL PANEL                               */
+/* ════════════════════════════════════════════ */
+.control-panel {
+  width: 1024px;
+  background-color: #0a0a0d;
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 16px;
+  padding: 14px 20px;
+  margin-top: 20px;
+  display: flex; flex-direction: column; gap: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+.control-buttons {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.btn {
+  border: none; outline: none; border-radius: 8px;
+  font-weight: bold; font-size: 12px;
+  padding: 8px 16px; cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-primary {
+  background: linear-gradient(135deg, #276EF1 0%, #06C167 100%);
+  color: white;
+  box-shadow: 0 4px 10px rgba(39,110,241,0.2);
+}
+.btn-primary:hover { opacity: 0.95; }
+.btn-secondary {
+  background-color: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: #e4e4e7;
+}
+.btn-secondary:hover { background-color: rgba(255,255,255,0.06); }
+.speed-toggle-group {
+  display: flex; background-color: #050508;
+  padding: 3px; border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.03);
+}
+.speed-btn {
+  background: none; border: none; outline: none;
+  color: #52525b; font-weight: 600; font-size: 11px;
+  padding: 4px 10px; border-radius: 4px;
+  cursor: pointer; transition: all 0.2s;
+}
+.speed-btn.active {
+  background-color: rgba(255,255,255,0.05); color: #fff;
+}
+.timeline-slider-wrapper {
+  display: flex; align-items: center; gap: 12px;
+}
+.time-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: #71717a; width: 50px;
+}
+.timeline-slider {
+  flex: 1; -webkit-appearance: none; height: 5px;
+  border-radius: 2px; background: #18181b;
+  outline: none; cursor: pointer;
+}
+.timeline-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 14px; height: 14px;
+  border-radius: 50%; background: #276EF1; cursor: pointer;
+  box-shadow: 0 0 8px rgba(39,110,241,0.5);
+}
+.timeline-slider::-webkit-slider-thumb:hover {
+  background: #4A8AF4; transform: scale(1.15);
+}
+.steps-progress {
+  display: flex; justify-content: space-between;
+  border-top: 1px solid rgba(255,255,255,0.03);
+  padding-top: 10px;
+}
+.step-indicator {
+  display: flex; flex-direction: column; align-items: center;
+  cursor: pointer; opacity: 0.35;
+  transition: opacity 0.3s, transform 0.3s; flex: 1;
+}
+.step-indicator:hover { opacity: 0.75; transform: translateY(-1px); }
+.step-indicator.active { opacity: 1; }
+.step-num {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800; font-size: 12px; color: #276EF1;
+  margin-bottom: 1px;
+}
+.step-indicator.active .step-num { color: #4A8AF4; }
+.step-txt { font-size: 10px; color: #52525b; }

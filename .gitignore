@@ -1,0 +1,13 @@
+node_modules
+*.log
+.DS_Store
+dist
+build
+.env
+.env.local
+__pycache__/
+*.pyc
+backend/data/
+backend/output/
+*.mp4
+*.webm

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zomato Food Delivery 3D Showcase</title>
+  
+  <!-- Premium Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="zomato-style.css">
+</head>
+<body>
+
+  <!-- Ambient Background Gradients (Zomato Warm Red/Orange) -->
+  <div class="ambient-glow"></div>
+  <div class="ambient-glow-secondary"></div>
+
+  <!-- Main Showcase Viewport (16:9 Canvas) -->
+  <div class="showcase-viewport">
+    
+    <!-- SVG Glowing Red Connectors Layer -->
+    <svg class="connectors-svg" viewBox="0 0 1024 576">
+      <defs>
+        <linearGradient id="glow-grad-red-1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="rgba(226, 55, 68, 0.8)" />
+          <stop offset="100%" stop-color="rgba(249, 115, 22, 0.1)" />
+        </linearGradient>
+        <linearGradient id="glow-grad-red-2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="rgba(245, 158, 11, 0.8)" />
+          <stop offset="100%" stop-color="rgba(226, 55, 68, 0.1)" />
+        </linearGradient>
+        <linearGradient id="glow-grad-red-3" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="rgba(16, 185, 129, 0.8)" />
+          <stop offset="100%" stop-color="rgba(226, 55, 68, 0.1)" />
+        </linearGradient>
+        <filter id="glow-blur" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="6" result="blur" />
+          <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+      </defs>
+      <!-- Paths connecting cards to bubbles -->
+      <path id="path-course" d="M 370 260 C 500 200, 600 220, 720 260" stroke="url(#glow-grad-red-1)" stroke-width="3" fill="none" filter="url(#glow-blur)" />
+      <path id="path-calendar" d="M 380 380 C 280 350, 220 280, 180 190" stroke="url(#glow-grad-red-2)" stroke-width="3" fill="none" filter="url(#glow-blur)" />
+      <path id="path-downloads" d="M 380 440 C 280 420, 220 400, 185 375" stroke="url(#glow-grad-red-3)" stroke-width="3" fill="none" filter="url(#glow-blur)" />
+    </svg>
+
+    <!-- Global Zoom Wrapper (Enables close-up shot of Pizza Card at the end) -->
+    <div class="zoom-wrapper" id="zoom-wrapper">
+
+      <!-- Phone Mockup Container -->
+      <div class="phone-mockup-wrapper" id="phone-mockup-wrapper">
+        
+        <!-- Secondary Slide-Out Phone Screen (Confirm UPI Payment) -->
+        <div class="secondary-phone-screen" id="secondary-phone-screen">
+          <div class="secondary-screen-header">
+            <h4>UPI Payment</h4>
+            <span class="price-header-badge">Zomato Pay</span>
+          </div>
+          
+          <div class="delivery-address-box">
+            <h6>Delivery Location</h6>
+            <p>12, Park Street, Connaught Place, New Delhi</p>
+          </div>
+          
+          <div class="checkout-card-preview">
+            <div class="upi-logo-container">
+              <span class="upi-text">BHIM</span> <span class="upi-logo">UPI</span>
+            </div>
+            <div class="card-dots">zomato@upi</div>
+            <div class="card-footer">
+              <span class="card-brand">Instant Discount Applied</span>
+              <span class="check-mark-small">✓</span>
+            </div>
+          </div>
+          
+          <button class="book-action-btn">Pay UPI ₹299</button>
+        </div>
+
+        <div class="phone-shell">
+          <!-- Phone Speaker & Camera Notch -->
+          <div class="phone-notch"></div>
+          
+          <!-- Screen Content -->
+          <div class="phone-screen" id="phone-screen-content">
+            <div class="profile-header">
+              <!-- Zomato Brand Header -->
+              <h1 class="creator-name branding-red">zomato</h1>
+              
+              <!-- Tagline -->
+              <div class="social-icons">
+                <span class="food-tagline">Great food. Delivered fast. ⚡</span>
+              </div>
+            </div>
+  
+            <!-- Main Zomato Photo Wrapper (Pizza) -->
+            <div class="creator-photo-wrapper">
+              <img src="zomato_food.png" alt="Pepperoni Pizza" class="creator-photo" id="creator-photo">
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- ── FLOATING Link Cards (Rise out of phone screen) ── -->
+      
+      <!-- Card 1: Main Food Card (Left) -->
+      <div class="floating-card link-card main-course-card" id="phone-card-1">
+        <div class="card-glass-body">
+          <div class="course-visual">
+            <!-- Pizza Slice SVG -->
+            <svg viewBox="0 0 80 80" class="helix-svg">
+              <defs>
+                <linearGradient id="pizza-crust" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ea580c" />
+                  <stop offset="100%" stop-color="#b45309" />
+                </linearGradient>
+                <linearGradient id="pizza-cheese" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#fbbf24" />
+                  <stop offset="100%" stop-color="#d97706" />
+                </linearGradient>
+              </defs>
+              <polygon points="40 10 70 65 10 65" fill="url(#pizza-crust)" />
+              <polygon points="40 16 64 60 16 60" fill="url(#pizza-cheese)" />
+              <!-- Pepperonis -->
+              <circle cx="40" cy="40" r="5" fill="#dc2626" />
+              <circle cx="28" cy="50" r="4.5" fill="#dc2626" />
+              <circle cx="52" cy="50" r="4.5" fill="#dc2626" />
+            </svg>
+          </div>
+          <div class="course-info">
+            <h4>Double Cheese Margherita</h4>
+            <p>Freshly baked handmade crust topped with mozzarella cheese and fresh basil leaves.</p>
+            <div class="course-footer">
+              <span class="price">₹299</span>
+              <span class="crossed-price">₹599</span>
+              <span class="rating-stars">★ 4.8</span>
+              <span class="sale-badge">50% Off</span>
+              <button class="action-btn" id="btn-get-started">Add Item</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Card 2: Live Delivery Address Card (Bottom Left) -->
+      <div class="floating-card link-card item-card" id="phone-card-2">
+        <div class="card-glass-body row-layout">
+          <div class="icon-indicator bg-green">
+            <!-- Delivery Bike icon SVG -->
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none">
+              <circle cx="5" cy="18" r="3"></circle>
+              <circle cx="19" cy="18" r="3"></circle>
+              <path d="M12 18V8h6l3 4v6h-3"></path>
+              <path d="M5 18h14"></path>
+              <path d="M12 8l-4 4H3"></path>
+            </svg>
+          </div>
+          <div class="item-text">
+            <h5>Delivering to Home</h5>
+            <span class="price-label">12 Mins Away (Fast Track)</span>
+          </div>
+          <span class="arrow-indicator">➔</span>
+        </div>
+      </div>
+  
+      <!-- Card 3: Apply Coupon Card (Bottom Left 2) -->
+      <div class="floating-card link-card item-card" id="phone-card-3">
+        <div class="card-glass-body row-layout">
+          <div class="icon-indicator bg-orange">
+            <!-- Tag/Coupon icon SVG -->
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none">
+              <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+              <line x1="7" y1="7" x2="7.01" y2="7"></line>
+            </svg>
+          </div>
+          <div class="item-text">
+            <h5>Apply Promo ZOMATO50</h5>
+            <span class="price-label">Save ₹150 instantly</span>
+          </div>
+          <span class="arrow-indicator">➔</span>
+        </div>
+      </div>
+  
+      <!-- Card 4: Popular Orders / Review List Card -->
+      <div class="floating-card list-card" id="phone-card-4">
+        <div class="card-glass-body col-layout">
+          <div class="list-item border-b">
+            <div class="thumb-face">
+              <img src="zomato_food.png" alt="Alexandra" class="tiny-avatar">
+            </div>
+            <div class="list-details">
+              <div class="bar-placeholder short"></div>
+              <div class="bar-placeholder long"></div>
+            </div>
+            <span class="heart-badge">♥</span>
+          </div>
+          <div class="list-item">
+            <div class="thumb-icon bg-blue">
+              <!-- Food box icon SVG -->
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none">
+                <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline>
+                <path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path>
+              </svg>
+            </div>
+            <div class="list-details">
+              <div class="bar-placeholder medium"></div>
+              <div class="bar-placeholder short"></div>
+            </div>
+            <span class="ellipsis-menu">•••</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 3D GLASS BUBBLES (ZOMATO PRESETS) ── -->
+      <!-- Bubble 1: Google Map Tracking Bubble (Upper Left) -->
+      <div class="glass-bubble" id="bubble-calendar">
+        <div class="bubble-sphere">
+          <div class="bubble-glare"></div>
+          <div class="bubble-content">
+            <div class="bubble-calendar-card map-bg">
+              <!-- Route marker -->
+              <div class="map-route-line"></div>
+              <div class="map-bike-marker">🏍️</div>
+            </div>
+            <div class="bubble-label">LIVE TRACK</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bubble 2: Coupon Applied Bubble (Lower Left) -->
+      <div class="glass-bubble" id="bubble-downloads">
+        <div class="bubble-sphere">
+          <div class="bubble-glare"></div>
+          <div class="bubble-content">
+            <div class="bubble-download-circle bg-red-brand">
+              <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="3" fill="none">
+                <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+              </svg>
+            </div>
+            <div class="bubble-label">₹150 SAVED</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bubble 3: Fresh Pizza Box Bubble (Right) -->
+      <div class="glass-bubble" id="bubble-course">
+        <div class="bubble-sphere">
+          <div class="bubble-glare"></div>
+          <div class="bubble-content">
+            <div class="bubble-course-visual">
+              <!-- Food box SVG -->
+              <svg class="bubble-cap-svg" viewBox="0 0 64 64">
+                <polygon points="32 10 58 20 32 30 6 20" fill="#dc2626" stroke="#fbf7f0" stroke-width="1.5" />
+                <path d="M6 20v22l26 10 26-10V20" fill="none" stroke="#fbf7f0" stroke-width="1.5" />
+                <line x1="32" y1="30" x2="32" y2="52" stroke="#fbf7f0" stroke-width="1.5" />
+              </svg>
+              <div class="bubble-mini-checklist">
+                <div class="check-row"><span>✓</span><div class="mini-bar bg-red"></div></div>
+                <div class="check-row"><span>✓</span><div class="mini-bar bg-red"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bubble 4: Decorative Ambient Bubble (Bottom Right) -->
+      <div class="glass-bubble" id="bubble-decor">
+        <div class="bubble-sphere">
+          <div class="bubble-glare"></div>
+        </div>
+      </div>
+
+    </div> <!-- /zoom-wrapper -->
+
+    <!-- ── VIRTUAL MOUSE CURSOR ── -->
+    <div class="virtual-cursor" id="virtual-cursor">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="white" stroke="#e23744" stroke-width="1.5">
+        <polygon points="5 3 21 11 13 13 11 21 5 3"/>
+      </svg>
+      <div class="cursor-ripple" id="cursor-ripple"></div>
+    </div>
+
+    <!-- ── SUCCESS CELEBRATION TOAST ── -->
+    <div class="celebration-toast" id="celebration-toast">
+      <div class="toast-confetti-badge">🍕</div>
+      <div class="toast-body">
+        <h5>Order Confirmed!</h5>
+        <p>Double Cheese Margherita is being prepared by chef.</p>
+      </div>
+    </div>
+
+    <!-- Canvas for Confetti Overlay -->
+    <canvas class="confetti-overlay" id="confetti-canvas"></canvas>
+
+  </div>
+
+  <!-- Media Playback Control Bar -->
+  <div class="control-panel">
+    <div class="control-buttons">
+      <button class="btn btn-primary" id="btn-play">Pause</button>
+      <button class="btn btn-secondary" id="btn-restart">Restart</button>
+      <div class="speed-toggle-group">
+        <button class="speed-btn active" data-speed="1">1x</button>
+        <button class="speed-btn" data-speed="2">2x</button>
+        <button class="speed-btn" data-speed="0.5">0.5x</button>
+      </div>
+    </div>
+    
+    <div class="timeline-slider-wrapper">
+      <span class="time-label">0.00s</span>
+      <input type="range" class="timeline-slider" id="timeline-slider" min="0" max="240" value="0">
+      <span class="time-label" id="total-time-label">8.00s</span>
+    </div>
+
+    <div class="steps-progress">
+      <div class="step-indicator active" data-frame="0">
+        <span class="step-num">1</span>
+        <span class="step-txt">Normal View</span>
+      </div>
+      <div class="step-indicator" data-frame="60">
+        <span class="step-num">2</span>
+        <span class="step-txt">3D Bubbles</span>
+      </div>
+      <div class="step-indicator" data-frame="135">
+        <span class="step-num">3</span>
+        <span class="step-txt">Cursor Click</span>
+      </div>
+      <div class="step-indicator" data-frame="195">
+        <span class="step-num">4</span>
+        <span class="step-txt">Card Zoom</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="zomato-script.js"></script>
+</body>
+</html>

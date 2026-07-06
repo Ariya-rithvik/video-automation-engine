@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADE ⚡ 3D Isometric Physics Demo & Exporter</title>
+  
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="3d-demo-style.css">
+</head>
+<body>
+
+  <!-- Ambient Space Background -->
+  <div class="ambient-glow"></div>
+  <div class="ambient-glow-secondary"></div>
+  <div class="starfield" id="starfield"></div>
+
+  <!-- Header Banner -->
+  <header class="showcase-header">
+    <div class="header-logo">ADE ⚡ <span>3D & Physics Engine</span></div>
+    <p class="header-subtitle">Experience programmatic 3D device tilt, real-time reflection calculations, canvas vector physics, and export the render straight to an MP4 video.</p>
+  </header>
+
+  <!-- Main Showcase Container -->
+  <div class="showcase-container">
+    
+    <!-- Visual Viewport -->
+    <div class="stage" id="stage">
+      <div class="showcase-viewport" id="viewport">
+        
+        <!-- Camera Canvas for Panning/Zooming -->
+        <div class="camera-canvas" id="camera-canvas">
+          
+          <!-- 3D Perspective Scene Container -->
+          <div class="scene-3d">
+            
+            <!-- 3D Smartphone Device Mockup -->
+            <div class="phone-3d" id="phone-3d">
+              
+              <!-- Front Side: The Screen -->
+              <div class="phone-side phone-front">
+                <div class="screen-content">
+                  
+                  <!-- Canvas for high-performance Vector Physics particles -->
+                  <canvas class="physics-canvas" id="physics-canvas"></canvas>
+                  
+                  <!-- Screen Application Interface -->
+                  <div class="app-ui" id="app-ui">
+                    <div class="app-header">✨ Physics Sandbox</div>
+                    
+                    <div class="app-card" id="app-card">
+                      <div class="card-icon">⚡</div>
+                      <h3>Kinetic Engine</h3>
+                      <p>Programmatic 60FPS physics.</p>
+                      
+                      <!-- Target Button for Cursor Click -->
+                      <button class="trigger-btn" id="trigger-btn">EXPLODE PARTICLES</button>
+                    </div>
+
+                    <div class="app-status" id="app-status">
+                      <span class="status-dot"></span> System Calibrated
+                    </div>
+                  </div>
+
+                  <!-- SPECULAR GLARE LAYER: tilt-responsive light glare overlay -->
+                  <div class="glare-layer" id="glare-layer"></div>
+                  
+                </div>
+              </div>
+              
+              <!-- Edge Bezels (3D Depth Plates) -->
+              <div class="phone-side phone-back"></div>
+              <div class="phone-side phone-left"></div>
+              <div class="phone-side phone-right"></div>
+              <div class="phone-side phone-top"></div>
+              <div class="phone-side phone-bottom"></div>
+              
+            </div> <!-- /phone-3d -->
+            
+          </div> <!-- /scene-3d -->
+          
+          <!-- Outro / Holographic Overlay pop-out elements -->
+          <div class="holographic-panel" id="holo-panel-1">
+            <h4>Vector Physics</h4>
+            <p>Elastic collisions & gravity</p>
+          </div>
+          <div class="holographic-panel" id="holo-panel-2">
+            <h4>CSS 3D Engine</h4>
+            <p>Preserve-3d perspective</p>
+          </div>
+
+        </div> <!-- /camera-canvas -->
+
+        <!-- Virtual Cursor Pointer -->
+        <div class="virtual-cursor" id="virtual-cursor">
+          <svg viewBox="0 0 24 24" width="22" height="22">
+            <path d="M3 3v13.55l3.96-3.96 2.58 5.68 2.05-.93-2.58-5.68h5.36L3 3z" fill="black" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
+          </svg>
+          <div class="cursor-ripple" id="cursor-ripple"></div>
+        </div>
+
+        <!-- Export overlay progress -->
+        <div class="export-overlay" id="export-overlay">
+          <div class="export-spinner-box">
+            <div class="export-spinner"></div>
+            <h3 id="export-status-txt">Rendering MP4 Video...</h3>
+            <p id="export-progress-txt">0% completed</p>
+          </div>
+        </div>
+
+      </div> <!-- /showcase-viewport -->
+    </div> <!-- /stage -->
+
+    <!-- Playback Scrubber & Control Console -->
+    <div class="control-panel">
+      <div class="control-buttons">
+        <button class="btn btn-primary" id="btn-play">Pause</button>
+        <button class="btn btn-secondary" id="btn-restart">Restart</button>
+        
+        <div class="speed-toggle-group">
+          <button class="speed-btn active" data-speed="1">1x</button>
+          <button class="speed-btn" data-speed="2">2x</button>
+          <button class="speed-btn" data-speed="0.5">0.5x</button>
+        </div>
+        
+        <!-- EXPORT TO MP4 BUTTON (THE KILLER PIPELINE) -->
+        <button class="btn btn-export" id="btn-export">
+          <span>📤 Export to MP4</span>
+        </button>
+      </div>
+      
+      <div class="timeline-slider-wrapper">
+        <span class="time-label" id="current-time">0.00s</span>
+        <input type="range" class="timeline-slider" id="timeline-slider" min="0" max="900" value="0">
+        <span class="time-label" id="duration-label">30.00s</span>
+      </div>
+
+      <div class="steps-progress" id="steps-progress">
+        <div class="step-indicator active" data-frame="0">
+          <span class="step-num">1</span>
+          <span class="step-txt">3D Rotation</span>
+        </div>
+        <div class="step-indicator" data-frame="300">
+          <span class="step-num">2</span>
+          <span class="step-txt">Physics Click</span>
+        </div>
+        <div class="step-indicator" data-frame="600">
+          <span class="step-num">3</span>
+          <span class="step-txt">Hologram Pop</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="3d-demo-script.js"></script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tesla — Cybertruck Reveal Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tesla-style.css">
+</head>
+<body>
+
+  <div class="ambient-glow"></div>
+  <div class="ambient-glow-secondary"></div>
+
+  <div class="showcase-viewport" id="showcase-viewport">
+
+    <!-- ═══ SCENE 1: Autopilot Dashboard ═══ -->
+    <div class="scene scene-dash" id="scene-dash">
+      <div class="dash-panel" id="dash-panel">
+        <div class="dash-header">
+          <span class="dash-time" id="dash-time">9:41 PM</span>
+          <span class="dash-temp">24°C · Clear</span>
+          <div class="dash-battery">
+            <div class="dash-battery-bar">
+              <div class="dash-battery-fill" id="dash-bat-fill"></div>
+              <div class="dash-battery-nub"></div>
+            </div>
+            <span id="dash-bat-pct">82%</span>
+          </div>
+        </div>
+
+        <div class="dash-autopilot-badge" id="ap-badge">
+          <div class="ap-icon">AP</div>
+          <span class="ap-text">AUTOPILOT ENGAGED</span>
+        </div>
+
+        <canvas class="dash-road-canvas" id="dash-road-canvas" width="800" height="300"></canvas>
+
+        <div class="dash-speed-cluster">
+          <div class="dash-speed-num" id="dash-speed">0</div>
+          <div class="dash-speed-unit">km/h</div>
+        </div>
+
+        <div class="dash-gear">
+          <span>P</span> <span>R</span> <span>N</span> <span class="active-gear" id="dash-gear-d">D</span>
+        </div>
+
+        <div class="dash-range">
+          <div class="dash-range-num" id="dash-range">390</div>
+          <div class="dash-range-label">km range</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SCENE 2: Cybertruck Wireframe ═══ -->
+    <div class="scene scene-wireframe" id="scene-wireframe">
+      <canvas class="wireframe-canvas" id="wireframe-canvas" width="1024" height="576"></canvas>
+      <div class="wireframe-label top-left" id="wf-label-tl">ULTRA-HARD 30X COLD-ROLLED STAINLESS STEEL</div>
+      <div class="wireframe-label top-right" id="wf-label-tr">ARMOR GLASS</div>
+      <div class="wireframe-label bottom-center" id="wf-label-bc">CYBERTRUCK</div>
+    </div>
+
+    <!-- ═══ SCENE 3: Supercharger ═══ -->
+    <div class="scene scene-charger" id="scene-charger">
+      <svg class="charger-svg" viewBox="0 0 1024 576" id="charger-svg">
+        <defs>
+          <linearGradient id="charger-body" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#e0e0e0"/>
+            <stop offset="100%" stop-color="#808080"/>
+          </linearGradient>
+          <linearGradient id="charger-red" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#e82127"/>
+            <stop offset="100%" stop-color="#a01518"/>
+          </linearGradient>
+          <filter id="sc-glow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="6" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="ground-shadow" x="-10%" y="-10%" width="120%" height="130%">
+            <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.5"/>
+          </filter>
+        </defs>
+
+        <!-- Ground plane -->
+        <rect x="0" y="450" width="1024" height="126" fill="#0a0c14"/>
+        <line x1="0" y1="450" x2="1024" y2="450" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+
+        <!-- Supercharger post (left) -->
+        <g id="sc-post-1" opacity="0">
+          <rect x="330" y="280" width="24" height="170" rx="4" fill="url(#charger-body)" filter="url(#ground-shadow)"/>
+          <rect x="326" y="270" width="32" height="30" rx="6" fill="#c0c0c0"/>
+          <rect x="332" y="275" width="20" height="8" rx="2" fill="url(#charger-red)"/>
+          <!-- Tesla T on charger -->
+          <text x="342" y="310" font-size="14" fill="#e82127" text-anchor="middle" font-family="'Outfit',sans-serif" font-weight="900">T</text>
+          <!-- Cable -->
+          <path id="sc-cable-1" d="M 354 340 Q 380 360, 420 380 Q 460 400, 480 410" fill="none" stroke="#505060" stroke-width="4" stroke-linecap="round" opacity="0"/>
+          <!-- Plug glow -->
+          <circle id="sc-plug-glow-1" cx="480" cy="410" r="6" fill="#4ade80" opacity="0" filter="url(#sc-glow)"/>
+        </g>
+
+        <!-- Supercharger post (right) -->
+        <g id="sc-post-2" opacity="0">
+          <rect x="670" y="280" width="24" height="170" rx="4" fill="url(#charger-body)" filter="url(#ground-shadow)"/>
+          <rect x="666" y="270" width="32" height="30" rx="6" fill="#c0c0c0"/>
+          <rect x="672" y="275" width="20" height="8" rx="2" fill="url(#charger-red)"/>
+          <text x="682" y="310" font-size="14" fill="#e82127" text-anchor="middle" font-family="'Outfit',sans-serif" font-weight="900">T</text>
+        </g>
+
+        <!-- Tesla Model 3 silhouette (parked at charger) -->
+        <g id="sc-car" opacity="0">
+          <!-- Car body -->
+          <path d="M 400 420 L 420 390 Q 450 370, 510 365 Q 560 362, 590 370 L 610 385 L 620 410 Q 625 420, 620 425 L 400 425 Q 395 422, 400 420 Z" fill="#1a1a2a" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+          <!-- Roof line -->
+          <path d="M 430 390 Q 470 368, 520 365 Q 560 363, 585 372" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+          <!-- Windows -->
+          <path d="M 435 390 Q 465 372, 505 368 L 510 390 Z" fill="rgba(100,100,140,0.2)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+          <path d="M 515 390 L 510 368 Q 555 365, 580 375 L 575 390 Z" fill="rgba(100,100,140,0.2)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+          <!-- Wheels -->
+          <circle cx="440" cy="428" r="16" fill="#0a0a0a" stroke="#303040" stroke-width="2"/>
+          <circle cx="440" cy="428" r="8" fill="#1a1a1a" stroke="#404050" stroke-width="1"/>
+          <circle cx="590" cy="428" r="16" fill="#0a0a0a" stroke="#303040" stroke-width="2"/>
+          <circle cx="590" cy="428" r="8" fill="#1a1a1a" stroke="#404050" stroke-width="1"/>
+          <!-- Headlight -->
+          <ellipse cx="622" cy="408" rx="4" ry="3" fill="#f0f0ff" opacity="0.6"/>
+          <!-- Taillight -->
+          <rect x="398" y="415" width="6" height="3" rx="1" fill="#e82127" opacity="0.7"/>
+        </g>
+
+        <!-- Charging lightning bolt particles -->
+        <g id="sc-sparks"></g>
+      </svg>
+
+      <div class="charge-progress-bar" id="charge-bar">
+        <div class="charge-fill" id="charge-fill"></div>
+      </div>
+      <div class="charge-percent" id="charge-pct">0%</div>
+
+      <div class="charge-stats-row" id="charge-stats">
+        <div class="charge-stat">
+          <div class="charge-stat-val" id="cs-power">0 kW</div>
+          <div class="charge-stat-label">Power</div>
+        </div>
+        <div class="charge-stat">
+          <div class="charge-stat-val" id="cs-added">0 km</div>
+          <div class="charge-stat-label">Range Added</div>
+        </div>
+        <div class="charge-stat">
+          <div class="charge-stat-val" id="cs-time">0 min</div>
+          <div class="charge-stat-label">Time Remaining</div>
+        </div>
+        <div class="charge-stat">
+          <div class="charge-stat-val">V3</div>
+          <div class="charge-stat-label">Supercharger</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SCENE 4: Brand Celebration ═══ -->
+    <div class="scene scene-brand" id="scene-brand">
+      <div class="brand-container" id="brand-container">
+        <div class="brand-tesla-logo" id="brand-logo">
+          <svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+            <!-- Tesla T logo -->
+            <path d="M 50 10 L 50 110" stroke="#e82127" stroke-width="8" stroke-linecap="round" fill="none"/>
+            <path d="M 10 10 Q 10 30, 50 30 Q 90 30, 90 10" fill="none" stroke="#e82127" stroke-width="8" stroke-linecap="round"/>
+            <path d="M 10 10 L 90 10" stroke="#e82127" stroke-width="8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h1 class="brand-tagline" id="brand-tagline">Accelerating the World's Transition</h1>
+        <p class="brand-subtitle" id="brand-subtitle">to sustainable energy</p>
+        <div class="ts-stats-row" id="ts-stats-row">
+          <div class="ts-stat-item" id="stat-1">
+            <div class="ts-stat-number">6.9M+</div>
+            <div class="ts-stat-label">vehicles delivered</div>
+          </div>
+          <div class="ts-stat-item" id="stat-2">
+            <div class="ts-stat-number">62K+</div>
+            <div class="ts-stat-label">superchargers</div>
+          </div>
+          <div class="ts-stat-item" id="stat-3">
+            <div class="ts-stat-number">390 mi</div>
+            <div class="ts-stat-label">max range</div>
+          </div>
+          <div class="ts-stat-item" id="stat-4">
+            <div class="ts-stat-number">1.9s</div>
+            <div class="ts-stat-label">0-60 mph (Plaid)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Overlays -->
+    <div class="virtual-cursor" id="virtual-cursor">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="white" stroke="#e82127" stroke-width="1.5">
+        <polygon points="5 3 21 11 13 13 11 21 5 3"/>
+      </svg>
+      <div class="cursor-ripple" id="cursor-ripple"></div>
+    </div>
+    <canvas class="confetti-overlay" id="confetti-canvas"></canvas>
+  </div>
+
+  <!-- Control Bar -->
+  <div class="control-panel">
+    <div class="control-buttons">
+      <button class="btn btn-primary" id="btn-play">Pause</button>
+      <button class="btn btn-secondary" id="btn-restart">Restart</button>
+      <div class="speed-toggle-group">
+        <button class="speed-btn active" data-speed="1">1x</button>
+        <button class="speed-btn" data-speed="2">2x</button>
+        <button class="speed-btn" data-speed="0.5">0.5x</button>
+      </div>
+    </div>
+    <div class="timeline-slider-wrapper">
+      <span class="time-label" id="current-time">0.00s</span>
+      <input type="range" class="timeline-slider" id="timeline-slider" min="0" max="1350" value="0">
+      <span class="time-label">45.00s</span>
+    </div>
+    <div class="steps-progress">
+      <div class="step-indicator active" data-frame="0">
+        <span class="step-num">1</span>
+        <span class="step-txt">Autopilot</span>
+      </div>
+      <div class="step-indicator" data-frame="330">
+        <span class="step-num">2</span>
+        <span class="step-txt">Cybertruck</span>
+      </div>
+      <div class="step-indicator" data-frame="660">
+        <span class="step-num">3</span>
+        <span class="step-txt">Supercharger</span>
+      </div>
+      <div class="step-indicator" data-frame="1020">
+        <span class="step-num">4</span>
+        <span class="step-txt">Celebrate</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="tesla-script.js"></script>
+</body>
+</html>

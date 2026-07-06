@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpaceX — Falcon 9 Launch & Landing Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="spacex-style.css">
+</head>
+<body>
+  <div class="ambient-glow"></div>
+  <div class="ambient-glow-secondary"></div>
+
+  <div class="showcase-viewport" id="showcase-viewport">
+
+    <!-- ═══ SCENE 1: Mission Control ═══ -->
+    <div class="scene scene-mission" id="scene-mission">
+      <div class="mc-panel" id="mc-panel">
+        <div class="mc-header">
+          <span class="mc-logo">SPACEX</span>
+          <span class="mc-mission-name">STARLINK GROUP 12-5</span>
+          <div class="mc-status"><div class="mc-status-dot"></div>LIVE</div>
+        </div>
+        <div class="mc-body">
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div class="mc-countdown-block">
+              <div class="mc-countdown-label">Time to Launch</div>
+              <div class="mc-countdown" id="mc-countdown">T-10</div>
+            </div>
+            <canvas class="mc-wave-canvas" id="mc-wave-canvas" width="400" height="60"></canvas>
+            <div class="mc-telemetry" id="mc-telemetry">
+              <div class="mc-telem-row"><span>ALTITUDE</span><span class="mc-telem-val" id="tl-alt">0.0 km</span></div>
+              <div class="mc-telem-row"><span>VELOCITY</span><span class="mc-telem-val" id="tl-vel">0 km/h</span></div>
+              <div class="mc-telem-row"><span>DOWNRANGE</span><span class="mc-telem-val" id="tl-range">0.0 km</span></div>
+              <div class="mc-telem-row"><span>MAX-Q</span><span class="mc-telem-val" id="tl-maxq">—</span></div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="font-size:11px;color:#6080c0;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">GO / NO-GO POLL</div>
+            <div class="mc-checklist" id="mc-checklist">
+              <div class="mc-check-item" id="chk-prop"><div class="mc-check-dot">✓</div>PROPULSION</div>
+              <div class="mc-check-item" id="chk-guid"><div class="mc-check-dot">✓</div>GUIDANCE</div>
+              <div class="mc-check-item" id="chk-range"><div class="mc-check-dot">✓</div>RANGE SAFETY</div>
+              <div class="mc-check-item" id="chk-weather"><div class="mc-check-dot">✓</div>WEATHER</div>
+              <div class="mc-check-item" id="chk-ground"><div class="mc-check-dot">✓</div>GROUND SYSTEMS</div>
+              <div class="mc-check-item" id="chk-flight"><div class="mc-check-dot">✓</div>FLIGHT DIRECTOR</div>
+              <div class="mc-check-item" id="chk-launch"><div class="mc-check-dot">✓</div>LAUNCH DIRECTOR — GO</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SCENE 2: Launch ═══ -->
+    <div class="scene scene-launch" id="scene-launch">
+      <canvas class="launch-canvas" id="launch-canvas" width="1024" height="576"></canvas>
+    </div>
+
+    <!-- ═══ SCENE 3: Landing ═══ -->
+    <div class="scene scene-landing" id="scene-landing">
+      <canvas class="landing-canvas" id="landing-canvas" width="1024" height="576"></canvas>
+      <div class="landing-telemetry" id="landing-telemetry">
+        <div class="lt-row"><span>ALT</span><span class="lt-val" id="lt-alt">80.0 km</span></div>
+        <div class="lt-row"><span>VEL</span><span class="lt-val" id="lt-vel">2100 m/s</span></div>
+        <div class="lt-row"><span>FUEL</span><span class="lt-val" id="lt-fuel">38%</span></div>
+      </div>
+      <div class="landing-droneship-label" id="ds-label">OF COURSE I STILL LOVE YOU</div>
+    </div>
+
+    <!-- ═══ SCENE 4: Brand ═══ -->
+    <div class="scene scene-brand" id="scene-brand">
+      <div class="brand-container">
+        <div class="brand-logo" id="brand-logo">
+          <svg viewBox="0 0 400 50" xmlns="http://www.w3.org/2000/svg">
+            <text x="200" y="40" font-family="'Outfit',sans-serif" font-weight="900" font-size="44"
+                  fill="#ffffff" text-anchor="middle" letter-spacing="8">SPACEX</text>
+          </svg>
+        </div>
+        <h1 class="brand-tagline" id="brand-tagline">Making Life Multiplanetary</h1>
+        <p class="brand-subtitle" id="brand-subtitle">Reusable rockets · Global internet · Mars colonization</p>
+        <div class="sx-stats-row" id="sx-stats-row">
+          <div class="sx-stat-item" id="stat-1"><div class="sx-stat-number">350+</div><div class="sx-stat-label">missions launched</div></div>
+          <div class="sx-stat-item" id="stat-2"><div class="sx-stat-number">260+</div><div class="sx-stat-label">booster landings</div></div>
+          <div class="sx-stat-item" id="stat-3"><div class="sx-stat-number">6,700+</div><div class="sx-stat-label">Starlink satellites</div></div>
+          <div class="sx-stat-item" id="stat-4"><div class="sx-stat-number">121m</div><div class="sx-stat-label">Starship height</div></div>
+        </div>
+      </div>
+    </div>
+
+    <canvas class="confetti-overlay" id="confetti-canvas"></canvas>
+  </div>
+
+  <!-- Control Bar -->
+  <div class="control-panel">
+    <div class="control-buttons">
+      <button class="btn btn-primary" id="btn-play">Pause</button>
+      <button class="btn btn-secondary" id="btn-restart">Restart</button>
+      <div class="speed-toggle-group">
+        <button class="speed-btn active" data-speed="1">1x</button>
+        <button class="speed-btn" data-speed="2">2x</button>
+        <button class="speed-btn" data-speed="0.5">0.5x</button>
+      </div>
+    </div>
+    <div class="timeline-slider-wrapper">
+      <span class="time-label" id="current-time">0.00s</span>
+      <input type="range" class="timeline-slider" id="timeline-slider" min="0" max="1350" value="0">
+      <span class="time-label">45.00s</span>
+    </div>
+    <div class="steps-progress">
+      <div class="step-indicator active" data-frame="0"><span class="step-num">1</span><span class="step-txt">Mission Control</span></div>
+      <div class="step-indicator" data-frame="330"><span class="step-num">2</span><span class="step-txt">Launch</span></div>
+      <div class="step-indicator" data-frame="660"><span class="step-num">3</span><span class="step-txt">Landing</span></div>
+      <div class="step-indicator" data-frame="1020"><span class="step-num">4</span><span class="step-txt">Celebrate</span></div>
+    </div>
+  </div>
+  <script src="spacex-script.js"></script>
+</body>
+</html>

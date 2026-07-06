@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Screen Studio — Apple Intelligence Rewriter Demo</title>
+  
+  <!-- Premium Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="screen-studio-style.css">
+</head>
+<body>
+
+  <!-- Background Ambient Glows -->
+  <div class="ambient-glow"></div>
+  <div class="ambient-glow-secondary"></div>
+
+  <!-- Main 16:9 Showcase Stage -->
+  <div class="stage" id="stage">
+    <div class="showcase-viewport" id="viewport">
+      
+      <!-- The Camera Canvas that will scale/pan for zoom effects -->
+      <div class="camera-canvas" id="camera-canvas">
+        
+        <!-- macOS Sonoma-style fluid wallpaper -->
+        <div class="wallpaper">
+          <div class="wp-layer wp-orange"></div>
+          <div class="wp-layer wp-purple"></div>
+          <div class="wp-layer wp-cyan"></div>
+          <div class="wp-layer wp-magenta"></div>
+        </div>
+
+        <!-- macOS Mail Window -->
+        <div class="mac-window" id="mac-window">
+          
+          <!-- Apple Intelligence Multi-colored Edge Glow -->
+          <div class="ai-edge-glow" id="ai-edge-glow"></div>
+
+          <!-- Window Header (Traffic Lights & Action Icons) -->
+          <div class="window-header">
+            <div class="traffic-lights">
+              <div class="light light-close"></div>
+              <div class="light light-minimize"></div>
+              <div class="light light-maximize"></div>
+            </div>
+            <div class="header-actions">
+              <!-- Inline SVGs for macOS actions -->
+              <svg class="h-icon" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none">
+                <path d="M3 6h18"/>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+              </svg>
+              <svg class="h-icon" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none">
+                <path d="M9 14L4 9l5-5"/>
+                <path d="M4 9h10a5 5 0 0 1 5 5v3"/>
+              </svg>
+              <svg class="h-icon" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Email Metadata Fields -->
+          <div class="window-fields">
+            <div class="field-row">
+              <span class="field-label">To:</span>
+              <span class="field-pill">Product Team</span>
+            </div>
+            <div class="field-row">
+              <span class="field-label">Subject:</span>
+              <span class="field-value font-bold">Project Delta Update</span>
+            </div>
+          </div>
+
+          <!-- Formatting Toolbar -->
+          <div class="window-toolbar">
+            <div class="toolbar-left">
+              <span class="toolbar-font">San Francisco</span>
+              <div class="toolbar-separator"></div>
+              <button class="toolbar-btn font-bold">B</button>
+              <button class="toolbar-btn italic">I</button>
+              <button class="toolbar-btn">
+                <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2.5" fill="none">
+                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                </svg>
+              </button>
+            </div>
+            <div class="toolbar-right">
+              <button class="toolbar-btn">
+                <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2.5" fill="none">
+                  <circle cx="12" cy="12" r="1"/>
+                  <circle cx="12" cy="5" r="1"/>
+                  <circle cx="12" cy="19" r="1"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Window Body (Text Editor Area) -->
+          <div class="window-body">
+            <!-- Text wrapper for selections and rewrites -->
+            <div class="text-editor-container" id="editor-container">
+              <div class="text-editor" id="text-editor"></div>
+              
+              <!-- Selection overlay container -->
+              <div class="selection-overlay-container" id="selection-overlay-container"></div>
+            </div>
+
+            <!-- Apple Intelligence Sparkle Button -->
+            <button class="ai-sparkle-btn" id="ai-sparkle-btn">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 3L14.5 8.5L20 11L14.5 13.5L12 19L9.5 13.5L4 11L9.5 8.5L12 3Z" fill="url(#ai-sparkle-grad)"/>
+                <path d="M5 3L6 5.5L8.5 6.5L6 7.5L5 10L4 7.5L1.5 6.5L4 5.5L5 3Z" fill="url(#ai-sparkle-grad)"/>
+                <defs>
+                  <linearGradient id="ai-sparkle-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#a855f7"/>
+                    <stop offset="50%" stop-color="#ec4899"/>
+                    <stop offset="100%" stop-color="#3b82f6"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </button>
+          </div>
+
+        </div> <!-- /mac-window -->
+
+        <!-- Apple Intelligence System Glow Sweep (Screen/Edge border light) -->
+        <div class="ai-screen-glow" id="ai-screen-glow"></div>
+
+        <!-- "Play AI Demo" Entry Button -->
+        <button class="play-demo-btn" id="play-demo-btn">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+            <polygon points="5 3 19 12 5 21 5 3"/>
+          </svg>
+          <span>Play AI Demo</span>
+        </button>
+
+      </div> <!-- /camera-canvas -->
+
+      <!-- Virtual Mouse Pointer (macOS Black style) -->
+      <div class="virtual-cursor" id="virtual-cursor">
+        <svg viewBox="0 0 24 24" width="22" height="22">
+          <!-- macOS Cursor Path -->
+          <path d="M3 3v13.55l3.96-3.96 2.58 5.68 2.05-.93-2.58-5.68h5.36L3 3z" fill="black" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
+        </svg>
+        <div class="cursor-ripple" id="cursor-ripple"></div>
+      </div>
+
+      <!-- Confetti Success Overlay -->
+      <canvas class="confetti-overlay" id="confetti-canvas"></canvas>
+
+    </div> <!-- /showcase-viewport -->
+  </div> <!-- /stage -->
+
+  <!-- Playback Console -->
+  <div class="control-panel">
+    <div class="control-buttons">
+      <button class="btn btn-primary" id="btn-play">Pause</button>
+      <button class="btn btn-secondary" id="btn-restart">Restart</button>
+      <div class="speed-toggle-group">
+        <button class="speed-btn active" data-speed="1">1x</button>
+        <button class="speed-btn" data-speed="2">2x</button>
+        <button class="speed-btn" data-speed="0.5">0.5x</button>
+      </div>
+    </div>
+    
+    <div class="timeline-slider-wrapper">
+      <span class="time-label" id="current-time">0.00s</span>
+      <input type="range" class="timeline-slider" id="timeline-slider" min="0" max="900" value="0">
+      <span class="time-label">30.00s</span>
+    </div>
+
+    <div class="steps-progress">
+      <div class="step-indicator active" data-frame="0">
+        <span class="step-num">1</span>
+        <span class="step-txt">Draft</span>
+      </div>
+      <div class="step-indicator" data-frame="120">
+        <span class="step-num">2</span>
+        <span class="step-txt">Selection</span>
+      </div>
+      <div class="step-indicator" data-frame="300">
+        <span class="step-num">3</span>
+        <span class="step-txt">AI Zoom</span>
+      </div>
+      <div class="step-indicator" data-frame="420">
+        <span class="step-num">4</span>
+        <span class="step-txt">Rewriting</span>
+      </div>
+      <div class="step-indicator" data-frame="780">
+        <span class="step-num">5</span>
+        <span class="step-txt">Refined</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="screen-studio-script.js"></script>
+</body>
+</html>

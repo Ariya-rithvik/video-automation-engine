@@ -1,0 +1,392 @@
+/* ═══════════════════════════════════════════════
+   TESLA — CYBERTRUCK REVEAL SHOWCASE
+   45-second SVG/Canvas animation
+   ═══════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@500&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #060608;
+  color: #e5e5e5;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 24px 20px 60px;
+}
+
+.ambient-glow {
+  position: fixed;
+  width: 700px; height: 700px;
+  top: -200px; left: -150px;
+  background: radial-gradient(circle, rgba(200,200,220,0.06) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+  animation: drift 18s ease-in-out infinite alternate;
+}
+.ambient-glow-secondary {
+  position: fixed;
+  width: 500px; height: 500px;
+  bottom: -100px; right: -100px;
+  background: radial-gradient(circle, rgba(232,33,39,0.05) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+  animation: drift 22s ease-in-out infinite alternate-reverse;
+}
+@keyframes drift {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(40px, 30px) scale(1.1); }
+}
+
+.showcase-viewport {
+  position: relative;
+  width: 1024px; height: 576px;
+  background: #000;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(200,200,220,0.08),
+    0 20px 80px rgba(0,0,0,0.8),
+    0 0 120px rgba(200,200,220,0.03);
+  z-index: 1;
+}
+
+.scene {
+  position: absolute; inset: 0;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.scene.active { opacity: 1; pointer-events: auto; }
+
+/* ═══ SCENE 1: Autopilot Dashboard ═══ */
+.scene-dash {
+  background: #000;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.dash-panel {
+  width: 800px; height: 440px;
+  position: relative;
+  background: linear-gradient(180deg, #0c0c10 0%, #08080c 100%);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.04);
+  overflow: hidden;
+  opacity: 0;
+}
+
+.dash-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 24px;
+}
+.dash-time { font-family: 'JetBrains Mono', monospace; font-size: 16px; color: #a0a0b0; }
+.dash-temp { font-size: 14px; color: #808090; }
+.dash-battery {
+  display: flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #4ade80;
+}
+.dash-battery-bar {
+  width: 40px; height: 16px;
+  border: 1.5px solid #4ade80;
+  border-radius: 3px;
+  padding: 2px;
+  position: relative;
+}
+.dash-battery-fill {
+  height: 100%;
+  background: #4ade80;
+  border-radius: 1px;
+  width: 80%;
+}
+.dash-battery-nub {
+  position: absolute; right: -5px; top: 4px;
+  width: 3px; height: 8px;
+  background: #4ade80;
+  border-radius: 0 2px 2px 0;
+}
+
+.dash-road-canvas {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 300px;
+}
+
+.dash-speed-cluster {
+  position: absolute;
+  bottom: 30px; left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+.dash-speed-num {
+  font-family: 'Outfit', sans-serif;
+  font-size: 72px; font-weight: 900;
+  color: #fff;
+  line-height: 1;
+  text-shadow: 0 0 30px rgba(255,255,255,0.15);
+}
+.dash-speed-unit {
+  font-size: 14px; color: #808090;
+  letter-spacing: 2px; text-transform: uppercase;
+}
+
+.dash-autopilot-badge {
+  position: absolute;
+  top: 60px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(59,130,246,0.12);
+  border: 1px solid rgba(59,130,246,0.25);
+  border-radius: 8px;
+  padding: 8px 20px;
+  opacity: 0;
+}
+.ap-icon {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: #3b82f6;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; color: #fff; font-weight: 800;
+}
+.ap-text {
+  font-size: 14px; color: #93c5fd;
+  font-weight: 600; letter-spacing: 1px;
+}
+
+.dash-gear {
+  position: absolute; bottom: 30px; left: 30px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 24px; color: #808090;
+}
+.dash-gear .active-gear { color: #fff; font-weight: 700; }
+
+.dash-range {
+  position: absolute; bottom: 30px; right: 30px;
+  text-align: right;
+}
+.dash-range-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 22px; color: #4ade80; font-weight: 600;
+}
+.dash-range-label { font-size: 11px; color: #808090; }
+
+/* ═══ SCENE 2: Cybertruck Wireframe ═══ */
+.scene-wireframe {
+  background: #000;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.wireframe-canvas {
+  position: absolute; inset: 0;
+}
+
+.wireframe-label {
+  position: absolute;
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px; font-weight: 600;
+  color: rgba(200,200,220,0.5);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0;
+}
+.wireframe-label.top-left { top: 20px; left: 24px; }
+.wireframe-label.top-right { top: 20px; right: 24px; }
+.wireframe-label.bottom-center {
+  bottom: 24px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 28px;
+  color: rgba(255,255,255,0.12);
+  font-weight: 900;
+  letter-spacing: 8px;
+}
+
+/* ═══ SCENE 3: Supercharger ═══ */
+.scene-charger {
+  background: radial-gradient(ellipse at 50% 80%, #0a0c14 0%, #000 100%);
+  display: flex; align-items: center; justify-content: center;
+}
+
+.charger-svg {
+  position: absolute; inset: 0;
+}
+
+.charge-progress-bar {
+  position: absolute;
+  top: 50px; left: 50%; transform: translateX(-50%);
+  width: 400px; height: 8px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 4px;
+  overflow: hidden;
+  opacity: 0;
+}
+.charge-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4ade80, #22d3ee);
+  border-radius: 4px;
+  width: 0%;
+  transition: width 0.1s;
+  box-shadow: 0 0 12px rgba(74,222,128,0.4);
+}
+
+.charge-percent {
+  position: absolute;
+  top: 72px; left: 50%; transform: translateX(-50%);
+  font-family: 'Outfit', sans-serif;
+  font-size: 48px; font-weight: 900;
+  color: #4ade80;
+  opacity: 0;
+  text-shadow: 0 0 30px rgba(74,222,128,0.3);
+}
+
+.charge-stats-row {
+  position: absolute;
+  bottom: 50px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 40px;
+  opacity: 0;
+}
+.charge-stat { text-align: center; }
+.charge-stat-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 18px; font-weight: 600; color: #e0e0f0;
+}
+.charge-stat-label { font-size: 10px; color: #808090; margin-top: 2px; }
+
+/* ═══ SCENE 4: Brand ═══ */
+.scene-brand {
+  display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(ellipse at 50% 40%, rgba(200,200,220,0.04) 0%, #000 70%);
+}
+
+.brand-container { text-align: center; }
+
+.brand-tesla-logo {
+  opacity: 0; transform: scale(0.7);
+  margin-bottom: 20px;
+}
+.brand-tesla-logo svg {
+  width: 100px;
+  filter: drop-shadow(0 0 40px rgba(200,200,220,0.2));
+}
+
+.brand-tagline {
+  font-family: 'Outfit', sans-serif;
+  font-size: 36px; font-weight: 900; color: #fff;
+  opacity: 0; margin-bottom: 8px;
+}
+.brand-subtitle {
+  font-size: 16px; color: #808090;
+  opacity: 0; margin-bottom: 32px;
+}
+.ts-stats-row {
+  display: flex; gap: 48px; justify-content: center;
+}
+.ts-stat-item {
+  text-align: center; opacity: 0;
+  transform: translateY(15px);
+}
+.ts-stat-number {
+  font-family: 'Outfit', sans-serif;
+  font-size: 30px; font-weight: 900;
+  color: #e82127;
+}
+.ts-stat-label {
+  font-size: 12px; color: #808090;
+  font-weight: 500; margin-top: 2px;
+}
+
+/* ═══ Overlays ═══ */
+.virtual-cursor {
+  position: absolute; pointer-events: none; z-index: 100;
+  display: none; will-change: transform;
+}
+.cursor-ripple {
+  position: absolute; top: 0; left: 0;
+  width: 30px; height: 30px; border-radius: 50%;
+  border: 2px solid rgba(200,200,220,0.4);
+  opacity: 0; transform: scale(0);
+}
+.cursor-ripple.click-wave { animation: click-wave-anim 0.5s ease-out; }
+@keyframes click-wave-anim {
+  0% { transform: scale(0); opacity: 1; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+.confetti-overlay {
+  position: absolute; inset: 0; pointer-events: none; z-index: 50;
+}
+
+/* ═══ Control Panel ═══ */
+.control-panel {
+  width: 1024px; margin-top: 16px; padding: 14px 20px;
+  background: rgba(12,12,16,0.95);
+  border: 1px solid rgba(200,200,220,0.06);
+  border-radius: 12px;
+  backdrop-filter: blur(12px); z-index: 5;
+}
+.control-buttons {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+}
+.btn {
+  padding: 6px 18px; border-radius: 6px; font-size: 13px;
+  font-weight: 600; border: none; cursor: pointer;
+  font-family: 'Inter', sans-serif; transition: all 0.2s;
+}
+.btn-primary { background: #e82127; color: #fff; }
+.btn-primary:hover { background: #f03030; }
+.btn-secondary {
+  background: rgba(255,255,255,0.06); color: #a0a0b0;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+.speed-toggle-group { display: flex; gap: 4px; margin-left: auto; }
+.speed-btn {
+  padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: 600;
+  background: rgba(255,255,255,0.04); color: #808090;
+  border: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: all 0.2s;
+}
+.speed-btn.active {
+  background: rgba(232,33,39,0.15); color: #e82127;
+  border-color: rgba(232,33,39,0.25);
+}
+
+.timeline-slider-wrapper { display: flex; align-items: center; gap: 10px; }
+.time-label {
+  font-size: 11px; font-family: 'JetBrains Mono', monospace;
+  color: #808090; min-width: 48px;
+}
+.timeline-slider {
+  flex: 1; -webkit-appearance: none; appearance: none;
+  height: 4px; background: rgba(255,255,255,0.08);
+  border-radius: 2px; outline: none; cursor: pointer;
+}
+.timeline-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px; height: 14px; background: #e82127;
+  border-radius: 50%; border: 2px solid #fff;
+  cursor: pointer; box-shadow: 0 0 10px rgba(232,33,39,0.3);
+}
+
+.steps-progress { display: flex; gap: 6px; margin-top: 10px; }
+.step-indicator {
+  flex: 1; display: flex; align-items: center; gap: 6px;
+  padding: 5px 10px; border-radius: 6px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.04);
+  cursor: pointer; transition: all 0.2s;
+}
+.step-indicator.active {
+  background: rgba(232,33,39,0.08);
+  border-color: rgba(232,33,39,0.2);
+}
+.step-num {
+  font-size: 10px; font-weight: 700;
+  width: 18px; height: 18px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; background: rgba(255,255,255,0.05);
+  color: #808090;
+}
+.step-indicator.active .step-num { background: #e82127; color: #fff; }
+.step-txt { font-size: 11px; color: #808090; font-weight: 500; }
+.step-indicator.active .step-txt { color: #e0e0f0; }

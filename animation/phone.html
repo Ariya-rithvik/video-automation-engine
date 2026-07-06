@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creator Link-in-Bio 3D Phone Animation</title>
+  
+  <!-- Premium Google Fonts: Playfair Display for Serif title, Outfit & Inter for UI -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="phone-style.css">
+</head>
+<body>
+
+  <!-- Ambient Background Gradients -->
+  <div class="ambient-glow"></div>
+  <div class="ambient-glow-secondary"></div>
+
+  <!-- Main Showcase Viewport (16:9 Canvas) -->
+  <div class="showcase-viewport">
+    
+    <!-- SVG Glowing Connectors Layer -->
+    <svg class="connectors-svg" viewBox="0 0 1024 576">
+      <defs>
+        <linearGradient id="glow-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="rgba(37, 99, 235, 0.8)" />
+          <stop offset="100%" stop-color="rgba(99, 102, 241, 0.1)" />
+        </linearGradient>
+        <linearGradient id="glow-grad-2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="rgba(16, 185, 129, 0.8)" />
+          <stop offset="100%" stop-color="rgba(99, 102, 241, 0.1)" />
+        </linearGradient>
+        <linearGradient id="glow-grad-3" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="rgba(249, 115, 22, 0.8)" />
+          <stop offset="100%" stop-color="rgba(99, 102, 241, 0.1)" />
+        </linearGradient>
+        <filter id="glow-blur" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="6" result="blur" />
+          <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+      </defs>
+      <!-- Paths connecting cards to bubbles -->
+      <path id="path-course" d="M 370 260 C 500 200, 600 220, 720 260" stroke="url(#glow-grad-1)" stroke-width="3" fill="none" filter="url(#glow-blur)" />
+      <path id="path-calendar" d="M 380 380 C 280 350, 220 280, 180 190" stroke="url(#glow-grad-2)" stroke-width="3" fill="none" filter="url(#glow-blur)" />
+      <path id="path-downloads" d="M 380 440 C 280 420, 220 400, 185 375" stroke="url(#glow-grad-3)" stroke-width="3" fill="none" filter="url(#glow-blur)" />
+    </svg>
+
+    <!-- Global Zoom Wrapper (Enables close-up shot at the end) -->
+    <div class="zoom-wrapper" id="zoom-wrapper">
+
+      <!-- Phone Mockup Container -->
+      <div class="phone-mockup-wrapper" id="phone-mockup-wrapper">
+        
+        <!-- Secondary Slide-Out Phone Screen (Checkout / Calendar Book) -->
+        <div class="secondary-phone-screen" id="secondary-phone-screen">
+          <div class="secondary-screen-header">
+            <h4>Book a Time</h4>
+            <span class="price-header-badge">$32/hr</span>
+          </div>
+          
+          <!-- Calendar Days Placeholder -->
+          <div class="secondary-calendar-grid">
+            <div class="calendar-day passed">1</div>
+            <div class="calendar-day passed">2</div>
+            <div class="calendar-day passed">3</div>
+            <div class="calendar-day passed">4</div>
+            <div class="calendar-day active">5</div>
+            <div class="calendar-day">6</div>
+            <div class="calendar-day">7</div>
+            <div class="calendar-day">8</div>
+            <div class="calendar-day">9</div>
+            <div class="calendar-day">10</div>
+            <div class="calendar-day">11</div>
+            <div class="calendar-day">12</div>
+          </div>
+          
+          <div class="checkout-card-preview">
+            <div class="card-chip"></div>
+            <div class="card-dots">•••• •••• •••• 9840</div>
+            <div class="card-footer">
+              <span class="card-brand">Mastercard</span>
+              <div class="brand-circles">
+                <span class="circle red"></span>
+                <span class="circle yellow"></span>
+              </div>
+            </div>
+          </div>
+          
+          <button class="book-action-btn">Book a Time</button>
+        </div>
+
+        <div class="phone-shell">
+          <!-- Phone Speaker & Camera Notch -->
+          <div class="phone-notch"></div>
+          
+          <!-- Screen Content -->
+          <div class="phone-screen" id="phone-screen-content">
+            <div class="profile-header">
+              <h1 class="creator-name">Alexandra Silva</h1>
+              
+              <!-- Social Icons (Inline SVGs) -->
+              <div class="social-icons">
+                <!-- YouTube -->
+                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.107C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.388.511a3.002 3.002 0 0 0-2.11 2.107C0 8.048 0 12 0 12s0 3.952.502 5.837a3.002 3.002 0 0 0 2.11 2.107C4.495 20.455 12 20.455 12 20.455s7.505 0 9.388-.511a3.002 3.002 0 0 0 2.11-2.107C24 15.952 24 12 24 12s0-3.952-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                <!-- TikTok -->
+                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.02 1.59 4.18.94 1.13 2.29 1.89 3.71 2.13v3.9c-1.57-.04-3.11-.53-4.42-1.39-.04 4.09-.01 8.19-.02 12.28-.15 2.13-1.21 4.14-3 5.25-1.92 1.22-4.43 1.48-6.58.68-2.34-.84-4.22-2.88-4.73-5.32-.71-3.11.85-6.57 3.75-7.85 1.41-.63 3-.77 4.51-.4v3.78c-1.12-.29-2.33-.14-3.32.48-.96.59-1.56 1.68-1.56 2.81.01 1.45 1.03 2.76 2.44 3.09 1.46.36 3.09-.34 3.65-1.74.19-.51.22-1.07.22-1.61-.02-5.06-.01-10.12-.02-15.19z"/>
+                </svg>
+                <!-- Twitter / X -->
+                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+                <!-- LinkedIn -->
+                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+                <!-- Instagram -->
+                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+                </svg>
+              </div>
+            </div>
+  
+            <!-- Main Creator Profile Photo -->
+            <div class="creator-photo-wrapper">
+              <img src="creator_profile.png" alt="Alexandra Silva" class="creator-photo" id="creator-photo">
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- ── FLOATING Link Cards (Rise out of phone screen) ── -->
+      
+      <!-- Card 1: Main Creator Course (Left) -->
+      <div class="floating-card link-card main-course-card" id="phone-card-1">
+        <div class="card-glass-body">
+          <div class="course-visual">
+            <!-- Helix loop vector representation -->
+            <svg viewBox="0 0 80 80" class="helix-svg">
+              <defs>
+                <linearGradient id="helix-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#a855f7" />
+                  <stop offset="100%" stop-color="#ec4899" />
+                </linearGradient>
+                <linearGradient id="helix-grad-2" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#3b82f6" />
+                  <stop offset="100%" stop-color="#10b981" />
+                </linearGradient>
+              </defs>
+              <ellipse cx="40" cy="55" rx="30" ry="12" fill="url(#helix-grad-2)" opacity="0.85"/>
+              <ellipse cx="40" cy="40" rx="25" ry="10" fill="url(#helix-grad-1)" />
+              <ellipse cx="40" cy="25" rx="20" ry="8" fill="#eab308" opacity="0.9"/>
+            </svg>
+          </div>
+          <div class="course-info">
+            <h4>My Creator Course</h4>
+            <p>Everything you need to know about getting started making money online!</p>
+            <div class="course-footer">
+              <span class="price">$129</span>
+              <span class="crossed-price">$549</span>
+              <span class="rating-stars">★ 4.7</span>
+              <span class="sale-badge">60% Off</span>
+              <button class="action-btn" id="btn-get-started">Get Started</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Card 2: 1:1 Coaching Session (Bottom Left) -->
+      <div class="floating-card link-card item-card" id="phone-card-2">
+        <div class="card-glass-body row-layout">
+          <div class="icon-indicator bg-green">
+            <!-- Calendar icon SVG -->
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </div>
+          <div class="item-text">
+            <h5>1:1 Coaching Session</h5>
+            <span class="price-label">$49</span>
+          </div>
+          <span class="arrow-indicator">➔</span>
+        </div>
+      </div>
+  
+      <!-- Card 3: Download My Guide (Bottom Left 2) -->
+      <div class="floating-card link-card item-card" id="phone-card-3">
+        <div class="card-glass-body row-layout">
+          <div class="icon-indicator bg-orange">
+            <!-- Book icon SVG -->
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5v-15z"></path>
+            </svg>
+          </div>
+          <div class="item-text">
+            <h5>Download My Guide</h5>
+            <span class="price-label">$25</span>
+          </div>
+          <span class="arrow-indicator">➔</span>
+        </div>
+      </div>
+  
+      <!-- Card 4: Right Side Chat/Notification Card -->
+      <div class="floating-card list-card" id="phone-card-4">
+        <div class="card-glass-body col-layout">
+          <div class="list-item border-b">
+            <div class="thumb-face">
+              <img src="creator_profile.png" alt="Alexandra" class="tiny-avatar">
+            </div>
+            <div class="list-details">
+              <div class="bar-placeholder short"></div>
+              <div class="bar-placeholder long"></div>
+            </div>
+            <span class="heart-badge">♥</span>
+          </div>
+          <div class="list-item">
+            <div class="thumb-icon bg-blue">
+              <!-- Download icon SVG -->
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+            </div>
+            <div class="list-details">
+              <div class="bar-placeholder medium"></div>
+              <div class="bar-placeholder short"></div>
+            </div>
+            <span class="ellipsis-menu">•••</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 3D GLASS BUBBLES ── -->
+      <!-- Bubble 1: Calendar Bubble (Upper Left) -->
+      <div class="glass-bubble" id="bubble-calendar">
+        <div class="bubble-sphere">
+          <div class="bubble-glare"></div>
+          <div class="bubble-content">
+            <div class="bubble-calendar-card">
+              <div class="calendar-card-header"></div>
+              <div class="calendar-card-number">31</div>
+            </div>
+            <div class="bubble-label">CALENDAR</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bubble 2: Downloads Bubble (Lower Left) -->
+      <div class="glass-bubble" id="bubble-downloads">
+        <div class="bubble-sphere">
+          <div class="bubble-glare"></div>
+          <div class="bubble-content">
+            <div class="bubble-download-circle">
+              <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="3" fill="none">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+            </div>
+            <div class="bubble-label">DOWNLOADS</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bubble 3: Course Bubble (Right) -->
+      <div class="glass-bubble" id="bubble-course">
+        <div class="bubble-sphere">
+          <div class="bubble-glare"></div>
+          <div class="bubble-content">
+            <div class="bubble-course-visual">
+              <!-- Mortarboard Cap + Checklist Page + Pen -->
+              <svg class="bubble-cap-svg" viewBox="0 0 64 64">
+                <polygon points="32 10 56 20 32 30 8 20" fill="#292830" stroke="#fbf7f0" stroke-width="1.5" />
+                <path d="M18 24.5v12c0 6 6 9.5 14 9.5s14-3.5 14-9.5v-12" fill="none" stroke="#fbf7f0" stroke-width="1.5" />
+                <line x1="44" y1="26" x2="44" y2="40" stroke="#fcd34d" stroke-width="2" />
+                <circle cx="44" cy="41" r="2" fill="#fcd34d" />
+              </svg>
+              <div class="bubble-mini-checklist">
+                <div class="check-row"><span>✓</span><div class="mini-bar"></div></div>
+                <div class="check-row"><span>✓</span><div class="mini-bar"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bubble 4: Decorative Ambient Bubble (Bottom Right) -->
+      <div class="glass-bubble" id="bubble-decor">
+        <div class="bubble-sphere">
+          <div class="bubble-glare"></div>
+        </div>
+      </div>
+
+    </div> <!-- /zoom-wrapper -->
+
+    <!-- ── VIRTUAL MOUSE CURSOR ── -->
+    <div class="virtual-cursor" id="virtual-cursor">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="white" stroke="#2563eb" stroke-width="1.5">
+        <polygon points="5 3 21 11 13 13 11 21 5 3"/>
+      </svg>
+      <div class="cursor-ripple" id="cursor-ripple"></div>
+    </div>
+
+    <!-- ── SUCCESS CELEBRATION TOAST ── -->
+    <div class="celebration-toast" id="celebration-toast">
+      <div class="toast-confetti-badge">🎉</div>
+      <div class="toast-body">
+        <h5>Successfully Enrolled!</h5>
+        <p>Welcome to "My Creator Course". Access details sent.</p>
+      </div>
+    </div>
+
+    <!-- Canvas for Confetti Overlay -->
+    <canvas class="confetti-overlay" id="confetti-canvas"></canvas>
+
+  </div>
+
+  <!-- Media Playback Control Bar -->
+  <div class="control-panel">
+    <div class="control-buttons">
+      <button class="btn btn-primary" id="btn-play">Pause</button>
+      <button class="btn btn-secondary" id="btn-restart">Restart</button>
+      <div class="speed-toggle-group">
+        <button class="speed-btn active" data-speed="1">1x</button>
+        <button class="speed-btn" data-speed="2">2x</button>
+        <button class="speed-btn" data-speed="0.5">0.5x</button>
+      </div>
+    </div>
+    
+    <div class="timeline-slider-wrapper">
+      <span class="time-label">0.00s</span>
+      <input type="range" class="timeline-slider" id="timeline-slider" min="0" max="240" value="0">
+      <span class="time-label" id="total-time-label">8.00s</span>
+    </div>
+
+    <div class="steps-progress">
+      <div class="step-indicator active" data-frame="0">
+        <span class="step-num">1</span>
+        <span class="step-txt">Normal View</span>
+      </div>
+      <div class="step-indicator" data-frame="60">
+        <span class="step-num">2</span>
+        <span class="step-txt">3D Bubbles</span>
+      </div>
+      <div class="step-indicator" data-frame="135">
+        <span class="step-num">3</span>
+        <span class="step-txt">Cursor Click</span>
+      </div>
+      <div class="step-indicator" data-frame="195">
+        <span class="step-num">4</span>
+        <span class="step-txt">Card Zoom</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="phone-script.js"></script>
+</body>
+</html>
