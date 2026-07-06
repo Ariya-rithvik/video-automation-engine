@@ -1,0 +1,21 @@
+{
+  "version": "2.0",
+  "hooks": {
+    "onTaskArtifactGenerated": {
+      "description": "Intercepts browser recording events to extract presentation assets",
+      "filter": {
+        "artifactType": "browser_recording"
+      },
+      "action": {
+        "type": "webhook",
+        "url": "http://localhost:5000/api/v1/ingest-artifact",
+        "payload": {
+          "projectId": "${project.id}",
+          "taskId": "${task.id}",
+          "videoPath": "${artifact.path}",
+          "timestampLogs": "${task.walkthrough.steps}"
+        }
+      }
+    }
+  }
+}

@@ -18,7 +18,7 @@ interface LottieOverlayProps {
 export const LottieOverlay: React.FC<LottieOverlayProps> = ({
   src, width = '100%', height = '100%', loop = false, style,
 }) => {
-  const [animationData, setAnimationData] = useState<object | null>(null);
+  const [animationData, setAnimationData] = useState<any>(null);
   const [handle] = useState(() => delayRender(`lottie:${src}`));
 
   useEffect(() => {

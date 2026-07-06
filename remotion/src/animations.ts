@@ -69,6 +69,34 @@ export function popScale(frame: number, startAt: number, fps = 30): number {
   });
 }
 
+export interface AEPopConfig {
+  delayFrames?: number;
+  from?: number;
+  to?: number;
+  frame?: number;
+  fps?: number;
+}
+
+/**
+ * High-velocity After Effects "Snap & Bounce" Spring Physics
+ * Uses stiffness=180, damping=12, mass=0.8 to create an aggressive snap with a subtle overshoot bounce.
+ */
+export function useAESnapSpring(options: AEPopConfig = {}): number {
+  const { delayFrames = 0, from = 0, to = 1, frame = 0, fps = 30 } = options;
+  return spring({
+    frame: Math.max(0, frame - delayFrames),
+    fps,
+    config: {
+      stiffness: 180, // Explosive initial velocity
+      damping: 12,    // Allows a slight overshoot bounce
+      mass: 0.8,      // Lightweight & snappy response
+    },
+    from,
+    to,
+  });
+}
+
+
 // ─── Ongoing / organic motion ───────────────────────────────────────────────
 
 // Subtle pulse — used for CTAs / hero elements
